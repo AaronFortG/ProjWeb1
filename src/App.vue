@@ -5,6 +5,7 @@ import MyComponent from './components/MyComponent.vue'
 
 <template>
 
+
   <RouterView />
 
   <MyComponent />

@@ -12,16 +12,17 @@ body {
   background-color: #2F2F2F; /* Cambia este valor a un color de tu elección */
 }
 
-button {
+.main-button {
   border: 1px solid #181414;
   border-radius: 4px;
   margin-bottom: 10px;
   padding: 10px 20px;
   background-color: #181414;
   color: white;
+  width: 100%;
 }
 
-button:hover {
+.main-button:hover {
   border: 1px solid rgba(226, 222, 211, 0.89);
 }
 .buttons_container {
@@ -38,7 +39,7 @@ button:hover {
   margin-bottom: 5px;
 }
 @media (min-width: 600px) {
-  button {
+  .main-button {
     padding: 20px 20px;
   }
   .title {
