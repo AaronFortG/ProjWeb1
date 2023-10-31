@@ -20,11 +20,15 @@ import MySecondComponent from '../components/MySecondComponent.vue'
   display: grid;
   justify-content: center; /* Alinea los elementos horizontalmente en el centro */
   align-items: center;    /* Alinea los elementos verticalmente en el centro */
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 100px; /* Espacio entre elementos */
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 50px; /* Espacio entre elementos */
   padding: 0 40px;
 }
 
-
+@media (min-width: 600px) {
+  .big_container {
+    grid-gap: 100px;
+  }
+}
 
 </style>
