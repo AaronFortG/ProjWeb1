@@ -3,19 +3,28 @@ import MySecondComponent from '../components/MySecondComponent.vue'
 </script>
 
 <template>
-  <div class="columns">
-    <MySecondComponent />
-    <MySecondComponent />
-    <MySecondComponent />
+  <div class="big_container">
+    <p class="title"> Dungeon Clash </p>
+    <div class="buttons_container"> 
+      <button> Create match </button>
+      <button> Join match </button>
+      <button> Player information </button>
+      <button> Store </button>
+      <button> Log out </button>
+    </div> 
   </div>
 </template>
 
 <style scoped>
-.columns {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+.big_container {
+  display: grid;
+  justify-content: center; /* Alinea los elementos horizontalmente en el centro */
+  align-items: center;    /* Alinea los elementos verticalmente en el centro */
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 100px; /* Espacio entre elementos */
+  padding: 0 40px;
 }
+
+
+
 </style>

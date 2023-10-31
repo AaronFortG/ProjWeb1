@@ -1,3 +1,39 @@
 * {
   font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+}
+
+@font-face {
+  font-family: "Title font";
+  src: url("fonts/IrishGrover-Regular.ttf") format("truetype");
+}
+
+body {
+  background-color: #2F2F2F; /* Cambia este valor a un color de tu elección */
+}
+
+button {
+  border: 1px solid #181414;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: #181414;
+  color: white;
+}
+
+button:hover {
+  border: 1px solid rgba(226, 222, 211, 0.89);
+}
+.buttons_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: "Title font", serif;
+  font-size: 60px;
+  text-align: center; /* Alinea el contenido de cada elemento en el centro */
+  color: white;
+  word-wrap: break-word;
+  margin-bottom: 5px;
 }
