@@ -1,0 +1,43 @@
+<script setup>
+
+</script>
+
+<template>
+  <div class="header-buttons-container">
+    <button id="back-button">Back</button>
+    <button id="delete-account">Delete account</button>
+  </div>
+
+  <h1 class="title">Player information</h1>
+
+  <section id="player-info">
+    <article id="player-info-image">
+      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image">
+    </article>
+
+    <article id="player-info-name">
+      <p><b>Player name: </b></p>
+      <p id="player-name">Hola</p>
+    </article>
+
+    <article id="player-info-level">
+      <p><b>Level: </b></p>
+      <p id="player-level">2</p>
+    </article>
+
+    <article id="player-info-xp">
+      <p><b>  XP: </b></p>
+      <p id="player-xp">369</p>
+    </article>
+
+    <article id="player-info-coins">
+      <p><b>Coins: </b></p>
+      <p id="player-coins">199</p>
+    </article>
+
+  </section>
+</template>
+
+<style scoped>
+
+</style>
