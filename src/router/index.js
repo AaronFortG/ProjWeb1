@@ -26,6 +26,11 @@ const router = createRouter({
       path: '/game-over',
       name: 'gameOver',
       component: () => import('../views/GameOverView.vue')
+    },
+    {
+      path: '/create-arena',
+      name: 'createArena',
+      component: () => import('../views/CreateArenaView.vue')
     }
   ]
 })
