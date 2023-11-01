@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 .header-buttons-container {
     background-color: blue;
     display: flex;
@@ -33,4 +39,48 @@ h1 {
 
 #player-info-name p {
     display: inline;
+}
+
+#player-info article:last-child {
+    padding: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+    padding-bottom: 2rem;
+}
+
+#equipped-attacks article,
+#owned-attacks article {
+    margin-bottom: 1.5rem;
+}
+
+#equipped-attacks article p,
+#owned-attacks article p {
+    font-size: 1.2rem;
+    display: inline;
+}
+
+.main-attack-power {
+    margin-top: 1rem;
+}
+
+#equipped-attacks article:hover,
+#owned-attacks article:hover {
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+
+.main-attack, .attack{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 1rem;
+    background-color: #181414;
+}
+
+hr {
+    border: 1px solid white;
+    margin: 2rem;
 }

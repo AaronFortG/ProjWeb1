@@ -34,8 +34,66 @@
       <p><b>Coins: </b></p>
       <p id="player-coins">199</p>
     </article>
-
   </section>
+
+  <hr>
+
+  <h2>Attacks equipped</h2>
+
+  <section id="equipped-attacks">
+    <article class="main-attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>1</p>
+      </div>
+    </article>
+
+    <article class="main-attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>2</p>
+      </div>
+    </article>
+
+    <article class="main-attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>3</p>
+      </div>
+    </article>
+  </section>
+
+  <hr>
+
+  <section id="owned-attacks">
+    <article class="attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>1</p>
+      </div>
+    </article>
+
+    <article class="attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>2</p>
+      </div>
+    </article>
+
+    <article class="attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>3</p>
+      </div>
+    </article>
+  </section>
+
 </template>
 
 <style scoped>
