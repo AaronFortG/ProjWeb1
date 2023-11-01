@@ -38,16 +38,27 @@ body {
   word-wrap: break-word;
   margin-bottom: 5px;
 }
+
 @media (min-width: 600px) {
   .main-button {
     padding: 20px 20px;
   }
   .title {
     margin: 0;
-    font-size: 80px;
+    font-size: 100px;
   }
 
   * {
     font-size: 20px;
   }
+}
+
+.big_container {
+  display: grid;
+  justify-content: center; /* Alinea los elementos horizontalmente en el centro */
+  align-items: center;    /* Alinea los elementos verticalmente en el centro */
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 50px; /* Espacio entre elementos */
+  padding: 0 40px;
+  margin-top: 4rem;
 }

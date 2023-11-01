@@ -5,7 +5,7 @@ import {RouterLink} from "vue-router";
 
 <template>
   <div class="big_container">
-    <p class="title"> Dungeon Clash </p>
+    <h1 class="title"> Dungeon Clash </h1>
     <div class="buttons_container"> 
 
       <RouterLink to="/createMatch" class="router-link">
@@ -31,23 +31,3 @@ import {RouterLink} from "vue-router";
     </div> 
   </div>
 </template>
-
-
-
-<style scoped>
-.big_container {
-  display: grid;
-  justify-content: center; /* Alinea los elementos horizontalmente en el centro */
-  align-items: center;    /* Alinea los elementos verticalmente en el centro */
-  grid-template-rows: 1fr 2fr;
-  grid-gap: 50px; /* Espacio entre elementos */
-  padding: 0 40px;
-}
-
-@media (min-width: 600px) {
-  .big_container {
-    grid-gap: 100px;
-  }
-}
-
-</style>
