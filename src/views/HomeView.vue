@@ -8,7 +8,7 @@ import {RouterLink} from "vue-router";
     <h1 class="title"> Dungeon Clash </h1>
     <div class="buttons_container"> 
 
-      <RouterLink to="/createMatch" class="router-link">
+      <RouterLink to="/create-arena" class="router-link">
         <button class="main-button"> Create match </button>
       </RouterLink>
 
