@@ -1,3 +1,5 @@
+
+/* Classe per posar els elements un sota de l'altre, utilitzant flex. */
 .big_container {
     display: grid;
     justify-content: center; /* Alinea los elementos horizontalmente en el centro */
