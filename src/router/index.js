@@ -31,6 +31,11 @@ const router = createRouter({
       path: '/create-arena',
       name: 'createArena',
       component: () => import('../views/CreateArenaView.vue')
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import('../views/ShopView.vue')
     }
   ]
 })
