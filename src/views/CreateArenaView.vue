@@ -1,5 +1,32 @@
-<script setup>
 import {RouterLink} from "vue-router";
+<script>
+export default {
+  setup() {
+
+  },
+  methods: {
+    // Function to check if the value of the input is negative
+    negativeValueCheck(event, min) {
+      const input = event.target;
+
+      if (input.value < min) {
+        input.value = min;
+      }
+    },
+    // Function to check the value of the input
+    maxLengthCheck(event, min, max) {
+      const input = event.target;
+
+      this.negativeValueCheck(event, min);
+
+      if (input.value > max) {
+        input.value = max;
+      } else if (input.value.length > input.maxLength) {
+        input.value = input.value.slice(0, input.maxLength);
+      }
+    },
+  },
+};
 </script>
 
 <template>
@@ -10,13 +37,13 @@ import {RouterLink} from "vue-router";
 
       <form>
         <div class="form-group">
-          <label>Size:</label>
-          <input type="number" name="size" required min="2" max="10">
+          <label>Size [2..10]</label>
+          <input type="number" name="size" id="amount-input" required min="2" max="10" maxLength="2" @change="maxLengthCheck($event, 2, 10 )">
         </div>
 
         <div class="form-group">
-          <label>HP max:</label>
-          <input type="number" name="hp-max" required min="0">
+          <label>HP max</label>
+          <input type="number" id="amount-input" required min="1" @change="negativeValueCheck($event, 1)">
         </div>
       </form>
 
@@ -29,3 +56,4 @@ import {RouterLink} from "vue-router";
     </div>
   </div>
 </template>
+
