@@ -1,0 +1,13 @@
+.form-group {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+.form-group label {
+    color: white;
+
+}
+.form-group input {
+    padding: 5px 0;
+}

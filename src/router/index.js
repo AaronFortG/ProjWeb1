@@ -6,8 +6,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'login',
+      component: HomeView // TODO -> Això serà el login, s'ha de canviar en el futur
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: HomeView
+      component: () => import('../views/HomeView.vue')
     },
     {
       path: '/about',
@@ -16,6 +21,37 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/game-over',
+      name: 'gameOver',
+      component: () => import('../views/GameOverView.vue')
+    },
+    {
+      path: '/create-arena',
+      name: 'createArena',
+      component: () => import('../views/CreateArenaView.vue')
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import('../views/ShopView.vue')
+    },
+    {
+      path: '/player-info',
+      name: 'playerInfo',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/PlayerInfoView.vue')
+    },
+    {
+      path: '/player-info',
+      name: 'playerInfo',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/PlayerInfoView.vue')
     }
   ]
 })
