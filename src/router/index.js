@@ -33,6 +33,11 @@ const router = createRouter({
       component: () => import('../views/CreateArenaView.vue')
     },
     {
+      path: '/shop',
+      name: 'shop',
+      component: () => import('../views/ShopView.vue')
+    },
+    {
       path: '/player-info',
       name: 'playerInfo',
       // route level code-splitting

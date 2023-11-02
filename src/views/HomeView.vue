@@ -20,7 +20,7 @@ import {RouterLink} from "vue-router";
       <button class="main-button"> Player information </button>
       </RouterLink>
 
-      <RouterLink to="/store">
+      <RouterLink to="/shop">
       <button class="main-button"> Store </button>
       </RouterLink>
 
