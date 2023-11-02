@@ -101,6 +101,22 @@ import {RouterLink} from "vue-router";
         <p>3</p>
       </div>
     </article>
+
+    <article class="attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>4</p>
+      </div>
+    </article>
+
+    <article class="attack">
+      <p>Name of the attack</p>
+      <div class="main-attack-power">
+        <p>Power </p>
+        <p>5</p>
+      </div>
+    </article>
   </section>
 
 </template>

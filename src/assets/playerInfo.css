@@ -56,6 +56,7 @@ h2 {
     text-align: center;
     color: white;
     padding-bottom: 2rem;
+    font-weight: bold;
 }
 
 #equipped-attacks article,
@@ -75,15 +76,18 @@ h2 {
 
 #equipped-attacks article:hover,
 #owned-attacks article:hover {
-    border: 1px solid white;
-    box-sizing: border-box;
+    outline: 1px solid white;
 }
 
 .main-attack, .attack{
     margin-left: 2rem;
     margin-right: 2rem;
-    padding: 1rem;
+    padding: 1.5rem;
     background-color: #181414;
+}
+
+.main-attack > p, .attack > p {
+    font-weight: bold;
 }
 
 hr {
@@ -108,5 +112,28 @@ hr {
     #player-info-data {
         display: flex;
         flex-direction: column;
+    }
+
+    #equipped-attacks {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height: fit-content;
+    }
+
+    .main-attack {
+        flex: 1; /* Expand to fill the whole container */
+    }
+
+    #owned-attacks {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .attack {
+        width: 20%; /* Limit the number of columns to 4 */
     }
 }
