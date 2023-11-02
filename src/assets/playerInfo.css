@@ -5,9 +5,14 @@
 }
 
 .header-buttons-container {
-    background-color: blue;
     display: flex;
     justify-content: space-between;
+    padding: 2rem 2rem 0 2rem;
+}
+
+/* Remove "main-button" class' bottom margin */
+#delete-account {
+    margin-bottom: 0;
 }
 
 p, b {
@@ -34,7 +39,8 @@ h1 {
 }
 
 #player-info-image img {
-    max-width: 200px;
+    max-width: 50%;
+    margin: 0 auto;
 }
 
 #player-info-name p {
@@ -83,4 +89,24 @@ h2 {
 hr {
     border: 1px solid white;
     margin: 2rem;
+}
+
+@media (min-width: 600px) {
+    #player-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #player-info-image img {
+        max-width: 14rem;
+    }
+
+    h1 {
+        margin-bottom: 2rem !important;
+    }
+
+    #player-info-data {
+        display: flex;
+        flex-direction: column;
+    }
 }

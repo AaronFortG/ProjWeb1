@@ -16,7 +16,7 @@ import {RouterLink} from "vue-router";
       <button class="main-button"> Join match </button>
       </RouterLink>
 
-      <RouterLink to="/playerInfo">
+      <RouterLink to="/player-info">
       <button class="main-button"> Player information </button>
       </RouterLink>
 
