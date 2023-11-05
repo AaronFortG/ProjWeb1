@@ -1,4 +1,8 @@
+<script setup>
+
 import {RouterLink} from "vue-router";
+</script>
+
 <template>
   <div class="login-container">
     <h1>Login</h1>
@@ -14,8 +18,12 @@ import {RouterLink} from "vue-router";
         <input type="password" id="password" v-model="password" required />
       </div>
 
-      <button id="login-button" type="submit">Login</button>
-      <button id="register-button" @click="register">Register</button>
+      <RouterLink to="/home">
+        <button id="login-button" type="submit">Login</button>
+      </RouterLink>
+      <RouterLink to="/home">
+        <button id="register-button" @click="register">Register</button>
+      </RouterLink>
     </form>
   </div>
 </template>
@@ -54,14 +62,4 @@ export default {
 
 
 <style scoped>
-// Estilos CSS
-.login-container {
-  text-align: center;
-  margin: 20px;
-}
-
-.form-group {
-  margin: 10px;
-}
-
 </style>
