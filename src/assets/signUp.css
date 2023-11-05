@@ -1,0 +1,32 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 20px;
+    height: 100%;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group {
+    margin: 10px;
+}
+
+.error-message {
+    color: red;
+}
+
+#register-button,
+#login-button {
+    align-self: end;
+    display: inline-block;
+    margin: 0 10px;
+}
