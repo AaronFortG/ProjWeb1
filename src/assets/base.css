@@ -1,5 +1,5 @@
 * {
-  font-family: 'Roboto', "Roboto", monospace;
+  font-family: 'text font', "text font", monospace;
   font-size: 15px;
 
   margin: 0;
@@ -10,6 +10,11 @@
 @font-face {
   font-family: "Title font";
   src: url("fonts/IrishGrover-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "text font";
+  src: url("fonts/EightBitDragon-anqx.ttf") format("truetype");
 }
 
 body {
