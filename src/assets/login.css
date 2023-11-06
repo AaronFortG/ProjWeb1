@@ -4,15 +4,15 @@
 }
 
 .form-group {
-    margin: 10px;
+    margin: 40px;
 }
 
- footer{
+ footer p {
 
     background-color: #333333;
-    color: #ffff33;
+    color: #ffffff;
     text-align: center;
-    font-size: 10px;font-family: "Times New Roman", serif;
+    font-size: 20px;font-family: "Times New Roman", serif;
     padding: 10px;
     position: absolute;
     bottom: 0;
@@ -21,16 +21,16 @@
 }
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 30px;
     font-weight: bold;
     color: #fff;
 }
 
 .form-group input {
     width: 50%;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
@@ -47,6 +47,7 @@
 
 #login-button {
     background-color: #007BFF;
+    margin-right: 30px;
 }
 
 #register-button {
