@@ -5,7 +5,7 @@ import {RouterLink} from "vue-router";
 
 <template>
   <div class="login-container">
-    <h1>Login</h1>
+    <h1 class="title">Login</h1>
     <form @submit.prevent="login">
       <p id="Log in">Log in</p>
       <div class="form-group">
