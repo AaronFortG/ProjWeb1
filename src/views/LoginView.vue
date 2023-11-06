@@ -5,17 +5,17 @@ import {RouterLink} from "vue-router";
 
 <template>
   <div class="login-container">
-    <h1 class="title">Login</h1>
+    <h1 class="title">Welcome to Dungeon Clash</h1>
     <form @submit.prevent="login">
       <p id="Log in">Log in</p>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="text" id="email" v-model="email" @input="validateEmail" required />
+        <input type="text" id="email" v-model="email" @input="validateEmail" required placeholder="example@gmail.com" />
       </div>
 
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required />
+        <input type="password" id="password" v-model="password" required placeholder="password" />
       </div>
 
       <RouterLink to="/home">
@@ -24,9 +24,14 @@ import {RouterLink} from "vue-router";
       <RouterLink to="/home">
         <button id="register-button" @click="register">Register</button>
       </RouterLink>
+      <footer>
+        <p>Created by Marcos, Aaron and Gemma</p>
+      </footer>
     </form>
   </div>
+
 </template>
+
 
 <script>
 export default {
