@@ -40,7 +40,7 @@ const router = createRouter({
     {
       path: '/statistics',
       name: 'statistics',
-      component: () => import('../views/PlayerInfoView.vue')
+      component: () => import('../views/StatisticsView.vue')
     },
     {
       path: '/player-info',
