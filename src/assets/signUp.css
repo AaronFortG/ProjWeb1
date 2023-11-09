@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin: 20px;
-    height: 100%;
+    height: 100vh; /* Ajusta la altura para ocupar toda la ventana */
+    margin: 0; /* Elimina el margen predeterminado del cuerpo */
 }
 
 form {
@@ -26,7 +26,6 @@ form {
 
 #register-button,
 #login-button {
-    align-self: end;
     display: inline-block;
-    margin: 0 10px;
+    margin: 10px;
 }

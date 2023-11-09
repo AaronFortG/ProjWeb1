@@ -1,7 +1,7 @@
 import {RouterLink} from "vue-router";
 <template>
   <div class="register-container">
-    <h1>Register</h1>
+    <h1 class="title">Register</h1>
     <form @submit.prevent="register">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -18,13 +18,12 @@ import {RouterLink} from "vue-router";
         <input type="password" id="confirm-password" v-model="confirmPassword" required />
       </div>
 
-      <p id="Log in">Log in</p>
+      <p id="Log in" @click="redirectToLogin">Log in</p>
 
       <button id="register-button" type="submit">Register</button>
-      <button id="login-button" @click="redirectToLogin">Log in</button>
     </form>
 
-    <p v-if="password !== confirmPassword" class="error-message">Passwords does not match.</p>
+    <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
   </div>
 </template>
 
@@ -40,31 +39,17 @@ export default {
   methods: {
     register() {
       if (this.password === this.confirmPassword) {
-        console.log("Checking in...");
+        console.log("Registering...");
         console.log("Email:", this.email);
         console.log("Password:", this.password);
-      } else console.log("Password does not match.");
-
+      } else {
+        console.log("Passwords do not match.");
+      }
     },
     redirectToLogin() {
       console.log("Redirecting to login page...");
+      // Puedes agregar aquí la redirección a la página de inicio de sesión
     },
   },
 };
 </script>
-
-<style scoped>
-.register-container {
-  text-align: center;
-  margin: 20px;
-}
-
-.form-group {
-  margin: 10px;
-}
-
-.error-message {
-  color: red;
-}
-
-</style>
