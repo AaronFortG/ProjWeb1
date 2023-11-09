@@ -21,7 +21,7 @@ import {RouterLink} from "vue-router";
       <RouterLink to="/home">
         <button id="login-button" type="submit">Login</button>
       </RouterLink>
-      <RouterLink to="/home">
+      <RouterLink to="/sign-up">
         <button id="register-button" @click="register">Register</button>
       </RouterLink>
       <footer>
