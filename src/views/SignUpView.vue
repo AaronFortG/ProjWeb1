@@ -1,8 +1,7 @@
 import {RouterLink} from "vue-router";
 <template>
-  <div class="register-container">
-    <h1 class="title">Register</h1>
-    <form @submit.prevent="register">
+  <div class="signUp-container">
+    <h1 class="title">Sign Up</h1>
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="text" id="email" v-model="email" required />
@@ -18,12 +17,15 @@ import {RouterLink} from "vue-router";
         <input type="password" id="confirm-password" v-model="confirmPassword" required />
       </div>
 
-      <p id="Log in" @click="redirectToLogin">Log in</p>
-
-      <button id="register-button" type="submit">Register</button>
-    </form>
+    <div class="button-container">
+      <button id="login-button" @click="redirectToLogin">Log in</button>
+      <button id="register-button" @click="register">Register</button>
+    </div>
 
     <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
+    <footer>
+      <p>Created by Marcos, Aaron and Gemma</p>
+    </footer>
   </div>
 </template>
 
