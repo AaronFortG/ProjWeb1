@@ -12,22 +12,27 @@ import {RouterLink} from "vue-router";
         <button>Back</button>
       </div>
     </div>
-    <div class="grid-container">
-      <div class="column">
+    <div class="content-container">
+      <div class="column-1">
         <p class="Victorys">Victories</p>
         <p class="Losses">Losses</p>
         <p class="Winrate">Winrate</p>
         <p class="Partidas">Total Games</p>
-        <h1 class="main Attacks">Main Attacks</h1>
-        <p class="main attack 1">Attack 1</p>
-        <p class="main attack 2">Attack 2</p>
-        <p class="main attack 3">Attack 3</p>
         <p class="Favorite champ">Favorite Champion</p>
       </div>
-      <button>Last Games</button>
+
+      <div class="column-2">
+        <h1 class="title">Main Attacks</h1>
+        <p class="attack">Attack 1</p>
+        <p class="attack">Attack 2</p>
+        <p class="attack">Attack 3</p>
+      </div>
     </div>
+    <button class="main-button">Last Games</button>
+
   </div>
 </template>
+
 
 <style scoped>
 
