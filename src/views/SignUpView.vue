@@ -20,10 +20,12 @@ import {RouterLink} from "vue-router";
       </div>
 
     <div class="button-container">
-      <RouterLink to="/login" class="router-link">
+      <RouterLink to="/" class="router-link">
         <button class="login-button" @click="redirectToLogin">Log in</button>
       </RouterLink>
+      <RouterLink to="/home" class="router-link">
       <button class="register-button" @click="register">Register</button>
+      </RouterLink>
     </div>
 
 
