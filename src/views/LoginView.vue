@@ -1,6 +1,8 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
+import '../assets/login.css'
+
 </script>
 
 <template>

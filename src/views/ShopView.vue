@@ -1,6 +1,8 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
+import '../assets/shop.css'
+
 </script>
 
 <template>

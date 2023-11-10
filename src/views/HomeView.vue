@@ -1,6 +1,7 @@
 <script setup>
 import MySecondComponent from '../components/MySecondComponent.vue'
 import {RouterLink} from "vue-router";
+import '../assets/home.css'
 </script>
 
 <template>

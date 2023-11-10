@@ -1,5 +1,8 @@
+<script setup>
+
 import {RouterLink} from "vue-router";
-<script>
+import '../assets/createArena.css'
+
 export default {
   setup() {
 
