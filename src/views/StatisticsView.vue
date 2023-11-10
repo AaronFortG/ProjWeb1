@@ -6,7 +6,7 @@ import {RouterLink} from "vue-router";
   <div class="container">
     <div class="header">
       <div class="header-title">
-        <h1 class="title">Name Player</h1>
+        <h1>Name Player</h1>
       </div>
       <div class="header-buttons-container">
         <button>Back</button>
@@ -14,8 +14,18 @@ import {RouterLink} from "vue-router";
     </div>
     <div class="content-container">
       <div class="column-1">
+
+        
         <p class="Victorys">Victories</p>
+        <div class="progress-bar">
+          <div :style="`transform: rotate(${victoriesPercentage}deg)`" class="progress progress-victories"></div>
+        </div>
+
         <p class="Losses">Losses</p>
+        <div class="progress-bar">
+          <div :style="`transform: rotate(${lossesPercentage}deg)`" class="progress progress-losses"></div>
+        </div>
+        
         <p class="Winrate">Winrate</p>
         <p class="Partidas">Total Games</p>
         <p class="Favorite champ">Favorite Champion</p>
@@ -28,10 +38,13 @@ import {RouterLink} from "vue-router";
         <p class="attack">Attack 3</p>
       </div>
     </div>
-    <button class="main-button">Last Games</button>
 
+    <div class="last_games">
+      <button class="main-button">Last Games</button>
+    </div>
   </div>
 </template>
+
 
 
 <style scoped>
