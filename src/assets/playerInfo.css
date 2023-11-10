@@ -7,8 +7,9 @@
 .header-buttons-container {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 2rem 0 2rem;
+    padding: 2rem;
     position: sticky;
+    background-color: #2F2F2F;
     top: 0;
 }
 
@@ -126,6 +127,7 @@ hr {
 
     .main-attack {
         flex: 1; /* Expand to fill the whole container */
+        min-width: 20rem; /* Mida mínima pel requadre de l'atac */
     }
 
     #owned-attacks {
@@ -137,5 +139,6 @@ hr {
 
     .attack {
         width: 20%; /* Limit the number of columns to 4 */
+        min-width: 20rem; /* Mida mínima pel requadre de l'atac */
     }
 }
