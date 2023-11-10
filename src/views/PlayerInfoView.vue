@@ -1,11 +1,12 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
+import "../assets/playerInfo.css";
+
 </script>
 
 <template>
-  <div class="header-buttons-container">
-
+  <header class="header-buttons-container">
     <RouterLink to="/home" class="router-link">
       <button class="red_button" id="back-button">Back</button>
     </RouterLink>
@@ -13,7 +14,7 @@ import {RouterLink} from "vue-router";
     <RouterLink to="/delete-account" class="router-link">
       <button class="main-button" id="delete-account">Delete account</button>
     </RouterLink>
-  </div>
+  </header>
 
   <h1 class="title">Player information</h1>
 

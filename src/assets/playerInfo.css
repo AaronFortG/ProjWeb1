@@ -8,6 +8,8 @@
     display: flex;
     justify-content: space-between;
     padding: 2rem 2rem 0 2rem;
+    position: sticky;
+    top: 0;
 }
 
 /* Remove "main-button" class' bottom margin */
