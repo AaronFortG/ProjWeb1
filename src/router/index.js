@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LoginView from "@/views/LoginView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'login',
-      component: HomeView // TODO -> Això serà el login, s'ha de canviar en el futur
+      component: LoginView
     },
     {
       path: '/home',
@@ -15,17 +15,19 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/sign-up',
+      name: 'signUp',
+      component: () => import('../views/SignUpView.vue')
     },
     {
       path: '/game-over',
       name: 'gameOver',
       component: () => import('../views/GameOverView.vue')
+    },
+    {
+      path: '/stats',
+      name: 'stats',
+      component: () => import('../views/StatsView.vue')
     },
     {
       path: '/create-arena',
@@ -38,11 +40,6 @@ const router = createRouter({
       component: () => import('../views/ShopView.vue')
     },
     {
-      path: '/statistics',
-      name: 'statistics',
-      component: () => import('../views/StatisticsView.vue')
-    },
-    {
       path: '/player-info',
       name: 'playerInfo',
       // route level code-splitting
@@ -57,6 +54,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/PlayerInfoView.vue')
+    },
+    {
+      path: '/bag',
+      name: 'bag',
+      component: () => import('../views/BagView.vue')
     }
   ]
 })

@@ -1,21 +1,26 @@
-import {RouterLink} from "vue-router";
+
 <script setup>
+
+import '../assets/stats.css'
+import {RouterLink} from "vue-router";
 
 </script>
 <template>
   <div class="container">
     <div class="header">
       <div class="header-title">
-        <h1>Name Player</h1>
+        <h1 class="title">Name Player</h1>
       </div>
       <div class="header-buttons-container">
+        <RouterLink to="/sign-up" class="router-link">
         <button>Back</button>
+        </RouterLink>
       </div>
     </div>
     <div class="content-container">
       <div class="column-1">
 
-        
+
         <p class="Victorys">Victories</p>
         <div class="progress-bar">
           <div :style="`transform: rotate(${victoriesPercentage}deg)`" class="progress progress-victories"></div>
@@ -25,7 +30,7 @@ import {RouterLink} from "vue-router";
         <div class="progress-bar">
           <div :style="`transform: rotate(${lossesPercentage}deg)`" class="progress progress-losses"></div>
         </div>
-        
+
         <p class="Winrate">Winrate</p>
         <p class="Partidas">Total Games</p>
         <p class="Favorite champ">Favorite Champion</p>
@@ -40,7 +45,9 @@ import {RouterLink} from "vue-router";
     </div>
 
     <div class="last_games">
-      <button class="main-button">Last Games</button>
+      <RouterLink to="/last-games" class="router-link">
+        <button class="main-button">Last Games</button>
+      </RouterLink>
     </div>
   </div>
 </template>

@@ -60,22 +60,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 48%; /* Ajusta el ancho según sea necesario */
+    width: 48%;
     padding: 130px;
     background-color: #181414;
 }
 
 .Victorys {
-    color: #28A745; /* Color de texto para Victories */
-    font-size: 18px; /* Tamaño de fuente */
-    font-weight: bold; /* Peso de la fuente */
+    color: #28A745;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-/* Estilos para el componente "Losses" */
+
 .Losses {
-    color: #DC3545; /* Color de texto para Losses */
-    font-size: 18px; /* Tamaño de fuente */
-    font-weight: bold; /* Peso de la fuente */
+    color: #DC3545;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .Winrate {
@@ -92,7 +92,6 @@
     padding: 20px;
 }
 
-
 .Favorite {
     color: #FFC107;
     font-size: 18px;
@@ -100,13 +99,12 @@
     padding: 20px;
 }
 
-
 .column-2{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 48%; /* Ajusta el ancho según sea necesario */
-    padding: 141px;
+    width: 48%;
+    padding: 90px;
     background-color: blueviolet;
 }
 
@@ -161,5 +159,3 @@ button {
     transform: rotate(360deg);
     background-color: #DA4E39;
 }
-
-

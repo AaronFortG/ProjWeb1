@@ -1,5 +1,7 @@
 <script setup>
+
 import {RouterLink} from "vue-router";
+import '../assets/home.css'
 </script>
 
 <template>
@@ -23,7 +25,7 @@ import {RouterLink} from "vue-router";
       <button class="main-button"> Store </button>
       </RouterLink>
 
-      <RouterLink to="/statistics">
+      <RouterLink to="/sign-up">
       <button class="main-button"> Log out </button>
       </RouterLink>
 
