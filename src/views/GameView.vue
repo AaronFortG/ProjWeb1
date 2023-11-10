@@ -4,62 +4,240 @@ import '../assets/game.css';
 
 <template>
 
-  <!-- Create: player's (1) name and his life -->
-  <div class="player-info">
-    <p>Player name</p>
-    <section class="rows_together_container">
-      <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
-      <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
-      <img src="../assets/images/game/half-heart.png" alt="heart" width="30">
-      <img src="../assets/images/game/empty-heart.png" alt="heart" width="30">
-    </section>
-  </div>
+  <div class="game_container">
+    <!-- Create: player's (1) name and his life -->
+    <div class="player-info">
+      <p>Player name</p>
+      <section class="rows_together_container">
+        <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
+        <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
+        <img src="../assets/images/game/half-heart.png" alt="heart" width="30">
+        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30">
+      </section>
+    </div>
 
-  <!-- Create: the game board -->
-  <table class="board-game">
-    <tr>
-      <td><img src="../assets/images/game/wall_outer_left.png" alt="Wall left"></td>
-      <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
-      <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
-      <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
-      <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
-      <td><img src="../assets/images/game/wall_outer_right.png" alt="Wall right"></td>
-    </tr>
-    <tr>
-      <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
-    </tr>
-    <tr>
-      <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
-    </tr>
-    <tr>
-      <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_spikes_anim_f3.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_spikes_anim_f3.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
-      <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
-    </tr>
-  </table>
+    <!-- Create: the game board -->
+    <table class="board-game">
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall_outer_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_spikes_anim_f3.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_spikes_anim_f3.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/floor_1.png" alt="Floor"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
 
-  <!-- Create: player's (2) name and his life -->
-  <div class="player-info">
-    <p>Player name</p>
-    <section class="rows_together_container">
-      <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
-      <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
-      <img src="../assets/images/game/half-heart.png" alt="heart" width="30">
-      <img src="../assets/images/game/empty-heart.png" alt="heart" width="30">
-    </section>
+      <!-- Last row -->
+      <tr>
+        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up"></td>
+        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right"></td>
+      </tr>
+    </table>
+
+    <!-- Create: player's (2) name and his life -->
+    <div class="player-info">
+      <p>Player name</p>
+      <section class="rows_together_container">
+        <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
+        <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
+        <img src="../assets/images/game/half-heart.png" alt="heart" width="30">
+        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30">
+      </section>
+    </div>
+
+    <!-- The attacks and keys -->
+    <div class="rows_together_container">
+
+      <section id="attacks">
+        <article>Attacflajlfasdljflsjlfjdlfjlsjdlkfjak 1</article>
+        <article>Attack 2</article>
+        <article>Attack 3</article>
+      </section>
+
+      <section class="keys_container">
+        <button class="arrow-left">
+          <img src="../assets/images/game/arrow-left.png" alt="arrow-left" width="30">
+        </button>
+        <button class="arrow-up">
+          <img src="../assets/images/game/arrow-up.png" alt="arrow-up" width="30">
+        </button>
+        <button class="arrow-down">
+          <img src="../assets/images/game/arrow-down.png" alt="arrow-down" width="30">
+        </button>
+        <button class="arrow-right">
+          <img src="../assets/images/game/arrow-right.png" alt="arrow-right" width="30">
+        </button>
+
+        <button class="space-key">
+          <img src="../assets/images/game/space-key.png" alt="space-key" width="30">
+        </button>
+      </section>
+
+    </div>
+
+    <button class="red_button">
+      <RouterLink to="/home">
+        Leave match
+      </RouterLink>
+    </button>
+
+
   </div>
 </template>
 
