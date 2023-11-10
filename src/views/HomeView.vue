@@ -1,5 +1,4 @@
 <script setup>
-import MySecondComponent from '../components/MySecondComponent.vue'
 import {RouterLink} from "vue-router";
 </script>
 
@@ -24,7 +23,7 @@ import {RouterLink} from "vue-router";
       <button class="main-button"> Store </button>
       </RouterLink>
 
-      <RouterLink to="/logout">
+      <RouterLink to="/statistics">
       <button class="main-button"> Log out </button>
       </RouterLink>
 
