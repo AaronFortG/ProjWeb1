@@ -12,7 +12,7 @@ import {RouterLink} from "vue-router";
         <h1 class="title">Name Player</h1>
       </div>
       <div class="header-buttons-container">
-        <RouterLink to="/sing-up" class="router-link">
+        <RouterLink to="/sign-up" class="router-link">
         <button>Back</button>
         </RouterLink>
       </div>
