@@ -2,6 +2,7 @@
 <script setup>
 
 import '../assets/stats.css'
+import {RouterLink} from "vue-router";
 
 </script>
 <template>
@@ -11,7 +12,9 @@ import '../assets/stats.css'
         <h1 class="title">Name Player</h1>
       </div>
       <div class="header-buttons-container">
+        <RouterLink to="/sing-up" class="router-link">
         <button>Back</button>
+        </RouterLink>
       </div>
     </div>
     <div class="content-container">
@@ -42,7 +45,9 @@ import '../assets/stats.css'
     </div>
 
     <div class="last_games">
-      <button class="main-button">Last Games</button>
+      <RouterLink to="/last-games" class="router-link">
+        <button class="main-button">Last Games</button>
+      </RouterLink>
     </div>
   </div>
 </template>
