@@ -1,3 +1,5 @@
+
+
 import {RouterLink} from "vue-router";
 <template>
   <div class="signUp-container">
@@ -18,9 +20,12 @@ import {RouterLink} from "vue-router";
       </div>
 
     <div class="button-container">
-      <button id="login-button" @click="redirectToLogin">Log in</button>
-      <button id="register-button" @click="register">Register</button>
+      <RouterLink to="/login" class="router-link">
+        <button class="login-button" @click="redirectToLogin">Log in</button>
+      </RouterLink>
+      <button class="register-button" @click="register">Register</button>
     </div>
+
 
     <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
     <footer>
@@ -30,7 +35,10 @@ import {RouterLink} from "vue-router";
 </template>
 
 <script>
+import {RouterLink} from "vue-router";
+
 export default {
+  components: {RouterLink},
   data() {
     return {
       email: "",
@@ -50,7 +58,7 @@ export default {
     },
     redirectToLogin() {
       console.log("Redirecting to login page...");
-      // Puedes agregar aquí la redirección a la página de inicio de sesión
+
     },
   },
 };
