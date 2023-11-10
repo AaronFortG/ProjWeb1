@@ -42,7 +42,8 @@ h1 {
 }
 
 #player-info-image img {
-    max-width: 50%;
+    width: 16rem;
+    padding-bottom: 1rem;
     margin: 0 auto;
 }
 
@@ -58,13 +59,20 @@ h2 {
     font-size: 2rem;
     text-align: center;
     color: white;
-    padding-bottom: 2rem;
+    padding: 0.5rem 0 1.5rem 0;
     font-weight: bold;
 }
 
 #equipped-attacks article,
 #owned-attacks article {
     margin-bottom: 1.5rem;
+}
+
+/* Treure l'espai final de l'últim atac quan aquest està abaix */
+@media (min-width: 1100px) and (max-width: 1559px) {
+    #equipped-attacks article:last-child {
+        margin-bottom: 0;
+    }
 }
 
 #equipped-attacks article p,
@@ -98,7 +106,7 @@ hr {
     margin: 2rem;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1100px) {
     #player-info {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -127,7 +135,7 @@ hr {
 
     .main-attack {
         flex: 1; /* Expand to fill the whole container */
-        min-width: 20rem; /* Mida mínima pel requadre de l'atac */
+        min-width: 22rem; /* Mida mínima pel requadre de l'atac */
     }
 
     #owned-attacks {
@@ -139,6 +147,6 @@ hr {
 
     .attack {
         width: 20%; /* Limit the number of columns to 4 */
-        min-width: 20rem; /* Mida mínima pel requadre de l'atac */
+        min-width: 22rem; /* Mida mínima pel requadre de l'atac */
     }
 }
