@@ -1,7 +1,7 @@
 h2 {
     color: white;
     font-size: 1.5rem;
-    margin: 1rem 0;
+    margin: 1rem auto; !important;
 }
 .left_row_container {
     display: flex;
