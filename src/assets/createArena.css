@@ -7,8 +7,14 @@
 }
 .form-group label {
     color: white;
-
+    margin: 0.5rem;
 }
 .form-group input {
-    padding: 5px 0;
+    padding: 5px;
+}
+
+@media (min-width: 600px) {
+    .form {
+        margin-bottom: 5rem;
+    }
 }

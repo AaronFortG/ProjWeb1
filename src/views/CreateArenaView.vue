@@ -39,7 +39,7 @@ export default {
 
     <div class="buttons_container">
 
-      <form>
+      <form class="form">
         <div class="form-group">
           <label>Size [2..10]</label>
           <input type="number" name="size" id="amount-input" required min="2" max="10" maxLength="2" @change="maxLengthCheck($event, 2, 10 )">
