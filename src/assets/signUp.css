@@ -8,7 +8,7 @@
     min-height: 100vh;
 }
 
-.signUp h2 {
+.signUp-container h2 {
     margin: 10px;
     color: white;
 }
@@ -17,9 +17,12 @@ form {
     width: 100%;
     max-width: 500px;
     display: grid;
+    gap: 10px; /* Espacio entre los elementos */
     align-items: center;
     justify-content: center;
     text-align: left;
+    margin-top: 20px; /* Añade espacio superior */
+    margin-bottom: 20px; /* Añade espacio inferior */
 }
 
 .form-group {
@@ -68,15 +71,21 @@ label {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
 }
 
-#login-button {
+.login-button {
     background-color: #007BFF;
-    margin-right: 0; /* Elimina el margen derecho */
+    margin-right: 0;
 }
 
-#register-button {
+.register-button {
     background-color: #28A745;
+}
+
+#register-button:hover,
+#login-button:hover {
+    background-color: #0056b3;
 }
 
 footer p {
