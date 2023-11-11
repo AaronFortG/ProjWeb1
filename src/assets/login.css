@@ -7,6 +7,16 @@
     margin: 40px;
 }
 
+.Log.in {
+    font-size: 50px; /* Tamaño de fuente */
+    color: #ffffff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Alineación del texto al centro */
+    margin-bottom: 20px; /* Espaciado inferior */
+    margin-top: 30px;
+}
+
+
  footer p {
 
     background-color: #333333;

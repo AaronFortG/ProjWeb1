@@ -9,7 +9,7 @@ import '../assets/login.css'
   <div class="login-container">
     <h1 class="title">Welcome to Dungeon Clash</h1>
     <form @submit.prevent="login">
-      <p id="Log in">Log in</p>
+      <h2 class="Log in">Log in</h2>
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="text" id="email" v-model="email" @input="validateEmail" required placeholder="example@gmail.com" />
@@ -24,7 +24,7 @@ import '../assets/login.css'
         <button id="login-button" type="submit">Login</button>
       </RouterLink>
       <RouterLink to="/sign-up">
-        <button id="register-button" @click="register">Register</button>
+        <button id="register-button" @click="register">Create Account</button>
       </RouterLink>
       <footer>
         <p>Created by Marcos, Aaron and Gemma</p>

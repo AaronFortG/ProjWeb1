@@ -29,7 +29,7 @@ import '../assets/home.css'
         <button class="main-button"> Best Players </button>
       </RouterLink>
 
-      <RouterLink to="/sign-up">
+      <RouterLink to="/">
       <button class="main-button"> Log out </button>
       </RouterLink>
 
