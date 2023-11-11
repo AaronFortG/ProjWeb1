@@ -58,12 +58,12 @@ const router = createRouter({
       component: () => import('../views/PlayerInfoView.vue')
     },
     {
-      path: '/player-info',
-      name: 'playerInfo',
+      path: '/game-logs',
+      name: 'gameLogs',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/PlayerInfoView.vue')
+      component: () => import('../views/GameLogsView.vue')
     },
     {
       path: '/bag',
