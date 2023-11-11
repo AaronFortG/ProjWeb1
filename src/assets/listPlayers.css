@@ -1,0 +1,54 @@
+.container {
+    text-align: center;
+}
+
+#ListPlayers {
+    list-style-type: none;
+    padding: 10px;
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px;
+    background-color: #FFFFCC;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+}
+
+.player-rank {
+    margin-right: 1000px; 
+    font-weight: bold;
+    order: 1; /* Cambia el orden del número (player-rank) */
+}
+
+.player-name {
+    flex-grow: 1; /* Hace que el nombre ocupe el espacio restante */
+    text-align: center; /* Centra el texto del nombre */
+    padding: 10px;
+}
+
+.recent-results {
+    display: flex;
+}
+
+.result-box {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.victory {
+    background-color: #28A745; /* Color para victorias */
+}
+
+.defeat {
+    background-color: #DC3545; /* Color para derrotas */
+}

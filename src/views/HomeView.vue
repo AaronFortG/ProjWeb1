@@ -25,6 +25,10 @@ import '../assets/home.css'
       <button class="main-button"> Store </button>
       </RouterLink>
 
+      <RouterLink to="/list-players">
+        <button class="main-button"> Best Players </button>
+      </RouterLink>
+
       <RouterLink to="/sign-up">
       <button class="main-button"> Log out </button>
       </RouterLink>
