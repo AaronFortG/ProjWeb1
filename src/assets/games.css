@@ -1,0 +1,43 @@
+.game-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 100px;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.separator {
+    border: 3px solid #FFC107;
+    margin: 20px 20px;
+    height: 10px;
+    width: 100%;
+}
+
+.router-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-button {
+    padding: 10px 20px;
+    background-color: #DA4E39;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+    margin: 0 auto;
+    display: block;
+}
+
+
+.info_player-1, .info_player-2 {
+    background-color: #FFC;
+    padding: 25px;
+    border-radius: 30px;
+    color: #333333;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
