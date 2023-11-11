@@ -1,5 +1,6 @@
 @import './base.css';
 
+/* Classe per posar els elements un sota de l'altre, utilitzant flex. */
 .big_container {
     display: grid;
     justify-content: center; /* Alinea los elementos horizontalmente en el centro */
@@ -7,7 +8,12 @@
     grid-template-rows: 1fr 2fr;
     grid-gap: 50px; /* Espacio entre elementos */
     padding: 0 40px;
-    margin-top: 4rem;
+}
+
+@media (min-width: 600px) {
+    .big_container {
+        grid-gap: 0;
+    }
 }
 
 .red_button {
