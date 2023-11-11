@@ -43,9 +43,9 @@ const router = createRouter({
       component: () => import('../views/JoinGameView.vue')
     },
     {
-      path: '/shop',
-      name: 'shop',
-      component: () => import('../views/ShopView.vue')
+      path: '/store',
+      name: 'store',
+      component: () => import('../views/StoreView.vue')
     },
     {
       path: '/last-games',
@@ -82,6 +82,16 @@ const router = createRouter({
       path: '/game',
       name: 'game',
       component: () => import('../views/GameView.vue')
+    },
+    {
+      path: '/loading-page',
+      name: 'loading-page',
+      component: () => import('../views/LoadingPageView.vue')
+    },
+    {
+      path: '/create-attack',
+      name: 'create-attack',
+      component: () => import('../views/CreateAttack.vue')
     }
   ]
 })
