@@ -21,7 +21,7 @@ import '../assets/home.css'
       <button class="main-button"> Player information </button>
       </RouterLink>
 
-      <RouterLink to="/shop">
+      <RouterLink to="/store">
       <button class="main-button"> Store </button>
       </RouterLink>
 

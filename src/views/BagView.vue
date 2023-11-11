@@ -46,8 +46,8 @@ export default {
 
       <div class="rows_container" id="BagAndButton">
         <section class="left_row_container">
-          <RouterLink to="/shop">
-            <img src="../assets/images/store.png" alt="bag" style="max-width: 5.5rem">
+          <RouterLink to="/store">
+            <img src="../assets/images/store.png" alt="store" style="max-width: 5.5rem">
           </RouterLink>
 
           <RouterLink to="/create-attack">
