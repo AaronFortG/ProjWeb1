@@ -45,7 +45,7 @@ import {RouterLink} from "vue-router";
     </div>
 
     <div class="last_games">
-      <RouterLink to="/last-games" class="router-link">
+      <RouterLink to="/games" class="router-link">
         <button class="main-button">Last Games</button>
       </RouterLink>
     </div>
