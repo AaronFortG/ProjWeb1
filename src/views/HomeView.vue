@@ -13,7 +13,7 @@ import '../assets/home.css'
         <button class="main-button"> Create match </button>
       </RouterLink>
 
-      <RouterLink to="/joinMatch">
+      <RouterLink to="/join-arena">
       <button class="main-button"> Join match </button>
       </RouterLink>
 
