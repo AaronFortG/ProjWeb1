@@ -40,6 +40,11 @@ const router = createRouter({
       component: () => import('../views/ShopView.vue')
     },
     {
+      path: '/last-games',
+      name: 'last-games',
+      component: () => import('../views/GamesView.vue')
+    },
+    {
       path: '/player-info',
       name: 'playerInfo',
       // route level code-splitting
