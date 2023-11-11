@@ -243,7 +243,7 @@ import '../assets/game.css';
     </table>
 
     <!-- Create: player's (2) name and his life -->
-    <div class="player-info">
+    <div class="player-info" id="players2">
       <p>Player name</p>
       <section class="rows_together_container">
         <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
