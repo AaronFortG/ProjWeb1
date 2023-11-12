@@ -1,16 +1,11 @@
-
 <script setup>
-
-import {RouterLink} from "vue-router";
-
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
   <div class="container">
     <div class="back-button">
-      <router-link to="/list-players" class="router-link">
-        <button class="red_button">Back</button>
-      </router-link>
+      <router-link class="red_button" to="/list-players">Back</router-link>
     </div>
 
     <h1 class="title" style="margin-bottom: 2rem">Stats</h1>
@@ -22,14 +17,20 @@ import {RouterLink} from "vue-router";
         <article>
           <p class="victories">Victories</p>
           <div class="progress-bar">
-            <div :style="`transform: rotate(${victoriesPercentage}deg)`" class="progress progress-victories"></div>
+            <div
+              :style="`transform: rotate(${victoriesPercentage}deg)`"
+              class="progress progress-victories"
+            ></div>
           </div>
         </article>
 
         <article>
           <p class="losses">Losses</p>
           <div class="progress-bar">
-            <div :style="`transform: rotate(${lossesPercentage}deg)`" class="progress progress-losses"></div>
+            <div
+              :style="`transform: rotate(${lossesPercentage}deg)`"
+              class="progress progress-losses"
+            ></div>
           </div>
         </article>
 
@@ -49,144 +50,141 @@ import {RouterLink} from "vue-router";
     </div>
 
     <div class="last_games">
-      <router-link to="/last-games" class="router-link">
-        <button class="main-button">Last Games</button>
-      </router-link>
+      <router-link class="main-button" to="/last-games">Last Games</router-link>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .container {
-    text-align: center;
-    margin: 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  h2 {
-    margin-bottom: 1rem;
-  }
+.container {
+  text-align: center;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+h2 {
+  margin-bottom: 1rem;
+}
 
+.back-button {
+  text-align: center;
+  margin-bottom: 40px;
+  order: -1;
+  margin-left: auto;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.column-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #181414;
+  margin-bottom: 5rem;
+}
+
+.column-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: blueviolet;
+  margin-bottom: 4rem;
+}
+
+.last_games {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  min-width: 17rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.progress-bar {
+  position: relative;
+  width: 80px;
+  height: 80px; /* Reducido el tamaño de las redondas de porcentaje */
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip: rect(0, 100px, 100px, 50px);
+  border-radius: 100%;
+  background-color: #28a745;
+  transform-origin: bottom right;
+}
+
+.progress-victories {
+  transform: rotate(0deg);
+  background-color: #28a745;
+}
+
+.progress-losses {
+  transform: rotate(360deg);
+  background-color: #da4e39;
+}
+
+.victories {
+  color: #28a745;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.losses {
+  color: #da4e39;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.win-rate {
+  color: #ffc107;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.total-games {
+  color: #007bff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.favorite {
+  color: blueviolet;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
   .back-button {
-    text-align: center;
-    margin-bottom: 40px;
-    order: -1;
-    margin-left: auto;
+    order: 2;
   }
-
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-
   .column-1 {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    background-color: #181414;
-    margin-bottom: 5rem;
+    flex-direction: row;
+    justify-content: space-around;
   }
-
-  .column-2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    background-color: blueviolet;
-    margin-bottom: 4rem;
+  .column-1 article:last-child {
+    margin-left: 10rem;
+    text-align: end;
   }
-
-  .last_games {
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    min-width: 17rem;
-    margin-left: auto;
-    margin-right: auto;
+  .column-1 article:last-child p {
+    margin-top: 1rem;
   }
-
-  .progress-bar {
-    position: relative;
-    width: 80px;
-    height: 80px; /* Reducido el tamaño de las redondas de porcentaje */
-    border-radius: 50%;
-    background-color: #f0f0f0;
-    margin: 10px 0;
-    overflow: hidden;
-  }
-
-  .progress {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    clip: rect(0, 100px, 100px, 50px);
-    border-radius: 100%;
-    background-color: #28A745;
-    transform-origin: bottom right;
-  }
-
-  .progress-victories {
-    transform: rotate(0deg);
-    background-color: #28A745;
-  }
-
-  .progress-losses {
-    transform: rotate(360deg);
-    background-color: #DA4E39;
-  }
-
-  .victories {
-    color: #28A745;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .losses {
-    color: #DA4E39;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .win-rate {
-    color: #FFC107;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .total-games {
-    color: #007BFF;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .favorite {
-    color: blueviolet;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  @media (min-width: 768px) {
-    .back-button {
-      order: 2;
-    }
-    .column-1 {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-    .column-1 article:last-child {
-      margin-left: 10rem;
-      text-align: end;
-    }
-    .column-1 article:last-child p {
-      margin-top: 1rem;
-    }
-  }
-
+}
 </style>

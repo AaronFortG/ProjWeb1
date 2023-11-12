@@ -1,5 +1,5 @@
 * {
-  font-family: 'text font', "text font", monospace;
+  font-family: 'text font', 'text font', monospace;
   font-size: 15px;
 
   margin: 0;
@@ -8,15 +8,15 @@
 }
 
 @font-face {
-  font-family: "Title font";
-  src: url("fonts/IrishGrover-Regular.ttf") format("truetype");
+  font-family: 'Title font';
+  src: url('fonts/IrishGrover-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "text font";
-  src: url("fonts/EightBitDragon-anqx.ttf") format("truetype");
+  font-family: 'text font';
+  src: url('fonts/EightBitDragon-anqx.ttf') format('truetype');
 }
 
 body {
-  background-color: #2F2F2F; /* Cambia este valor a un color de tu elección */
+  background-color: #2f2f2f; /* Cambia este valor a un color de tu elección */
 }
