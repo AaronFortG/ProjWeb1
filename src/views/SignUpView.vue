@@ -1,9 +1,12 @@
-
-
+<script setup>
+import '../assets/signUp.css'
 import {RouterLink} from "vue-router";
+</script>
+
 <template>
   <div class="signUp-container">
-    <h1 class="title">Sign Up</h1>
+    <h1 class="title">Welcome to Dungeon Clash</h1>
+    <h2 class="signUp">Sign Up</h2>
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="text" id="email" v-model="email" required />
@@ -24,7 +27,7 @@ import {RouterLink} from "vue-router";
         <button class="login-button" @click="redirectToLogin">Log in</button>
       </RouterLink>
       <RouterLink to="/home" class="router-link">
-      <button class="register-button" @click="register">Register</button>
+      <button class="register-button" @click="register">Create Account</button>
       </RouterLink>
     </div>
 
@@ -37,7 +40,6 @@ import {RouterLink} from "vue-router";
 </template>
 
 <script>
-import {RouterLink} from "vue-router";
 
 export default {
   components: {RouterLink},

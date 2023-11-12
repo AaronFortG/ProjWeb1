@@ -26,10 +26,10 @@ import '../assets/home.css'
       </RouterLink>
 
       <RouterLink to="/list-players">
-        <button class="main-button"> Best Players </button>
+        <button class="main-button">Ranking</button>
       </RouterLink>
 
-      <RouterLink to="/sign-up">
+      <RouterLink to="/">
       <button class="main-button"> Log out </button>
       </RouterLink>
 
