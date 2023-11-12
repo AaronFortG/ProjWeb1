@@ -72,7 +72,7 @@ export default {
   <p class="arena-join-description">Click a finished arena to view its logs.</p>
 
   <section>
-    <article class="arena" @click="showPopUpMethod">
+    <article class="arena" @click="navigateLogs">
       <div class="arena-info">
         <h2>Arena #1 - Date: </h2>
         <h2>20/10/2023</h2>
@@ -82,7 +82,7 @@ export default {
         <p>2x2</p>
       </div>
     </article>
-    <article class="arena" @click="showPopUpMethod">
+    <article class="arena" @click="navigateLogs">
       <div class="arena-info">
         <h2>Arena #2 - Date: </h2>
         <h2>31/10/2023</h2>
@@ -92,7 +92,7 @@ export default {
         <p>3x3</p>
       </div>
     </article>
-    <article class="arena" @click="showPopUpMethod">
+    <article class="arena" @click="navigateLogs">
       <div class="arena-info">
         <h2>Arena #3 - Date: </h2>
         <h2>05/11/2023</h2>
@@ -102,7 +102,7 @@ export default {
         <p>5x5</p>
       </div>
     </article>
-    <article class="arena" @click="showPopUpMethod">
+    <article class="arena" @click="navigateLogs">
       <div class="arena-info">
         <h2>Arena #4 - Date: </h2>
         <h2>09/11/2023</h2>

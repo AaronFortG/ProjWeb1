@@ -41,51 +41,51 @@ export default {
     <div id="available-arenas">
       <article class="arena" @click="showPopUpMethod">
         <div class="arena-info">
-          <h2>Arena #1 - Date:</h2>
+          <h2>Arena #1 - Date: </h2>
           <h2>20/10/2023</h2>
         </div>
         <div class="arena-size">
-          <p>Grid size:</p>
+          <p>Grid size: </p>
           <p>2x2</p>
         </div>
       </article>
       <article class="arena" @click="showPopUpMethod">
         <div class="arena-info">
-          <h2>Arena #2 - Date:</h2>
+          <h2>Arena #2 - Date: </h2>
           <h2>31/10/2023</h2>
         </div>
         <div class="arena-size">
-          <p>Grid size:</p>
+          <p>Grid size: </p>
           <p>3x3</p>
         </div>
       </article>
       <article class="arena" @click="showPopUpMethod">
         <div class="arena-info">
-          <h2>Arena #3 - Date:</h2>
+          <h2>Arena #3 - Date: </h2>
           <h2>05/11/2023</h2>
         </div>
         <div class="arena-size">
-          <p>Grid size:</p>
+          <p>Grid size: </p>
           <p>5x5</p>
         </div>
       </article>
       <article class="arena" @click="showPopUpMethod">
         <div class="arena-info">
-          <h2>Arena #4 - Date:</h2>
+          <h2>Arena #4 - Date: </h2>
           <h2>09/11/2023</h2>
         </div>
         <div class="arena-size">
-          <p>Grid size:</p>
+          <p>Grid size: </p>
           <p>10x10</p>
         </div>
       </article>
       <article class="arena" @click="showPopUpMethod">
         <div class="arena-info">
-          <h2>Arena #5 - Date:</h2>
+          <h2>Arena #5 - Date: </h2>
           <h2>11/11/2023</h2>
         </div>
         <div class="arena-size">
-          <p>Grid size:</p>
+          <p>Grid size: </p>
           <p>8x8</p>
         </div>
       </article>

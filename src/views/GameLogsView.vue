@@ -4,15 +4,13 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <div id="container">
-    <RouterLink to="/filter-arenas" class="router-link">
-      <button class="red_button">Back</button>
-    </RouterLink>
+    <RouterLink to="/filter-arenas" class="red_button">Back</RouterLink>
 
     <h1 class="title">Game Logs</h1>
 
     <section>
       <article id="grid-size">
-        <p>Grid Size:</p>
+        <p>Grid Size: </p>
         <p>5x5</p>
       </article>
       <article id="game-logs">

@@ -195,7 +195,7 @@ export default {
   </div>
 
   <div id="popUp" class="popUp" v-show="deleteAccPopUp">
-    <p class="popUp-question"><b>Confirm to delete your account</b></p>
+    <p class="popUp-question"><b>Confirm to delete your account, all progress will be lost.</b></p>
     <p @click="confirmDelete">Delete account</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
