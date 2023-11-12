@@ -12,7 +12,7 @@ export default {
     // Initialize the date range picker with 'drops: up'
     $('input[name="date-range"]').daterangepicker({
       opens: 'center'
-    }, function(start, end, label) {
+    }, function(start, end) {
       console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     });
   },
@@ -50,18 +50,24 @@ export default {
   <h1 class="title">Filter arenas</h1>
   
   <form id="arena-filters">
-    <label for="arena-filter-selector">Filter by arena Status</label>
-    <select id="arena-filter-selector" required>
-      <option value="Available" selected>Available</option>
-      <option value="Finished">Finished</option>
-      <option value="Available and Finished">Available and Finished</option>
-    </select>
+    <div>
+      <label for="arena-filter-selector">Filter by arena Status</label>
+      <select id="arena-filter-selector" required>
+        <option value="Available" selected>Available</option>
+        <option value="Finished">Finished</option>
+        <option value="Available and Finished">Available and Finished</option>
+      </select>
+    </div>
 
-    <label for="arena-search-input">Filter by arena ID</label>
-    <input id="arena-search-input" type="text" placeholder="Arena ID">
+    <div>
+      <label for="arena-search-input">Filter by arena ID</label>
+      <input id="arena-search-input" type="text" placeholder="Arena ID">
+    </div>
 
-    <label for="date-range-input">Filter by date range</label>
-    <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023" />
+    <div>
+      <label for="date-range-input">Filter by date range</label>
+      <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023"/>
+    </div>
   </form>
 
   <p id="arena-join-description">Right click an arena to join it.</p>

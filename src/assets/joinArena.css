@@ -75,7 +75,7 @@ section article:hover {
     font-weight: bold;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
     section {
         display: flex;
         flex-wrap: wrap;

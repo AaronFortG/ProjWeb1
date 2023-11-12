@@ -25,3 +25,16 @@ p {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
 }
+
+@media (min-width: 1000px) {
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 2rem;
+    }
+
+    form div {
+        flex: 1;
+        min-width: 20rem;
+    }
+}
