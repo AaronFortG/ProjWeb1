@@ -41,7 +41,7 @@ export default {
 </script>
 
 <template>
-  <header class="header-buttons-container">
+  <header class="header-buttons-container" id="center-button">
     <RouterLink to="/join-arena">
       <button class="red_button" id="back-button">Back</button>
     </RouterLink>
