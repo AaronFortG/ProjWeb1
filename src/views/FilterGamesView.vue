@@ -3,18 +3,18 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <script>
-import {onMounted} from "vue";
-import $ from 'jquery';
+import { onMounted } from 'vue'
+import $ from 'jquery'
 
 export default {
   setup() {
     onMounted(() => {
       // Initialize the date range picker with 'drops: up'
       $(this.$el).find('input[name="date-range"]').daterangepicker(
-          {
-            opens: 'center'
-          },
-          // function (start, end) {}
+        {
+          opens: 'center'
+        }
+        // function (start, end) {}
       )
     })
 
