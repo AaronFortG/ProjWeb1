@@ -23,8 +23,8 @@ export default {
       this.deleteAccPopUp = true
     },
     confirmDelete() {
-      alert("Account successfully deleted!")
-      this.$router.push("/")
+      alert('Account successfully deleted!')
+      this.$router.push('/')
     },
     handleYesClick() {
       alert('Join arena')
@@ -40,7 +40,9 @@ export default {
 <template>
   <header class="header-buttons-container">
     <router-link to="/home" class="red_button" id="back_button">Back</router-link>
-    <router-link to="" @click="showDeletePopUp" class="main-button" id="delete-account">Delete account</router-link>
+    <router-link to="" @click="showDeletePopUp" class="main-button" id="delete-account"
+      >Delete account</router-link
+    >
   </header>
 
   <h1 class="title">Player information</h1>
@@ -85,11 +87,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>1</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -97,11 +99,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>2</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -109,11 +111,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>3</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -129,11 +131,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>1</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -141,11 +143,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>2</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -153,11 +155,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>3</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -165,11 +167,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>4</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -177,11 +179,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>5</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -211,7 +213,7 @@ export default {
   top: 0;
 }
 
-#delete-account{
+#delete-account {
   margin-bottom: 0;
   width: auto;
   padding: 1rem;
@@ -328,7 +330,6 @@ hr {
 }
 
 @media (min-width: 1100px) {
-
   /* Estils pel popUp */
   div.popUp p {
     color: black;
@@ -376,7 +377,8 @@ hr {
     margin-bottom: 0;
   }
 
-  #player-info-data p, #player-info-data p b {
+  #player-info-data p,
+  #player-info-data p b {
     font-size: 1.5rem;
   }
 

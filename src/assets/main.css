@@ -4,112 +4,114 @@
 
 /* Classe per posar els elements un sota de l'altre, utilitzant flex. */
 .big_container {
-    display: grid;
-    justify-content: center; /* Alinea los elementos horizontalmente en el centro */
-    align-items: center;    /* Alinea los elementos verticalmente en el centro */
-    grid-template-rows: 1fr 2fr;
-    grid-gap: 50px; /* Espacio entre elementos */
-    padding: 0 40px;
+  display: grid;
+  justify-content: center; /* Alinea los elementos horizontalmente en el centro */
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 50px; /* Espacio entre elementos */
+  padding: 0 40px;
 }
 
 @media (min-width: 600px) {
-    .big_container {
-        grid-gap: 0;
-    }
+  .big_container {
+    grid-gap: 0;
+  }
 }
 
 .red_button {
-    background-color: #DB4E38;
-    color: white;
-    padding: 1.1rem 2rem;
-    border-radius: 10px;
-    text-align: center;
+  background-color: #db4e38;
+  color: white;
+  padding: 1.1rem 2rem;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .red_button:hover {
-    outline: 1px solid rgba(226, 222, 211, 0.89);
+  outline: 1px solid rgba(226, 222, 211, 0.89);
 }
 
 .rows_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .main-button {
-    border: 1px solid #181414;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    padding: 10px 20px;
-    background-color: #181414;
-    color: white;
-    text-align: center;
+  border: 1px solid #181414;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  padding: 10px 20px;
+  background-color: #181414;
+  color: white;
+  text-align: center;
 }
 
 .main-button:hover {
-    border: 1px solid rgba(226, 222, 211, 0.89);
+  border: 1px solid rgba(226, 222, 211, 0.89);
 }
 
 .buttons_container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    font-family: "Title font", serif;
-    font-size: 2.5rem;
-    text-align: center; /* Alinea el contenido de cada elemento en el centro */
-    color: white;
-    word-wrap: break-word;
-    margin-bottom: 5px;
+  font-family: 'Title font', serif;
+  font-size: 2.5rem;
+  text-align: center; /* Alinea el contenido de cada elemento en el centro */
+  color: white;
+  word-wrap: break-word;
+  margin-bottom: 5px;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Estilos para los botones del Router Link: no poner underline y de color blanco */
-a:link, a:visited, a:active {
-    text-decoration: none;
-    color: white;
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: white;
 }
 
 /* FOOTER */
-footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 footer p {
-    background-color: #2F2F2F;
-    color: #ffffff;
-    text-align: center;
-    font-size: 20px;
-    font-family: "Times New Roman", serif;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 30px;
+  background-color: #2f2f2f;
+  color: #ffffff;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Times New Roman', serif;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 30px;
 }
 
 h2 {
-    font-size: 1.5rem;
-    color: white;
+  font-size: 1.5rem;
+  color: white;
 }
 
 @media (min-width: 600px) {
-    .main-button {
-        padding: 20px 20px;
-    }
-    .title {
-        margin: 0;
-        font-size: 100px;
-    }
+  .main-button {
+    padding: 20px 20px;
+  }
+  .title {
+    margin: 0;
+    font-size: 100px;
+  }
 
-    * {
-        font-size: 20px;
-    }
+  * {
+    font-size: 20px;
+  }
 }

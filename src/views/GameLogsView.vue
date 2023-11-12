@@ -10,7 +10,7 @@ import { RouterLink } from 'vue-router'
 
     <section>
       <article id="grid-size">
-        <p>Grid Size: </p>
+        <p>Grid Size:</p>
         <p>5x5</p>
       </article>
       <article id="game-logs">

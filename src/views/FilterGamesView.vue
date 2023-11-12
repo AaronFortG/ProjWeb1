@@ -3,25 +3,28 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <script>
+import {onMounted} from "vue";
+import $ from 'jquery';
+
 export default {
-  mounted() {
-    // Initialize the date range picker with 'drops: up'
-    $('input[name="date-range"]').daterangepicker(
-      {
-        opens: 'center'
-      },
-      function (start, end) {}
-    )
-  },
-  setup() {},
-  data() {
+  setup() {
+    onMounted(() => {
+      // Initialize the date range picker with 'drops: up'
+      $(this.$el).find('input[name="date-range"]').daterangepicker(
+          {
+            opens: 'center'
+          },
+          // function (start, end) {}
+      )
+    })
+
     return {
       showPopUp: false
     }
   },
   methods: {
     navigateLogs() {
-      this.$router.push('/game-logs');
+      this.$router.push('/game-logs')
     },
     showPopUpMethod() {
       this.showPopUp = true
@@ -59,12 +62,12 @@ export default {
 
     <div>
       <label for="arena-search-input">Filter by arena ID</label>
-      <input id="arena-search-input" type="text" placeholder="Arena ID">
+      <input id="arena-search-input" type="text" placeholder="Arena ID" />
     </div>
 
     <div>
       <label for="date-range-input">Filter by date range</label>
-      <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023"/>
+      <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023" />
     </div>
   </form>
 
@@ -74,51 +77,51 @@ export default {
   <section>
     <article class="arena" @click="navigateLogs">
       <div class="arena-info">
-        <h2>Arena #1 - Date: </h2>
+        <h2>Arena #1 - Date:</h2>
         <h2>20/10/2023</h2>
       </div>
       <div class="arena-size">
-        <p>Grid size: </p>
+        <p>Grid size:</p>
         <p>2x2</p>
       </div>
     </article>
     <article class="arena" @click="navigateLogs">
       <div class="arena-info">
-        <h2>Arena #2 - Date: </h2>
+        <h2>Arena #2 - Date:</h2>
         <h2>31/10/2023</h2>
       </div>
       <div class="arena-size">
-        <p>Grid size: </p>
+        <p>Grid size:</p>
         <p>3x3</p>
       </div>
     </article>
     <article class="arena" @click="navigateLogs">
       <div class="arena-info">
-        <h2>Arena #3 - Date: </h2>
+        <h2>Arena #3 - Date:</h2>
         <h2>05/11/2023</h2>
       </div>
       <div class="arena-size">
-        <p>Grid size: </p>
+        <p>Grid size:</p>
         <p>5x5</p>
       </div>
     </article>
     <article class="arena" @click="navigateLogs">
       <div class="arena-info">
-        <h2>Arena #4 - Date: </h2>
+        <h2>Arena #4 - Date:</h2>
         <h2>09/11/2023</h2>
       </div>
       <div class="arena-size">
-        <p>Grid size: </p>
+        <p>Grid size:</p>
         <p>10x10</p>
       </div>
     </article>
     <article class="arena" @click="navigateLogs">
       <div class="arena-info">
-        <h2>Arena #5 - Date: </h2>
+        <h2>Arena #5 - Date:</h2>
         <h2>11/11/2023</h2>
       </div>
       <div class="arena-size">
-        <p>Grid size: </p>
+        <p>Grid size:</p>
         <p>8x8</p>
       </div>
     </article>
@@ -132,111 +135,111 @@ export default {
 </template>
 
 <style scoped>
-  .header-buttons-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 2rem;
-    position: sticky;
-    background-color: #2F2F2F;
-    top: 0;
-  }
+.header-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  position: sticky;
+  background-color: #2f2f2f;
+  top: 0;
+}
 
-  h1.title {
-    margin-bottom: 2rem;
-  }
+h1.title {
+  margin-bottom: 2rem;
+}
 
+section {
+  margin: 2rem;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+.arena-join-description {
+  color: white;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+}
+
+section article {
+  background-color: #181414;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+section article p,
+section article h2 {
+  color: white;
+}
+
+section article div.arena-info {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+section article div.arena-info h2,
+section article div.arena-size p {
+  display: inline;
+}
+
+section article:hover {
+  outline: white 1px solid;
+}
+
+@media (min-width: 1000px) {
   section {
-    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
   }
 
-  h2 {
-    font-size: 1rem;
+  section article.arena {
+    flex: 1;
+    max-width: 21.5rem;
+    min-width: 21.5rem;
+    box-sizing: border-box;
+  }
+}
+
+#center-button {
+  justify-content: center;
+}
+
+form#arena-filters {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+label {
+  color: white;
+}
+
+form select,
+form input {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  margin-right: 2rem;
+  padding: 1rem;
+  box-sizing: border-box; /* Fer que l'element no sobresurti de la pantalla */
+  width: 100%;
+}
+
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1000px) {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
   }
 
-  .arena-join-description {
-    color: white;
-    margin-bottom: 1rem;
-    margin-left: 2rem;
+  form div {
+    flex: 1;
+    min-width: 20rem;
   }
-
-  section article {
-    background-color: #181414;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  section article p,
-  section article h2 {
-    color: white;
-  }
-
-  section article div.arena-info {
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  section article div.arena-info h2,
-  section article div.arena-size p {
-    display: inline;
-  }
-
-  section article:hover {
-    outline: white 1px solid;
-  }
-
-  @media (min-width: 1000px) {
-    section {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 2rem;
-    }
-
-    section article.arena {
-      flex: 1;
-      max-width: 21.5rem;
-      min-width: 21.5rem;
-      box-sizing: border-box;
-    }
-  }
-
-  #center-button {
-    justify-content: center;
-  }
-
-  form#arena-filters {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-
-  label {
-    color: white;
-  }
-
-  form select,
-  form input {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    margin-right: 2rem;
-    padding: 1rem;
-    box-sizing: border-box; /* Fer que l'element no sobresurti de la pantalla */
-    width: 100%;
-  }
-
-  p {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  @media (min-width: 1000px) {
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 2rem;
-    }
-
-    form div {
-      flex: 1;
-      min-width: 20rem;
-    }
-  }
+}
 </style>

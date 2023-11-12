@@ -11,13 +11,7 @@ import { RouterLink } from 'vue-router'
 
       <div class="login_and_signUp_form-group">
         <label for="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          v-model="email"
-          required
-          placeholder="example@gmail.com"
-        />
+        <input type="text" id="email" v-model="email" required placeholder="example@gmail.com" />
       </div>
 
       <div class="login_and_signUp_form-group">
@@ -26,8 +20,9 @@ import { RouterLink } from 'vue-router'
       </div>
 
       <div class="buttons_login_and_signUp">
-
-        <router-link id="login-button" type="submit" to="/home" class="router-link">Login</router-link>
+        <router-link id="login-button" type="submit" to="/home" class="router-link"
+          >Login</router-link
+        >
 
         <router-link to="/sign-up" id="register-button" class="router-link">Sign Up</router-link>
       </div>
