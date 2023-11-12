@@ -1,5 +1,5 @@
 <script setup>
-import {RouterLink} from "vue-router";
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import {RouterLink} from "vue-router";
 
     <section>
       <article id="grid-size">
-        <p>Grid Size: </p>
+        <p>Grid Size:</p>
         <p>5x5</p>
       </article>
       <article id="game-logs">
@@ -26,40 +26,40 @@ import {RouterLink} from "vue-router";
 </template>
 
 <style scoped>
+#container {
+  margin: 2rem;
+}
+
+h1 {
+  padding: 1rem 0 1rem 0;
+}
+
+p {
+  color: white;
+}
+
+/* Alinear els dos paràgrafs */
+article#grid-size p {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  display: inline;
+}
+
+article#grid-size {
+  padding-bottom: 2rem;
+}
+
+article p {
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
   #container {
-    margin: 2rem;
+    margin: 6rem;
   }
 
   h1 {
-    padding: 1rem 0 1rem 0;
+    padding: 2rem 0 2rem 0;
   }
-
-  p {
-    color: white;
-  }
-
-  /* Alinear els dos paràgrafs */
-  article#grid-size p {
-    font-weight: bolder;
-    font-size: 1.5rem;
-    display: inline;
-  }
-
-  article#grid-size {
-    padding-bottom: 2rem;
-  }
-
-  article p {
-    padding-bottom: 1rem;
-  }
-
-  @media (min-width: 600px) {
-    #container {
-      margin: 6rem;
-    }
-
-    h1 {
-      padding: 2rem 0 2rem 0;
-    }
-  }
+}
 </style>

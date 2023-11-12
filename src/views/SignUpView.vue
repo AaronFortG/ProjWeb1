@@ -1,10 +1,9 @@
 <script setup>
-import {RouterLink} from "vue-router";
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
   <div class="login_and_signUp-container">
-
     <h1 class="title">Welcome to Dungeon Clash</h1>
 
     <h2 class="login_and_signUp">Sign Up</h2>
@@ -16,25 +15,26 @@ import {RouterLink} from "vue-router";
 
     <div class="login_and_signUp_form-group">
       <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" required placeholder="password"/>
+      <input type="password" id="password" v-model="password" required placeholder="password" />
     </div>
 
     <div class="login_and_signUp_form-group">
       <label for="confirm-password">Confirm Password:</label>
-      <input type="password" id="confirm-password" v-model="confirmPassword" required placeholder="password"/>
+      <input
+        type="password"
+        id="confirm-password"
+        v-model="confirmPassword"
+        required
+        placeholder="password"
+      />
     </div>
 
     <div class="buttons_login_and_signUp">
-      <router-link to="/" class="router-link">
-        <button id="login-button" type="submit">Login</button>
-      </router-link>
-      <router-link to="/home" class="router-link">
-        <button id="register-button" @click="register">Create account</button>
-      </router-link>
+      <router-link id="login-button" type="submit" to="/" class="router-link">Login</router-link>
+      <router-link id="register-button" to="/home" class="router-link">Create account</router-link>
     </div>
 
     <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
-
   </div>
 
   <footer>
@@ -43,57 +43,53 @@ import {RouterLink} from "vue-router";
 </template>
 
 <script>
-
 export default {
-  components: {RouterLink},
+  components: { RouterLink },
   data() {
     return {
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped>
-  .signUp-container {
-    text-align: center;
-    margin: 1px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
+.signUp-container {
+  text-align: center;
+  margin: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 
-  .signUp-container h2 {
-    margin: 20px;
-    color: white;
-  }
+.signUp-container h2 {
+  margin: 20px;
+  color: white;
+}
 
-  form {
-    width: 100%;
-    max-width: 300px;
-    display: grid;
-    gap: 4px; /* Espacio entre los elementos */
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    margin-top: 3px; /* Añade espacio superior */
-    margin-bottom: 3px; /* Añade espacio inferior */
-  }
+form {
+  width: 100%;
+  max-width: 300px;
+  display: grid;
+  gap: 4px; /* Espacio entre los elementos */
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  margin-top: 3px; /* Añade espacio superior */
+  margin-bottom: 3px; /* Añade espacio inferior */
+}
 
+label {
+  font-weight: bold;
+}
 
-  label {
-    font-weight: bold;
-  }
-
-
-  .error-message {
-    color: red;
-    margin-top: 40px;
-  }
-
+.error-message {
+  color: red;
+  margin-top: 40px;
+}
 </style>

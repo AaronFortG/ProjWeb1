@@ -1,7 +1,5 @@
 <script setup>
-
-import {RouterLink} from "vue-router";
-
+import { RouterLink } from 'vue-router'
 </script>
 
 <script>
@@ -9,23 +7,23 @@ export default {
   setup() {},
   data() {
     return {
-      showPopUp: false,
-    };
+      showPopUp: false
+    }
   },
   methods: {
     showPopUpMethod() {
-      this.showPopUp = true;
+      this.showPopUp = true
     },
     hidePopUp() {
-      this.showPopUp = false;
+      this.showPopUp = false
     },
     handleYesClick() {
-      alert('Join arena');
-      this.hidePopUp();
+      alert('Join arena')
+      this.hidePopUp()
     },
     handleNoClick() {
-      this.hidePopUp();
-    },
+      this.hidePopUp()
+    }
   }
 }
 </script>
@@ -45,7 +43,7 @@ export default {
 
   <div id="player-info">
     <div id="player-info-image">
-      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image">
+      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image" />
     </div>
 
     <div id="player-info-data">
@@ -71,7 +69,7 @@ export default {
     </div>
   </div>
 
-  <hr>
+  <hr />
 
   <section>
     <div id="equipped-attacks-title">
@@ -83,11 +81,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>1</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -95,11 +93,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>2</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -107,18 +105,18 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>3</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
     </div>
   </section>
 
-  <hr id="owned-attacks-divider">
+  <hr id="owned-attacks-divider" />
 
   <section>
     <h2>Owned attacks</h2>
@@ -127,11 +125,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>1</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -139,11 +137,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>2</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -151,11 +149,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>3</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -163,11 +161,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>4</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -175,11 +173,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power </p>
+          <p>Power</p>
           <p>5</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions: </p>
+          <p>Positions:</p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -194,199 +192,202 @@ export default {
 </template>
 
 <style scoped>
-  .header-buttons-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 2rem;
-    position: sticky;
-    background-color: #2F2F2F;
-    top: 0;
-  }
+.header-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  position: sticky;
+  background-color: #2f2f2f;
+  top: 0;
+}
 
-  #delete-account {
+#delete-account {
+  margin-bottom: 0;
+}
+
+p,
+b {
+  color: white;
+  font-size: 1.5rem;
+}
+
+h1.title {
+  font-size: 2.5rem !important;
+  padding: 0 2rem 2rem 2rem;
+  margin: 0;
+}
+
+#player-info {
+  text-align: center;
+  display: inline;
+}
+
+/* Separar la informació del jugador amb espai */
+#player-info-data * {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#player-info p {
+  display: inline;
+}
+
+#player-info article {
+  margin-bottom: 1.5rem;
+}
+
+#player-info-image img {
+  width: 12rem;
+}
+
+#player-info-image {
+  padding-bottom: 0.5rem;
+}
+
+#player-info-name p {
+  display: inline;
+}
+
+#player-info article:last-child {
+  padding: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+h3 {
+  color: white;
+  font-size: 18px;
+}
+
+#equipped-attacks article,
+#owned-attacks article {
+  margin-bottom: 1.5rem;
+}
+
+/* Treure l'espai final de l'últim atac quan aquest està abaix */
+@media (min-width: 1100px) and (max-width: 1559px) {
+  #equipped-attacks article:last-child {
     margin-bottom: 0;
   }
+}
 
-  p, b {
-    color: white;
-    font-size: 1.5rem;
-  }
+#equipped-attacks article p,
+#owned-attacks article p {
+  font-size: 1.2rem;
+  display: inline;
+}
 
-  h1.title {
-    font-size: 2.5rem !important;
-    padding: 0 2rem 2rem 2rem;
-    margin: 0;
+.main-attack-power {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#equipped-attacks article:hover,
+#owned-attacks article:hover {
+  outline: 1px solid white;
+}
+
+.main-attack,
+.attack {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 1.5rem;
+  background-color: #181414;
+}
+
+.main-attack > p,
+.attack > p {
+  font-weight: bold;
+}
+
+hr {
+  border: 1px solid white;
+  margin: 2rem;
+}
+
+@media (min-width: 1100px) {
+  .header-buttons-container {
+    padding-bottom: 0;
   }
 
   #player-info {
-    text-align: center;
-    display: inline;
-  }
-
-  /* Separar la informació del jugador amb espai */
-  #player-info-data * {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  #player-info p {
-    display: inline;
-  }
-
-  #player-info article {
-    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 2rem;
   }
 
   #player-info-image img {
-    width: 12rem;
+    max-width: 12rem;
   }
 
   #player-info-image {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0;
   }
 
-  #player-info-name p {
-    display: inline;
-  }
-
-  #player-info article:last-child {
-    padding: 0;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    text-align: center;
-    color: white;
-    margin-bottom: 2rem;
-    font-weight: bold;
+  h1 {
+    margin-bottom: 2rem !important;
   }
 
   h3 {
-    color: white;
-    font-size: 18px;
+    font-size: 24px;
   }
 
-  #equipped-attacks article,
-  #owned-attacks article {
-    margin-bottom: 1.5rem;
+  /* Mostrar el títol dels atacs equipats en una sola línia. */
+  #equipped-attacks-title {
+    display: flex;
+    justify-content: center;
+    column-gap: 1rem;
   }
 
-  /* Treure l'espai final de l'últim atac quan aquest està abaix */
-  @media (min-width: 1100px) and (max-width: 1559px) {
-    #equipped-attacks article:last-child {
-      margin-bottom: 0;
-    }
+  hr#owned-attacks-divider {
+    margin-top: 0.5rem;
   }
 
-  #equipped-attacks article p,
-  #owned-attacks article p {
-    font-size: 1.2rem;
-    display: inline;
+  #player-info-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  .main-attack-power {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  /* No separar la informació del jugador amb espai (ja se separa adalt amb el justify-content) */
+  #player-info-data * {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  #equipped-attacks article:hover,
-  #owned-attacks article:hover {
-    outline: 1px solid white;
+  #player-info article {
+    margin-bottom: 0;
   }
 
-  .main-attack, .attack{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    padding: 1.5rem;
-    background-color: #181414;
+  #equipped-attacks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: fit-content;
   }
 
-  .main-attack > p, .attack > p {
-    font-weight: bold;
+  .main-attack {
+    flex: 1; /* Expand to fill the whole container */
+    min-width: 22rem; /* Mida mínima pel requadre de l'atac */
   }
 
-  hr {
-    border: 1px solid white;
-    margin: 2rem;
+  #owned-attacks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 
-  @media (min-width: 1100px) {
-    .header-buttons-container {
-      padding-bottom: 0;
-    }
-
-    #player-info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-bottom: 2rem;
-    }
-
-    #player-info-image img {
-      max-width: 12rem;
-    }
-
-    #player-info-image {
-      padding-bottom: 0;
-    }
-
-    h1 {
-      margin-bottom: 2rem !important;
-    }
-
-    h3 {
-      font-size: 24px;
-    }
-
-    /* Mostrar el títol dels atacs equipats en una sola línia. */
-    #equipped-attacks-title {
-      display: flex;
-      justify-content: center;
-      column-gap: 1rem;
-    }
-
-    hr#owned-attacks-divider {
-      margin-top: 0.5rem;
-    }
-
-    #player-info-data {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    /* No separar la informació del jugador amb espai (ja se separa adalt amb el justify-content) */
-    #player-info-data * {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    #player-info article {
-      margin-bottom: 0;
-    }
-
-    #equipped-attacks {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      height: fit-content;
-    }
-
-    .main-attack {
-      flex: 1; /* Expand to fill the whole container */
-      min-width: 22rem; /* Mida mínima pel requadre de l'atac */
-    }
-
-    #owned-attacks {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-    }
-
-    .attack {
-      min-width: 22rem; /* Mida mínima pel requadre de l'atac */
-      flex: 1;
-    }
+  .attack {
+    min-width: 22rem; /* Mida mínima pel requadre de l'atac */
+    flex: 1;
   }
+}
 </style>

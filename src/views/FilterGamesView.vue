@@ -1,39 +1,40 @@
 <script setup>
-
-import {RouterLink} from "vue-router";
-
+import { RouterLink } from 'vue-router'
 </script>
 
 <script>
 export default {
   mounted() {
     // Initialize the date range picker with 'drops: up'
-    $('input[name="date-range"]').daterangepicker({
-      opens: 'center'
-    }, function(start, end) {});
+    $('input[name="date-range"]').daterangepicker(
+      {
+        opens: 'center'
+      },
+      function (start, end) {}
+    )
   },
   setup() {},
   data() {
     return {
-      showPopUp: false,
-    };
+      showPopUp: false
+    }
   },
   methods: {
     showPopUpMethod() {
-      this.showPopUp = true;
+      this.showPopUp = true
     },
     hidePopUp() {
-      this.showPopUp = false;
+      this.showPopUp = false
     },
     handleYesClick() {
-      alert('Join arena');
-      this.hidePopUp();
+      alert('Join arena')
+      this.hidePopUp()
     },
     handleNoClick() {
-      this.hidePopUp();
-    },
+      this.hidePopUp()
+    }
   }
-};
+}
 </script>
 
 <template>
