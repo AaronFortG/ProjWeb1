@@ -27,7 +27,7 @@ export default {
     handleNoClick() {
       this.hidePopUp();
     },
-  },
+  }
 }
 </script>
 

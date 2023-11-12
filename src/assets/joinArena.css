@@ -67,6 +67,10 @@ section article:hover {
     z-index: 999; /* Per posar-lo per sobre dels elements */
 }
 
+.popUp *:nth-child(2) {
+    margin-bottom: 1rem;
+}
+
 .popUp button:hover {
     font-weight: bold;
 }

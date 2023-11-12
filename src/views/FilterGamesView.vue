@@ -16,6 +16,27 @@ export default {
       console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     });
   },
+  setup() {},
+  data() {
+    return {
+      showPopUp: false,
+    };
+  },
+  methods: {
+    showPopUpMethod() {
+      this.showPopUp = true;
+    },
+    hidePopUp() {
+      this.showPopUp = false;
+    },
+    handleYesClick() {
+      alert('Join arena');
+      this.hidePopUp();
+    },
+    handleNoClick() {
+      this.hidePopUp();
+    },
+  }
 };
 </script>
 
@@ -23,10 +44,6 @@ export default {
   <header class="header-buttons-container">
     <RouterLink to="/join-arena">
       <button class="red_button" id="back-button">Back</button>
-    </RouterLink>
-
-    <RouterLink to="/filter-arenas">
-      <button class="main-button" id="filter-button">Filter Arenas</button>
     </RouterLink>
   </header>
 
@@ -43,7 +60,7 @@ export default {
     <label for="arena-search-input">Filter by arena ID</label>
     <input id="arena-search-input" type="text" placeholder="Arena ID">
 
-    <label for="date-range-input">Date range input</label>
+    <label for="date-range-input">Filter by date range</label>
     <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023" />
   </form>
 
