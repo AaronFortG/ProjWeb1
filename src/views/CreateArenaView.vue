@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="big_container">
+  <div class="createArena_container">
     <h1 class="title">Create an arena</h1>
 
     <div class="buttons_container">
@@ -57,10 +57,23 @@ export default {
       </RouterLink>
 
     </div>
+
+    <div class="back-button">
+      <RouterLink to="/home" class="router-link">
+        <button class="red_button" id="back-button">Back</button>
+      </RouterLink>
+    </div>
+
   </div>
 </template>
 
 <style scoped>
+  .createArena_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+  }
   .form-group {
     display: flex;
     justify-content: center;
@@ -77,9 +90,21 @@ export default {
     width: 17rem;
   }
 
+  .back-button {
+    text-align: center;
+    margin-bottom: 40px;
+    order: -1;
+    margin-left: auto;
+  }
+
   @media (min-width: 600px) {
     .form {
       margin-bottom: 5rem;
+    }
+
+    .back-button {
+      order: 2;
+      margin-top: 2rem;
     }
   }
 </style>
