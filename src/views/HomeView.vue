@@ -1,34 +1,38 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+
+import {RouterLink} from "vue-router";
+
 </script>
 
 <template>
   <div class="big_container">
-    <h1 class="title">Dungeon Clash</h1>
-    <div class="buttons_container">
-      <RouterLink to="/create-arena" class="router-link">
-        <button class="main-button">Create match</button>
+    <h1 class="title"> Dungeon Clash </h1>
+    <div class="buttons_container"> 
+
+      <RouterLink to="/create-arena" class="router-link main-button">
+        Create match
       </RouterLink>
 
-      <RouterLink to="/join-arena">
-        <button class="main-button">Join match</button>
+      <RouterLink to="/join-arena" class="router-link main-button">
+        Join match
       </RouterLink>
 
-      <RouterLink to="/player-info">
-        <button class="main-button">Player information</button>
+      <RouterLink to="/player-info" class="router-link main-button">
+        Player information
       </RouterLink>
 
-      <RouterLink to="/store">
-        <button class="main-button">Store</button>
+      <RouterLink to="/store" class="router-link main-button">
+        Store
       </RouterLink>
 
-      <RouterLink to="/list-players">
-        <button class="main-button">Ranking</button>
+      <RouterLink to="/list-players" class="router-link main-button">
+        Ranking
       </RouterLink>
 
-      <RouterLink to="/">
-        <button class="main-button">Log out</button>
+      <RouterLink to="/" class="router-link main-button">
+        Log out
       </RouterLink>
-    </div>
+
+    </div> 
   </div>
 </template>
