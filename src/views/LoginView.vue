@@ -5,31 +5,40 @@ import {RouterLink} from "vue-router";
 </script>
 
 <template>
-  <div class="login-container">
+  <div class="login_and_signUp-container">
+
     <h1 class="title">Welcome to Dungeon Clash</h1>
+
     <form @submit.prevent="login">
-      <h2 class="Log in">Log in</h2>
-      <div class="form-group">
+
+      <h2 class="login_and_signUp">Log in</h2>
+
+      <div class="login_and_signUp_form-group">
         <label for="email">Email:</label>
         <input type="text" id="email" v-model="email" @input="validateEmail" required placeholder="example@gmail.com" />
       </div>
 
-      <div class="form-group">
+      <div class="login_and_signUp_form-group">
         <label for="password">Password:</label>
         <input type="password" id="password" v-model="password" required placeholder="password" />
       </div>
 
-      <RouterLink to="/home">
-        <button id="login-button" type="submit">Login</button>
-      </RouterLink>
-      <RouterLink to="/sign-up">
-        <button id="register-button" @click="register">Sign Up</button>
-      </RouterLink>
-      <footer>
-        <p>Created by Marcos, Aaron and Gemma</p>
-      </footer>
+      <div class="buttons_login_and_signUp">
+        <RouterLink to="/home" class="router-link">
+          <button id="login-button" type="submit">Login</button>
+        </RouterLink>
+        <RouterLink to="/sign-up" class="router-link">
+          <button id="register-button" @click="register">Sign Up</button>
+        </RouterLink>
+      </div>
+
     </form>
+
   </div>
+
+  <footer>
+    <p>Created by Marcos Ruiz-Flores, Aaron Fort and Gemma Yebra.</p>
+  </footer>
 
 </template>
 
@@ -66,72 +75,3 @@ export default {
 };
 </script>
 
-
-<style scoped>
-  .login-container {
-    text-align: center;
-    margin: 20px;
-  }
-
-  .form-group {
-    margin: 20px;
-  }
-
-  h2.Log.in {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  footer p {
-    background-color: #2F2F2F;
-    color: #ffffff;
-    text-align: center;
-    font-size: 20px;
-    font-family: "Times New Roman", serif;
-    padding: 10px;
-    position: relative; /* Cambiado de absolute a relative */
-    bottom: 0;
-    width: 100%;
-    margin-top: 20px; /* Añadido espacio superior */
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 15px;
-    font-weight: bold;
-    color: #fff;
-  }
-
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  #login-button,
-  #register-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  #login-button {
-    background-color: #007BFF;
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
-
-  #register-button {
-    background-color: #28A745;
-  }
-</style>
