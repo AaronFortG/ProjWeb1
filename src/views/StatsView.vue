@@ -62,8 +62,13 @@ import { RouterLink } from 'vue-router'
   display: flex;
   flex-direction: column;
 }
+
 h2 {
   margin-bottom: 1rem;
+}
+
+p {
+  color: white;
 }
 
 .back-button {
@@ -96,7 +101,7 @@ h2 {
   align-items: center;
   width: 100%;
   padding: 20px;
-  background-color: blueviolet;
+  background-color: #181414;
   margin-bottom: 4rem;
 }
 
@@ -165,7 +170,7 @@ h2 {
 }
 
 .favorite {
-  color: blueviolet;
+  color: darkviolet;
   font-size: 16px;
   font-weight: bold;
 }
