@@ -1,5 +1,7 @@
 @import './base.css';
 @import './logIn_SignUp.css';
+@import './popUp.css';
+
 /* Classe per posar els elements un sota de l'altre, utilitzant flex. */
 .big_container {
     display: grid;
@@ -109,53 +111,4 @@ h2 {
     * {
         font-size: 20px;
     }
-}
-
-/* Estils per el popup */
-.popUp {
-    display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border: #cccccc 1px solid;
-    padding: 1.5rem;
-    box-sizing: border-box;
-    width: 22rem;
-    z-index: 999; /* Per posar-lo per sobre dels elements */
-}
-
-/* Separar les opcions del PopUp */
-.popUp *:nth-child(2) {
-    margin-bottom: 1rem;
-}
-
-/* Mostrar l'opció seleccionada del PopUp en negreta */
-.popUp button:hover {
-    font-weight: bold;
-}
-
-/* Ajustar la font del text i el seu color */
-.popUp p b {
-    color: black;
-    font-size: 20px;
-    line-height: 2rem;
-}
-
-.popUp button {
-    font-size: 20px;
-}
-
-/* Separar la pregunta de les respostes */
-.popUp p {
-    margin-bottom: 1rem;
-}
-
-/* Esborrar el color de fons dels botons */
-.popUp button {
-    background: none;
 }
