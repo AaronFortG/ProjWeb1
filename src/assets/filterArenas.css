@@ -11,8 +11,10 @@ form select,
 form input {
     margin-top: 1rem;
     margin-bottom: 1.5rem;
-    width: 100%;
+    margin-right: 2rem;
     padding: 1rem;
+    box-sizing: border-box; /* Fer que l'element no sobresurti de la pantalla */
+    width: 100%;
 }
 
 p {
