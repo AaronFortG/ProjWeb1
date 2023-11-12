@@ -2,11 +2,20 @@
 
 import {RouterLink} from "vue-router";
 import "../assets/joinArena.css";
+import "../assets/filterArenas.css";
 
 </script>
 
 <script>
 export default {
+  mounted() {
+    // Initialize the date range picker with 'drops: up'
+    $('input[name="date-range"]').daterangepicker({
+      opens: 'center'
+    }, function(start, end) {
+      console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    });
+  },
   setup() {},
   data() {
     return {
@@ -28,21 +37,39 @@ export default {
       this.hidePopUp();
     },
   }
-}
+};
 </script>
 
 <template>
-  <header class="header-buttons-container">
-    <RouterLink to="/home">
+  <header class="header-buttons-container" id="center-button">
+    <RouterLink to="/join-arena">
       <button class="red_button" id="back-button">Back</button>
-    </RouterLink>
-
-    <RouterLink to="/filter-arenas">
-      <button class="main-button" id="filter-button">Filter Arenas</button>
     </RouterLink>
   </header>
 
-  <h1 class="title">Join an arena</h1>
+  <h1 class="title">Filter arenas</h1>
+  
+  <form id="arena-filters">
+    <div>
+      <label for="arena-filter-selector">Filter by arena Status</label>
+      <select id="arena-filter-selector" required>
+        <option value="Available" selected>Available</option>
+        <option value="Finished">Finished</option>
+        <option value="Available and Finished">Available and Finished</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="arena-search-input">Filter by arena ID</label>
+      <input id="arena-search-input" type="text" placeholder="Arena ID">
+    </div>
+
+    <div>
+      <label for="date-range-input">Filter by date range</label>
+      <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023"/>
+    </div>
+  </form>
+
   <p id="arena-join-description">Right click an arena to join it.</p>
 
   <section>
