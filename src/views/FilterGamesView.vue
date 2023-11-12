@@ -38,17 +38,15 @@ export default {
 
 <template>
   <header class="header-buttons-container" id="center-button">
-    <RouterLink to="/join-arena">
-      <button class="red_button" id="back-button">Back</button>
-    </RouterLink>
+    <RouterLink to="/join-arena" class="red_button" id="back-button">Back</RouterLink>
   </header>
 
   <h1 class="title">Filter arenas</h1>
-  
+
   <form id="arena-filters">
     <div>
       <label for="arena-filter-selector">Filter by arena Status</label>
-      <select id="arena-filter-selector" required>
+      <select id="arena-filter-selector">
         <option value="Available" selected>Available</option>
         <option value="Finished">Finished</option>
         <option value="Available and Finished">Available and Finished</option>
@@ -122,14 +120,13 @@ export default {
   </section>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
-    <p><b>Are you sure you want to join the game?</b></p>
-    <button @click="handleYesClick">Join arena</button>
-    <button @click="handleNoClick">Cancel</button>
+    <p class="popUp-question"><b>Are you sure you want to join the game?</b></p>
+    <p @click="handleYesClick">Join arena</p>
+    <p @click="handleNoClick">Cancel</p>
   </div>
 </template>
 
 <style scoped>
-
   .header-buttons-container {
     display: flex;
     justify-content: space-between;
@@ -146,6 +143,10 @@ export default {
 
   section {
     margin: 2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
   }
 
   p#arena-join-description {
