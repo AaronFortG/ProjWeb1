@@ -35,9 +35,9 @@ import { RouterLink } from 'vue-router'
         </article>
 
         <article>
-          <p class="win-rate">Winrate</p>
-          <p class="total-games">Total Games</p>
-          <p class="favorite champ">Favorite Champion</p>
+          <p class="win-rate">Winrate 50%</p>
+          <p class="total-games">Total Games: 10 games</p>
+          <p class="favorite champ">Favorite Champion LeBlanc</p>
         </article>
       </section>
 
