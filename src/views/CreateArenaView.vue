@@ -41,12 +41,12 @@ export default {
       <form class="form">
         <div class="form-group">
           <label>Size [2..10]</label>
-          <input type="number" name="size" id="amount-input" required min="2" max="10" maxLength="2" @change="maxLengthCheck($event, 2, 10 )">
+          <input type="number" name="size" id="amount-input" required min="2" max="10" maxLength="2" @change="maxLengthCheck($event, 2, 10 )" placeholder="[2..10]">
         </div>
 
         <div class="form-group">
           <label>HP max</label>
-          <input type="number" id="amount-input" required min="1" @change="negativeValueCheck($event, 1)">
+          <input type="number" id="amount-input" required min="1" @change="negativeValueCheck($event, 1)" placeholder="HP">
         </div>
       </form>
 
@@ -74,6 +74,7 @@ export default {
   }
   .form-group input {
     padding: 5px;
+    width: 17rem;
   }
 
   @media (min-width: 600px) {
