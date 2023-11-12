@@ -18,24 +18,30 @@ import {RouterLink} from "vue-router";
     <h2>Name Player</h2>
 
     <div class="content-container">
-      <div class="column-1">
-        <p class="victories">Victories</p>
-        <div class="progress-bar">
-          <div :style="`transform: rotate(${victoriesPercentage}deg)`" class="progress progress-victories"></div>
-        </div>
+      <section class="column-1">
+        <article>
+          <p class="victories">Victories</p>
+          <div class="progress-bar">
+            <div :style="`transform: rotate(${victoriesPercentage}deg)`" class="progress progress-victories"></div>
+          </div>
+        </article>
 
-        <p class="losses">Losses</p>
-        <div class="progress-bar">
-          <div :style="`transform: rotate(${lossesPercentage}deg)`" class="progress progress-losses"></div>
-        </div>
+        <article>
+          <p class="losses">Losses</p>
+          <div class="progress-bar">
+            <div :style="`transform: rotate(${lossesPercentage}deg)`" class="progress progress-losses"></div>
+          </div>
+        </article>
 
-        <p class="win-rate">Winrate</p>
-        <p class="total-games">Total Games</p>
-        <p class="favorite champ">Favorite Champion</p>
-      </div>
+        <article>
+          <p class="win-rate">Winrate</p>
+          <p class="total-games">Total Games</p>
+          <p class="favorite champ">Favorite Champion</p>
+        </article>
+      </section>
 
+      <h2>Main Attacks</h2>
       <div class="column-2">
-        <h2>Main Attacks</h2>
         <p class="attack">Attack 1</p>
         <p class="attack">Attack 2</p>
         <p class="attack">Attack 3</p>
@@ -82,7 +88,7 @@ import {RouterLink} from "vue-router";
     width: 100%;
     padding: 20px;
     background-color: #181414;
-    margin-bottom: 20px;
+    margin-bottom: 5rem;
   }
 
   .column-2 {
@@ -92,6 +98,7 @@ import {RouterLink} from "vue-router";
     width: 100%;
     padding: 20px;
     background-color: blueviolet;
+    margin-bottom: 4rem;
   }
 
   .last_games {
@@ -167,6 +174,18 @@ import {RouterLink} from "vue-router";
   @media (min-width: 768px) {
     .back-button {
       order: 2;
+    }
+    .column-1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .column-1 article:last-child {
+      margin-left: 10rem;
+      text-align: end;
+    }
+    .column-1 article:last-child p {
+      margin-top: 1rem;
     }
   }
 

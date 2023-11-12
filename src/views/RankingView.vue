@@ -185,15 +185,6 @@ import {RouterLink} from "vue-router";
     margin-left: auto;
   }
 
-  .red_button {
-    padding: 10px 20px;
-    background-color: #DA4E39;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
   .victory {
     background-color: #28A745;
   }
