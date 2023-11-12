@@ -29,32 +29,30 @@ export default {
       <form class="form">
         <div class="form-group">
           <label>Positions</label>
-          <input type="number" name="size" id="amount-input" required @change="negativeValueCheck($event, 1)" placeholder="43">
+          <input type="number" name="positions" id="positions-input" required @change="negativeValueCheck($event, 1)" placeholder="43">
         </div>
 
         <div class="form-group">
           <label>Price</label>
-          <input type="number" id="amount-input" required @change="negativeValueCheck($event, 1)" placeholder="78">
+          <input type="number" name="price" id="price-input" required @change="negativeValueCheck($event, 1)" placeholder="78">
         </div>
 
         <div class="form-group">
           <label>Level needed</label>
-          <input type="number" id="amount-input" required @change="negativeValueCheck($event, 1)" placeholder="15">
+          <input type="number" name="level-needed" id="level-input" required @change="negativeValueCheck($event, 1)" placeholder="15">
         </div>
       </form>
 
-      <RouterLink to="/bag" class="router-link">
-        <button class="main-button" type="submit">
-          Create attack
-        </button>
+      <RouterLink to="/bag" class="router-link main-button">
+        Create attack
       </RouterLink>
 
     </div>
 
 
     <div class="back-button">
-      <RouterLink to="/bag" class="router-link">
-        <button class="red_button" id="back-button">Back</button>
+      <RouterLink to="/bag" class="router-link red_button">
+        Back
       </RouterLink>
     </div>
   </div>
@@ -91,6 +89,11 @@ export default {
     margin-left: auto;
   }
 
+  .main-button {
+    max-width: 20rem;
+    margin: auto;
+  }
+
   @media (min-width: 600px) {
     .form {
       margin-bottom: 2rem;
@@ -102,8 +105,9 @@ export default {
       margin: 1rem;
     }
 
-    button {
+    .main-button {
       max-width: 20rem;
+      margin: auto;
     }
     .back-button {
       order: 2;

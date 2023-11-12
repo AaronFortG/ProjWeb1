@@ -44,7 +44,7 @@ export default {
       </div>
 
       <div class="rows_container" id="BagAndButton">
-        <section class="left_row_container">
+        <div class="left_row_container">
           <RouterLink to="/store">
             <img src="../assets/images/store.png" alt="store" style="max-width: 5.5rem">
           </RouterLink>
@@ -52,28 +52,28 @@ export default {
           <RouterLink to="/create-attack">
             <img src="../assets/images/createAttack.png" alt="bag" style="max-width: 5.5rem">
           </RouterLink>
-        </section>
+        </div>
       </div>
 
       <h2>Attacks</h2>
 
-      <section class="shop_container">
+      <div class="shop_container">
         <article class="item_container">
           <h3>Attack 1</h3>
 
           <div class="rows_container">
             <p>Level</p>
-            <p id="level">level</p>
+            <p id="level-1">level</p>
           </div>
 
           <div class="rows_container">
             <p>Power</p>
-            <p id="power">power</p>
+            <p id="power-1">power</p>
           </div >
 
           <div class="rows_container">
             <p>Price</p>
-            <p id="price">price</p>
+            <p id="price-1">price</p>
           </div>
           <button class="red_button" @click="showPopUpMethod">Sell</button>
         </article>
@@ -83,17 +83,17 @@ export default {
 
           <div class="rows_container">
             <p>Level</p>
-            <p id="level">level</p>
+            <p id="level-2">level</p>
           </div>
 
           <div class="rows_container">
             <p>Power</p>
-            <p id="power">power</p>
+            <p id="power-2">power</p>
           </div >
 
           <div class="rows_container">
             <p>Price</p>
-            <p id="price">price</p>
+            <p id="price-2">price</p>
           </div>
           <button class="red_button" @click="showPopUpMethod">Sell</button>
         </article>
@@ -103,17 +103,17 @@ export default {
 
           <div class="rows_container">
             <p>Level</p>
-            <p id="level">level</p>
+            <p id="level-3">level</p>
           </div>
 
           <div class="rows_container">
             <p>Power</p>
-            <p id="power">power</p>
+            <p id="power-3">power</p>
           </div >
 
           <div class="rows_container">
             <p>Price</p>
-            <p id="price">price</p>
+            <p id="price-3">price</p>
           </div>
           <button class="red_button" @click="showPopUpMethod">Sell</button>
         </article>
@@ -123,22 +123,22 @@ export default {
 
           <div class="rows_container">
             <p>Level</p>
-            <p id="level">level</p>
+            <p id="level-4">level</p>
           </div>
 
           <div class="rows_container">
             <p>Power</p>
-            <p id="power">power</p>
+            <p id="power-4">power</p>
           </div >
 
           <div class="rows_container">
             <p>Price</p>
-            <p id="price">price</p>
+            <p id="price-4">price</p>
           </div>
           <button class="red_button" @click="showPopUpMethod">Sell</button>
         </article>
 
-      </section>
+      </div>
 
     </div>
   </div>

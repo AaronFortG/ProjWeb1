@@ -65,12 +65,12 @@
     <!-- Create: player's (1) name and his life -->
     <div class="player-info">
       <p>Player name</p>
-      <section class="rows_together_container">
+      <div class="rows_together_container">
         <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
         <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
         <img src="../assets/images/game/half-heart.png" alt="heart" width="30">
         <img src="../assets/images/game/empty-heart.png" alt="heart" width="30">
-      </section>
+      </div>
     </div>
 
     <!-- Create: the game board -->
@@ -250,24 +250,24 @@
     <!-- Create: player's (2) name and his life -->
     <div class="player-info" id="players2">
       <p>Player name</p>
-      <section class="rows_together_container">
+      <div class="rows_together_container">
         <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
         <img src="../assets/images/game/full-heart.png" alt="heart" width="30">
         <img src="../assets/images/game/half-heart.png" alt="heart" width="30">
         <img src="../assets/images/game/empty-heart.png" alt="heart" width="30">
-      </section>
+      </div>
     </div>
 
     <!-- The attacks and keys -->
     <div class="rows_together_container">
 
       <section id="attacks">
-        <article>Attacflajlfasdljflsjlfjdlfjlsjdlkfjak 1</article>
-        <article>Attack 2</article>
-        <article>Attack 3</article>
+        <h2>Attacflajlfasdljflsjlfjdlfjlsjdlkfjak 1</h2>
+        <h2>Attack 2</h2>
+        <h2>Attack 3</h2>
       </section>
 
-      <section class="keys_container">
+      <div class="keys_container">
         <button class="arrow-left" id="arrowLeftButton">
           <img src="../assets/images/game/arrow-left.png" alt="arrow-left" width="30">
         </button>
@@ -284,22 +284,18 @@
         <button class="space-key" id="spaceKeyButton">
           <img src="../assets/images/game/space-key.png" alt="space-key" width="30">
         </button>
-      </section>
+      </div>
 
     </div>
 
-    <button class="red_button">
-      <RouterLink to="/home">
-        Leave match
-      </RouterLink>
-    </button>
-
-
+    <RouterLink to="/home" class="red_button">
+      Leave match
+    </RouterLink>
   </div>
 </template>
 
 <style scoped>
-  p, article {
+  p, h2 {
     color: white;
   }
   .rows_together_container {
@@ -351,12 +347,13 @@
     margin: 1rem;
   }
 
-  button {
+  .red_button {
     margin: 0 auto;
   }
 
   .keys_container button {
     background: none;
+    border: none;
   }
 
   #attacks {
@@ -366,7 +363,7 @@
 
   }
 
-  #attacks article {
+  #attacks h2 {
     max-width: 7rem;
     padding: 0.5rem;
     margin: 0.5rem 0;
@@ -477,13 +474,13 @@
     .rows_together_container #attacks {
       margin: auto auto 0 0;
     }
-    .rows_together_container #attacks article {
+    .rows_together_container #attacks h2 {
       max-width: 14rem;
     }
     .red_button {
       max-height: 5rem;
       grid-column: 2 / 3;
-      grid-row: 1 / 3;
+      grid-row: 1 / 1;
     }
 
     .keys_container img {

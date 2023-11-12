@@ -23,6 +23,7 @@
     color: white;
     padding: 1.1rem 2rem;
     border-radius: 10px;
+    text-align: center;
 }
 
 .red_button:hover {
@@ -39,11 +40,11 @@
 .main-button {
     border: 1px solid #181414;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px 20px;
     background-color: #181414;
     color: white;
-    width: 100%;
+    text-align: center;
 }
 
 .main-button:hover {

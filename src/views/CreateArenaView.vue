@@ -41,26 +41,24 @@ export default {
       <form class="form">
         <div class="form-group">
           <label>Size [2..10]</label>
-          <input type="number" name="size" id="amount-input" required min="2" max="10" maxLength="2" @change="maxLengthCheck($event, 2, 10 )" placeholder="[2..10]">
+          <input type="number" name="size" id="size-input" required min="2" max="10" @change="maxLengthCheck($event, 2, 10 )" placeholder="[2..10]">
         </div>
 
         <div class="form-group">
           <label>HP max</label>
-          <input type="number" id="amount-input" required min="1" @change="negativeValueCheck($event, 1)" placeholder="HP">
+          <input type="number" id="hp-input" required min="1" @change="negativeValueCheck($event, 1)" placeholder="HP">
         </div>
       </form>
 
-      <RouterLink to="/loading-page" class="router-link">
-        <button class="main-button" type="submit">
-          Create arena
-        </button>
+      <RouterLink to="/loading-page" class="router-link main-button">
+        Create arena
       </RouterLink>
 
     </div>
 
     <div class="back-button">
-      <RouterLink to="/home" class="router-link">
-        <button class="red_button" id="back-button">Back</button>
+      <RouterLink to="/home" class="router-link red_button">
+        Back
       </RouterLink>
     </div>
 
