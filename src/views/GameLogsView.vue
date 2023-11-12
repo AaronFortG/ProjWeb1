@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <div id="container">
-    <RouterLink to="/home" class="router-link">
+    <RouterLink to="/filter-arenas" class="router-link">
       <button class="red_button">Back</button>
     </RouterLink>
 
@@ -31,7 +31,7 @@ import { RouterLink } from 'vue-router'
 }
 
 h1 {
-  padding: 1rem 0 1rem 0;
+  padding: 2rem 0 2rem 0;
 }
 
 p {
@@ -51,15 +51,6 @@ article#grid-size {
 
 article p {
   padding-bottom: 1rem;
-}
-
-@media (min-width: 600px) {
-  #container {
-    margin: 6rem;
-  }
-
-  h1 {
-    padding: 2rem 0 2rem 0;
-  }
+  line-height: 1.5rem;
 }
 </style>

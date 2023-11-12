@@ -31,10 +31,7 @@ export default {
 <template>
   <header class="header-buttons-container">
     <router-link to="/home" class="red_button" id="back-button">Back</router-link>
-
-    <router-link to="/filter-arenas" class="main-button" id="filter-button"
-      >Filter Arenas</router-link
-    >
+    <router-link to="/filter-arenas" class="main-button" id="filter-button">Filter Arenas</router-link>
   </header>
 
   <section>
@@ -114,7 +111,6 @@ export default {
 }
 
 h1.title {
-  font-size: 3rem;
   margin-bottom: 2rem;
 }
 

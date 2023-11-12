@@ -7,7 +7,8 @@ export default {
   setup() {},
   data() {
     return {
-      showPopUp: false
+      showPopUp: false,
+      deleteAccPopUp: false
     }
   },
   methods: {
@@ -16,6 +17,14 @@ export default {
     },
     hidePopUp() {
       this.showPopUp = false
+      this.deleteAccPopUp = false
+    },
+    showDeletePopUp() {
+      this.deleteAccPopUp = true
+    },
+    confirmDelete() {
+      alert("Account successfully deleted!")
+      this.$router.push("/")
     },
     handleYesClick() {
       alert('Join arena')
@@ -30,13 +39,8 @@ export default {
 
 <template>
   <header class="header-buttons-container">
-    <router-link to="/home" class="router-link">
-      <button class="red_button" id="back-button">Back</button>
-    </router-link>
-
-    <router-link to="/delete-account" class="router-link">
-      <button class="main-button" id="delete-account">Delete account</button>
-    </router-link>
+    <router-link to="/home" class="red_button" id="back_button">Back</router-link>
+    <router-link to="" @click="showDeletePopUp" class="main-button" id="delete-account">Delete account</router-link>
   </header>
 
   <h1 class="title">Player information</h1>
@@ -81,11 +85,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>1</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -93,11 +97,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>2</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -105,11 +109,11 @@ export default {
       <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>3</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -125,11 +129,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>1</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -137,11 +141,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>2</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -149,11 +153,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>3</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -161,11 +165,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>4</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -173,11 +177,11 @@ export default {
       <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
-          <p>Power</p>
+          <p>Power </p>
           <p>5</p>
         </div>
         <div class="main-attack-positions">
-          <p>Positions:</p>
+          <p>Positions: </p>
           <p>x=2, y=3</p>
         </div>
       </article>
@@ -185,9 +189,15 @@ export default {
   </section>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
-    <p><b>Are you sure you want to join the game?</b></p>
-    <button @click="handleYesClick">Join arena</button>
-    <button @click="handleNoClick">Cancel</button>
+    <p class="popUp-question"><b>Are you sure you want to join the game?</b></p>
+    <p @click="handleYesClick">Join arena</p>
+    <p @click="handleNoClick">Cancel</p>
+  </div>
+
+  <div id="popUp" class="popUp" v-show="deleteAccPopUp">
+    <p class="popUp-question"><b>Confirm to delete your account</b></p>
+    <p @click="confirmDelete">Delete account</p>
+    <p @click="handleNoClick">Cancel</p>
   </div>
 </template>
 
@@ -201,18 +211,25 @@ export default {
   top: 0;
 }
 
-#delete-account {
+#delete-account{
   margin-bottom: 0;
+  width: auto;
+  padding: 1rem;
 }
 
 p,
 b {
   color: white;
-  font-size: 1.5rem;
+  font-size: 20px;
+}
+
+/* Estils pel popUp */
+div.popUp p {
+  color: black;
+  font-size: 1.25rem;
 }
 
 h1.title {
-  font-size: 2.5rem !important;
   padding: 0 2rem 2rem 2rem;
   margin: 0;
 }
@@ -253,7 +270,6 @@ h1.title {
 }
 
 h2 {
-  font-size: 1.5rem;
   text-align: center;
   color: white;
   margin-bottom: 2rem;
@@ -312,8 +328,11 @@ hr {
 }
 
 @media (min-width: 1100px) {
-  .header-buttons-container {
-    padding-bottom: 0;
+
+  /* Estils pel popUp */
+  div.popUp p {
+    color: black;
+    font-size: 1rem;
   }
 
   #player-info {
@@ -345,10 +364,6 @@ hr {
     column-gap: 1rem;
   }
 
-  hr#owned-attacks-divider {
-    margin-top: 0.5rem;
-  }
-
   #player-info-data {
     display: flex;
     flex-direction: column;
@@ -359,6 +374,10 @@ hr {
   #player-info-data * {
     margin-top: 0;
     margin-bottom: 0;
+  }
+
+  #player-info-data p, #player-info-data p b {
+    font-size: 1.5rem;
   }
 
   #player-info article {

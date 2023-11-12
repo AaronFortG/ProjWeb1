@@ -20,6 +20,9 @@ export default {
     }
   },
   methods: {
+    navigateLogs() {
+      this.$router.push('/game-logs');
+    },
     showPopUpMethod() {
       this.showPopUp = true
     },
@@ -65,7 +68,8 @@ export default {
     </div>
   </form>
 
-  <p id="arena-join-description">Right click an arena to join it.</p>
+  <p class="arena-join-description">Click an available arena to join it.</p>
+  <p class="arena-join-description">Click a finished arena to view its logs.</p>
 
   <section>
     <article class="arena" @click="showPopUpMethod">
@@ -108,7 +112,7 @@ export default {
         <p>10x10</p>
       </div>
     </article>
-    <article class="arena" @click="showPopUpMethod">
+    <article class="arena" @click="navigateLogs">
       <div class="arena-info">
         <h2>Arena #5 - Date: </h2>
         <h2>11/11/2023</h2>
@@ -138,7 +142,6 @@ export default {
   }
 
   h1.title {
-    font-size: 3rem;
     margin-bottom: 2rem;
   }
 
@@ -150,7 +153,7 @@ export default {
     font-size: 1rem;
   }
 
-  p#arena-join-description {
+  .arena-join-description {
     color: white;
     margin-bottom: 1rem;
     margin-left: 2rem;
