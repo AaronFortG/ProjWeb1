@@ -4,6 +4,32 @@ import {RouterLink} from "vue-router";
 
 </script>
 
+<script>
+export default {
+  setup() {},
+  data() {
+    return {
+      showPopUp: false,
+    };
+  },
+  methods: {
+    showPopUpMethod() {
+      this.showPopUp = true;
+    },
+    hidePopUp() {
+      this.showPopUp = false;
+    },
+    handleYesClick() {
+      alert('Join arena');
+      this.hidePopUp();
+    },
+    handleNoClick() {
+      this.hidePopUp();
+    },
+  }
+}
+</script>
+
 <template>
   <header class="header-buttons-container">
     <router-link to="/home" class="router-link">
@@ -54,7 +80,7 @@ import {RouterLink} from "vue-router";
     </div>
 
     <div id="equipped-attacks">
-      <article class="main-attack">
+      <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -159,6 +185,12 @@ import {RouterLink} from "vue-router";
       </article>
     </div>
   </section>
+
+  <div id="popUp" class="popUp" v-show="showPopUp">
+    <p><b>Are you sure you want to join the game?</b></p>
+    <button @click="handleYesClick">Join arena</button>
+    <button @click="handleNoClick">Cancel</button>
+  </div>
 </template>
 
 <style scoped>
@@ -231,7 +263,7 @@ import {RouterLink} from "vue-router";
 
   h3 {
     color: white;
-    font-size: 24px;
+    font-size: 18px;
   }
 
   #equipped-attacks article,
@@ -295,6 +327,10 @@ import {RouterLink} from "vue-router";
 
     h1 {
       margin-bottom: 2rem !important;
+    }
+
+    h3 {
+      font-size: 24px;
     }
 
     /* Mostrar el títol dels atacs equipats en una sola línia. */

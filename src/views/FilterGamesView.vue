@@ -10,9 +10,7 @@ export default {
     // Initialize the date range picker with 'drops: up'
     $('input[name="date-range"]').daterangepicker({
       opens: 'center'
-    }, function(start, end) {
-      console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-    });
+    }, function(start, end) {});
   },
   setup() {},
   data() {
@@ -179,30 +177,6 @@ export default {
 
   section article:hover {
     outline: white 1px solid;
-  }
-
-  .popUp {
-    display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border: #cccccc 1px solid;
-    padding: 1rem;
-    width: 20rem;
-    z-index: 999; /* Per posar-lo per sobre dels elements */
-  }
-
-  .popUp *:nth-child(2) {
-    margin-bottom: 1rem;
-  }
-
-  .popUp button:hover {
-    font-weight: bold;
   }
 
   @media (min-width: 1000px) {
