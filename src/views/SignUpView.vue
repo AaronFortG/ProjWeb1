@@ -25,12 +25,12 @@ import {RouterLink} from "vue-router";
     </div>
 
     <div class="buttons_login_and_signUp">
-      <RouterLink to="/" class="router-link">
+      <router-link to="/" class="router-link">
         <button id="login-button" type="submit">Login</button>
-      </RouterLink>
-      <RouterLink to="/home" class="router-link">
+      </router-link>
+      <router-link to="/home" class="router-link">
         <button id="register-button" @click="register">Create account</button>
-      </RouterLink>
+      </router-link>
     </div>
 
     <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
