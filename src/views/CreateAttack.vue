@@ -80,8 +80,8 @@ export default {
   .createAttack_container {
     display: flex;
     flex-direction: column;
-    margin: auto 5rem;
     justify-content: center;
+    margin: 2rem 5rem auto;
   }
 
   .back-button {
