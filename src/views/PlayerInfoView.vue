@@ -48,6 +48,7 @@ import {RouterLink} from "vue-router";
   <hr>
 
   <h2>Attacks equipped</h2>
+  <h2>(Click to change)</h2>
 
   <section id="equipped-attacks">
     <article class="main-attack">
@@ -75,7 +76,7 @@ import {RouterLink} from "vue-router";
     </article>
   </section>
 
-  <hr>
+  <hr id="owned-attacks-divider">
 
   <section id="owned-attacks">
     <article class="attack">
@@ -142,7 +143,7 @@ import {RouterLink} from "vue-router";
 
   h1 {
     font-size: 2.5rem !important;
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
   }
 
   #player-info {
@@ -155,11 +156,11 @@ import {RouterLink} from "vue-router";
   }
 
   #player-info article {
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   #player-info-image img {
-    width: 16rem;
+    width: 12rem;
     padding-bottom: 1rem;
     margin: 0 auto;
   }
@@ -173,10 +174,10 @@ import {RouterLink} from "vue-router";
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     color: white;
-    padding: 0.5rem 0 1.5rem 0;
+    margin-bottom: 2rem;
     font-weight: bold;
   }
 
@@ -227,19 +228,30 @@ import {RouterLink} from "vue-router";
     #player-info {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      padding-bottom: 2rem;
     }
 
     #player-info-image img {
-      max-width: 14rem;
+      max-width: 12rem;
+      padding-bottom: 0;
     }
 
     h1 {
       margin-bottom: 2rem !important;
     }
 
+    hr#owned-attacks-divider {
+      margin-top: 0.5rem;
+    }
+
     #player-info-data {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #player-info article {
+      margin-bottom: 0;
     }
 
     #equipped-attacks {
@@ -263,8 +275,8 @@ import {RouterLink} from "vue-router";
     }
 
     .attack {
-      width: 20%; /* Limit the number of columns to 4 */
       min-width: 22rem; /* Mida mínima pel requadre de l'atac */
+      flex: 1;
     }
   }
 </style>
