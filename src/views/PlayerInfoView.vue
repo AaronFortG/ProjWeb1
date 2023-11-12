@@ -6,120 +6,159 @@ import {RouterLink} from "vue-router";
 
 <template>
   <header class="header-buttons-container">
-    <RouterLink to="/home" class="router-link">
+    <router-link to="/home" class="router-link">
       <button class="red_button" id="back-button">Back</button>
-    </RouterLink>
+    </router-link>
 
-    <RouterLink to="/delete-account" class="router-link">
+    <router-link to="/delete-account" class="router-link">
       <button class="main-button" id="delete-account">Delete account</button>
-    </RouterLink>
+    </router-link>
   </header>
 
   <h1 class="title">Player information</h1>
 
-  <section id="player-info">
-    <article id="player-info-image">
+  <div id="player-info">
+    <div id="player-info-image">
       <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image">
-    </article>
+    </div>
 
-    <section id="player-info-data">
-      <article id="player-info-name">
+    <div id="player-info-data">
+      <div id="player-info-name">
         <p><b>Player name: </b></p>
         <p id="player-name">SrFox3999</p>
-      </article>
+      </div>
 
-      <article id="player-info-level">
+      <div id="player-info-level">
         <p><b>Level: </b></p>
         <p id="player-level">2</p>
-      </article>
+      </div>
 
-      <article id="player-info-xp">
-        <p><b>  XP: </b></p>
+      <div id="player-info-xp">
+        <p><b>XP: </b></p>
         <p id="player-xp">369</p>
-      </article>
+      </div>
 
-      <article id="player-info-coins">
+      <div id="player-info-coins">
         <p><b>Coins: </b></p>
         <p id="player-coins">199</p>
-      </article>
-    </section>
-  </section>
+      </div>
+    </div>
+  </div>
 
   <hr>
 
-  <h2>Attacks equipped</h2>
-  <h2>(Click to change)</h2>
+  <section>
+    <div id="equipped-attacks-title">
+      <h2>Equipped attacks</h2>
+      <h2>(Click to change)</h2>
+    </div>
 
-  <section id="equipped-attacks">
-    <article class="main-attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>1</p>
-      </div>
-    </article>
+    <div id="equipped-attacks">
+      <article class="main-attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>1</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
 
-    <article class="main-attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>2</p>
-      </div>
-    </article>
+      <article class="main-attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>2</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
 
-    <article class="main-attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>3</p>
-      </div>
-    </article>
+      <article class="main-attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>3</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
+    </div>
   </section>
 
   <hr id="owned-attacks-divider">
 
-  <section id="owned-attacks">
-    <article class="attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>1</p>
-      </div>
-    </article>
+  <section>
+    <h2>Owned attacks</h2>
 
-    <article class="attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>2</p>
-      </div>
-    </article>
+    <div id="owned-attacks">
+      <article class="attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>1</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
 
-    <article class="attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>3</p>
-      </div>
-    </article>
+      <article class="attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>2</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
 
-    <article class="attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>4</p>
-      </div>
-    </article>
+      <article class="attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>3</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
 
-    <article class="attack">
-      <p>Name of the attack</p>
-      <div class="main-attack-power">
-        <p>Power </p>
-        <p>5</p>
-      </div>
-    </article>
+      <article class="attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>4</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
+
+      <article class="attack">
+        <h3>Name of the attack</h3>
+        <div class="main-attack-power">
+          <p>Power </p>
+          <p>5</p>
+        </div>
+        <div class="main-attack-positions">
+          <p>Positions: </p>
+          <p>x=2, y=3</p>
+        </div>
+      </article>
+    </div>
   </section>
-
 </template>
 
 <style scoped>
@@ -141,14 +180,21 @@ import {RouterLink} from "vue-router";
     font-size: 1.5rem;
   }
 
-  h1 {
+  h1.title {
     font-size: 2.5rem !important;
     padding: 0 2rem 2rem 2rem;
+    margin: 0;
   }
 
   #player-info {
     text-align: center;
     display: inline;
+  }
+
+  /* Separar la informació del jugador amb espai */
+  #player-info-data * {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   #player-info p {
@@ -161,8 +207,10 @@ import {RouterLink} from "vue-router";
 
   #player-info-image img {
     width: 12rem;
-    padding-bottom: 1rem;
-    margin: 0 auto;
+  }
+
+  #player-info-image {
+    padding-bottom: 0.5rem;
   }
 
   #player-info-name p {
@@ -179,6 +227,11 @@ import {RouterLink} from "vue-router";
     color: white;
     margin-bottom: 2rem;
     font-weight: bold;
+  }
+
+  h3 {
+    color: white;
+    font-size: 24px;
   }
 
   #equipped-attacks article,
@@ -201,6 +254,7 @@ import {RouterLink} from "vue-router";
 
   .main-attack-power {
     margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   #equipped-attacks article:hover,
@@ -233,11 +287,21 @@ import {RouterLink} from "vue-router";
 
     #player-info-image img {
       max-width: 12rem;
+    }
+
+    #player-info-image {
       padding-bottom: 0;
     }
 
     h1 {
       margin-bottom: 2rem !important;
+    }
+
+    /* Mostrar el títol dels atacs equipats en una sola línia. */
+    #equipped-attacks-title {
+      display: flex;
+      justify-content: center;
+      column-gap: 1rem;
     }
 
     hr#owned-attacks-divider {
@@ -248,6 +312,12 @@ import {RouterLink} from "vue-router";
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+
+    /* No separar la informació del jugador amb espai (ja se separa adalt amb el justify-content) */
+    #player-info-data * {
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
     #player-info article {
