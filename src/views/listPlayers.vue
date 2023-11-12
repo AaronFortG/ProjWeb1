@@ -5,7 +5,7 @@ import '../assets/listPlayers.css'
 </script>
 <template>
 <div class="container">
-<h1 class="title">Best Players</h1>
+<h1 class="title">Ranking</h1>
 <ol id="ListPlayers">
   <li class="player-item">
     <RouterLink to="/stats">
@@ -110,6 +110,12 @@ import '../assets/listPlayers.css'
   </li>
 </ol>
 </div>
+
+  <div class="button-end">
+  <RouterLink to="/home" class="router-link">
+    <button class="red_button" id="back-button">Back</button>
+  </RouterLink>
+  </div>
 </template>
 
 

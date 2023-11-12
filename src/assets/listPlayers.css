@@ -1,5 +1,46 @@
 .container {
     text-align: center;
+    max-width: 100%;
+    margin: 0 20px; /* Establece un margen constante a ambos lados */
+}
+
+.player-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 30px auto;
+    background-color: #FFFFCC;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-rank {
+    margin-right: 0;
+    font-weight: bold;
+}
+
+.player-name {
+    text-align: center;
+    padding: 10px;
+}
+
+.recent-results {
+    display: flex;
+    justify-content: center;
+}
+
+.result-box {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    border-radius: 4px;
 }
 
 #ListPlayers {
@@ -7,48 +48,44 @@
     padding: 10px;
 }
 
-.player-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 30px;
-    background-color: #FFFFCC;
-    padding: 30px;
+.button-end {
+    text-align: center;
+    margin-top: 1px; /* Ajusta el margen superior del botón */
+    margin-bottom: 40px;
+}
+
+.red_button {
+    padding: 10px 20px;
+    background-color: #DA4E39;
+    color: #fff;
+    border: none;
     border-radius: 5px;
-}
-
-.player-info {
-    display: flex;
-    align-items: center;
-}
-
-.player-rank {
-    margin-right: 1000px; 
-    font-weight: bold;
-    order: 1; /* Cambia el orden del número (player-rank) */
-}
-
-.player-name {
-    flex-grow: 1; /* Hace que el nombre ocupe el espacio restante */
-    text-align: center; /* Centra el texto del nombre */
-    padding: 10px;
-}
-
-.recent-results {
-    display: flex;
-}
-
-.result-box {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    border-radius: 4px;
+    cursor: pointer;
 }
 
 .victory {
-    background-color: #28A745; /* Color para victorias */
+    background-color: #28A745;
 }
 
 .defeat {
-    background-color: #DC3545; /* Color para derrotas */
+    background-color: #DC3545;
+}
+
+@media (min-width: 768px) {
+    .player-item {
+        flex-direction: row;
+        max-width: 100%; /* Ajusta el ancho máximo al 100% para pantallas más grandes */
+    }
+
+    .player-info {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .player-rank {
+        margin-bottom: 0;
+        margin-right: 20px; /* Ajusta el margen derecho en pantallas más grandes */
+        margin-left: 20px; /* Ajusta el margen izquierdo en pantallas más grandes */
+    }
 }

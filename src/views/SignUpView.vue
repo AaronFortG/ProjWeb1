@@ -1,3 +1,7 @@
+<script setup>
+import '../assets/signUp.css'
+import {RouterLink} from "vue-router";
+</script>
 
 <template>
   <div class="signUp-container">
@@ -36,7 +40,6 @@
 </template>
 
 <script>
-import {RouterLink} from "vue-router";
 
 export default {
   components: {RouterLink},
