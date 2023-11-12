@@ -7,35 +7,35 @@ import {RouterLink} from "vue-router";
 
 <template>
   <div class="container">
-    <div class="header">
-      <div class="header-title">
-        <h1 class="title">Name Player</h1>
-      </div>
-      <div class="header-buttons-container">
-        <RouterLink to="/list-players" class="router-link">
-          <button class="red_button">Back</button>
-        </RouterLink>
-      </div>
+    <div class="back-button">
+      <RouterLink to="/list-players" class="router-link">
+        <button class="red_button">Back</button>
+      </RouterLink>
     </div>
+
+    <h1 class="title" style="margin-bottom: 2rem">Stats</h1>
+
+    <h2>Name Player</h2>
+
     <div class="content-container">
       <div class="column-1">
-        <p class="Victorys">Victories</p>
+        <p class="victories">Victories</p>
         <div class="progress-bar">
           <div :style="`transform: rotate(${victoriesPercentage}deg)`" class="progress progress-victories"></div>
         </div>
 
-        <p class="Losses">Losses</p>
+        <p class="losses">Losses</p>
         <div class="progress-bar">
           <div :style="`transform: rotate(${lossesPercentage}deg)`" class="progress progress-losses"></div>
         </div>
 
-        <p class="Winrate">Winrate</p>
-        <p class="Partidas">Total Games</p>
-        <p class="Favorite champ">Favorite Champion</p>
+        <p class="win-rate">Winrate</p>
+        <p class="total-games">Total Games</p>
+        <p class="favorite champ">Favorite Champion</p>
       </div>
 
       <div class="column-2">
-        <h1 class="title">Main Attacks</h1>
+        <h2>Main Attacks</h2>
         <p class="attack">Attack 1</p>
         <p class="attack">Attack 2</p>
         <p class="attack">Attack 3</p>
@@ -53,37 +53,19 @@ import {RouterLink} from "vue-router";
 <style scoped>
   .container {
     text-align: center;
-    margin: 10px;
-  }
-
-  .header {
+    margin: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    color: #fff;
+  }
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .back-button {
     text-align: center;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-
-  .header-title {
-    margin-bottom: 10px;
-  }
-
-  .header-buttons-container {
-    background-color: #2F2F2F;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 1.0s ease;
-    margin-top: 10px;
-  }
-
-  .header-buttons-container:hover {
-    background-color: #28A745;
+    margin-bottom: 40px;
+    order: -1;
+    margin-left: auto;
   }
 
   .content-container {
@@ -113,19 +95,18 @@ import {RouterLink} from "vue-router";
   }
 
   .last_games {
-    width: 100%;
-    height: 40px;
-    background-color: #007BFF;
-    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
+    min-width: 17rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .progress-bar {
     position: relative;
-    width: 100%;
+    width: 80px;
     height: 80px; /* Reducido el tamaño de las redondas de porcentaje */
     border-radius: 50%;
     background-color: #f0f0f0;
@@ -153,33 +134,40 @@ import {RouterLink} from "vue-router";
     background-color: #DA4E39;
   }
 
-  .Victorys {
+  .victories {
     color: #28A745;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .Losses {
+  .losses {
     color: #DA4E39;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .Winrate {
+  .win-rate {
     color: #FFC107;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .Partidas {
+  .total-games {
     color: #007BFF;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .Favorite {
+  .favorite {
     color: blueviolet;
     font-size: 16px;
     font-weight: bold;
   }
+
+  @media (min-width: 768px) {
+    .back-button {
+      order: 2;
+    }
+  }
+
 </style>

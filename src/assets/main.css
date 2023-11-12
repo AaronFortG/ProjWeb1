@@ -94,6 +94,7 @@ footer p {
 
 h2 {
     font-size: 1.5rem;
+    color: white;
 }
 
 @media (min-width: 600px) {
