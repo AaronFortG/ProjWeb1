@@ -15,7 +15,6 @@ import { RouterLink } from 'vue-router'
           type="text"
           id="email"
           v-model="email"
-          @input="validateEmail"
           required
           placeholder="example@gmail.com"
         />
@@ -52,22 +51,6 @@ export default {
     /**
      * Válidamos el email del usuario que almenos contenga un @
      */
-    validateEmail() {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(this.email)) console.log('Email format is not valid!.')
-    },
-    login() {
-      // Método para procesar el inicio de sesión
-      // Puedes agregar lógica para autenticar al usuario aquí
-      console.log('Iniciando sesión...')
-      console.log('Email:', this.email)
-      console.log('Password:', this.password)
-    },
-    register() {
-      // Método para redirigir al usuario a la página de registro
-      // Puedes implementar la lógica de redirección a la página de registro aquí
-      console.log('Redirigiendo al formulario de registro...')
-    }
   }
 }
 </script>
