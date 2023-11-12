@@ -49,7 +49,11 @@ export default {
 
   <div id="player-info">
     <div id="player-info-image">
-      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image" loading="lazy" />
+      <img
+        src="/src/assets/images/playerInfo_profilePicture.jpg"
+        alt="User profile image"
+        loading="lazy"
+      />
     </div>
 
     <div id="player-info-data">

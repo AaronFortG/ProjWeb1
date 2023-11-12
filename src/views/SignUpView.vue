@@ -57,16 +57,6 @@ export default {
 </script>
 
 <style scoped>
-.signUp-container {
-  text-align: center;
-  margin: 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
 .signUp-container h2 {
   margin: 20px;
   color: white;

@@ -24,35 +24,35 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <style scoped>
-  #container {
-    margin: 3rem 2rem 2rem;
-  }
+#container {
+  margin: 3rem 2rem 2rem;
+}
 
-  h1 {
-    margin: 3rem 0 2rem 0;
-  }
+h1 {
+  margin: 3rem 0 2rem 0;
+}
 
-  p {
-    color: white;
-  }
+p {
+  color: white;
+}
 
-  /* Alinear els dos paràgrafs */
-  article#grid-size p {
-    font-weight: bolder;
-    font-size: 1.5rem;
-    display: inline;
-  }
+/* Alinear els dos paràgrafs */
+article#grid-size p {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  display: inline;
+}
 
-  #grid-size p:first-child {
-    margin-right: 1rem;
-  }
+#grid-size p:first-child {
+  margin-right: 1rem;
+}
 
-  article#grid-size {
-    padding-bottom: 2rem;
-  }
+article#grid-size {
+  padding-bottom: 2rem;
+}
 
-  article p {
-    padding-bottom: 1rem;
-    line-height: 1.5rem;
-  }
+article p {
+  padding-bottom: 1rem;
+  line-height: 1.5rem;
+}
 </style>

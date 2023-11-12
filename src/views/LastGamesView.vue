@@ -82,11 +82,6 @@ p {
   width: 100%;
 }
 
-.router-link {
-  text-align: center;
-  margin-top: 20px;
-}
-
 .register-button {
   padding: 10px 20px;
   background-color: #da4e39;
