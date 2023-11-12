@@ -49,7 +49,7 @@ export default {
 
   <div id="player-info">
     <div id="player-info-image">
-      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image" />
+      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image" loading="lazy" />
     </div>
 
     <div id="player-info-data">
@@ -286,6 +286,16 @@ h3 {
 #equipped-attacks article,
 #owned-attacks article {
   margin-bottom: 1.5rem;
+}
+
+/* Espai al costat del poder */
+.main-attack-power p:last-child {
+  margin-left: 0.5rem;
+}
+
+/* Espai al costat de la posició */
+.main-attack-positions p:last-child {
+  margin-left: 0.5rem;
 }
 
 /* Treure l'espai final de l'últim atac quan aquest està abaix */

@@ -134,9 +134,9 @@ export default {
   </div>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
-    <p>Are you sure you want to buy it?</p>
-    <button @click="handleYesClick">Yes</button>
-    <button @click="handleNoClick">No</button>
+    <p class="popUp-question"><b>Are you sure you want to buy the attack?</b></p>
+    <p @click="handleYesClick">Yes</p>
+    <p @click="handleNoClick">No</p>
   </div>
 </template>
 

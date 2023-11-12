@@ -1,3 +1,5 @@
+/* All the css base for the project: font families, font size, reset CSS and background color */
+
 * {
   font-family: 'text font', 'text font', monospace;
   font-size: 15px;
