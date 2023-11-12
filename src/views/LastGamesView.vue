@@ -22,9 +22,9 @@ import { RouterLink } from "vue-router";
       <hr class="separator">
     </div>
     <div class="separator"></div>
-    <RouterLink to="/stats" class="router-link">
+    <router-link to="/stats" class="router-link">
       <button class="register-button" @click="back">Back</button>
-    </RouterLink>
+    </router-link>
   </div>
 </template>
 
