@@ -1,7 +1,37 @@
 <script setup>
 import {RouterLink} from "vue-router";
-import '../assets/shop.css'
+import '../assets/shopBag.css'
 
+</script>
+
+
+<script>
+export default {
+  setup() {
+
+  },
+  data() {
+    return {
+      showPopUp: false,
+    };
+  },
+  methods: {
+    showPopUpMethod() {
+      this.showPopUp = true;
+    },
+    hidePopUp() {
+      this.showPopUp = false;
+    },
+    handleYesClick() {
+      alert('Yes');
+      this.hidePopUp();
+    },
+    handleNoClick() {
+      alert('No');
+      this.hidePopUp();
+    },
+  },
+}
 </script>
 
 <template>
@@ -44,11 +74,11 @@ import '../assets/shop.css'
             <p>Price</p>
             <p id="price">price</p>
           </div>
-          <button class="red_button">Buy</button>
+          <button class="red_button" @click="showPopUpMethod">Buy</button>
         </article>
 
         <article class="item_container">
-          <h3>Attack 1</h3>
+          <h3>Attack 2</h3>
 
           <div class="rows_container">
             <p>Level</p>
@@ -64,11 +94,11 @@ import '../assets/shop.css'
             <p>Price</p>
             <p id="price">price</p>
           </div>
-          <button class="red_button">Buy</button>
+          <button class="red_button" @click="showPopUpMethod">Buy</button>
         </article>
 
         <article class="item_container">
-          <h3>Attack 1</h3>
+          <h3>Attack 3</h3>
 
           <div class="rows_container">
             <p>Level</p>
@@ -84,11 +114,11 @@ import '../assets/shop.css'
             <p>Price</p>
             <p id="price">price</p>
           </div>
-          <button class="red_button">Buy</button>
+          <button class="red_button" @click="showPopUpMethod">Buy</button>
         </article>
 
         <article class="item_container">
-          <h3>Attack 1</h3>
+          <h3>Attack 4</h3>
 
           <div class="rows_container">
             <p>Level</p>
@@ -104,12 +134,18 @@ import '../assets/shop.css'
             <p>Price</p>
             <p id="price">price</p>
           </div>
-          <button class="red_button">Buy</button>
+          <button class="red_button" @click="showPopUpMethod">Buy</button>
         </article>
 
       </section>
 
     </div>
+  </div>
+
+  <div id="popUp" class="popUp" v-show="showPopUp">
+    <p>Are you sure you want to buy it?</p>
+    <button @click="handleYesClick">Yes</button>
+    <button @click="handleNoClick">No</button>
   </div>
 </template>
 
