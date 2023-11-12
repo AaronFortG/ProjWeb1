@@ -24,12 +24,12 @@ import {RouterLink} from "vue-router";
       </div>
 
       <div class="buttons_login_and_signUp">
-        <RouterLink to="/home" class="router-link">
+        <router-link to="/home" class="router-link">
           <button id="login-button" type="submit">Login</button>
-        </RouterLink>
-        <RouterLink to="/sign-up" class="router-link">
+        </router-link>
+        <router-link to="/sign-up" class="router-link">
           <button id="register-button" @click="register">Sign Up</button>
-        </RouterLink>
+        </router-link>
       </div>
 
     </form>

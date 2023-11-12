@@ -8,9 +8,9 @@ import {RouterLink} from "vue-router";
 <template>
   <div class="container">
     <div class="back-button">
-      <RouterLink to="/list-players" class="router-link">
+      <router-link to="/list-players" class="router-link">
         <button class="red_button">Back</button>
-      </RouterLink>
+      </router-link>
     </div>
 
     <h1 class="title" style="margin-bottom: 2rem">Stats</h1>
@@ -49,9 +49,9 @@ import {RouterLink} from "vue-router";
     </div>
 
     <div class="last_games">
-      <RouterLink to="/last-games" class="router-link">
+      <router-link to="/last-games" class="router-link">
         <button class="main-button">Last Games</button>
-      </RouterLink>
+      </router-link>
     </div>
   </div>
 </template>
