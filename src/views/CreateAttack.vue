@@ -1,4 +1,23 @@
 <script setup>
+import {RouterLink} from "vue-router";
+</script>
+
+<script>
+export default {
+  setup() {
+
+  },
+  methods: {
+    // Function to check if the value of the input is negative
+    negativeValueCheck(event, min) {
+      const input = event.target;
+
+      if (input.value < min) {
+        input.value = min;
+      }
+    },
+  },
+};
 </script>
 
 <template>
@@ -10,17 +29,17 @@
       <form class="form">
         <div class="form-group">
           <label>Positions</label>
-          <input type="number" name="size" id="amount-input" required @change="negativeValueCheck($event, 1)">
+          <input type="number" name="size" id="amount-input" required @change="negativeValueCheck($event, 1)" placeholder="43">
         </div>
 
         <div class="form-group">
           <label>Price</label>
-          <input type="number" id="amount-input" required @change="negativeValueCheck($event, 1)">
+          <input type="number" id="amount-input" required @change="negativeValueCheck($event, 1)" placeholder="78">
         </div>
 
         <div class="form-group">
-          <label>Level_needed</label>
-          <input type="number" id="amount-input" required @change="negativeValueCheck($event, 1)">
+          <label>Level needed</label>
+          <input type="number" id="amount-input" required @change="negativeValueCheck($event, 1)" placeholder="15">
         </div>
       </form>
 
@@ -30,6 +49,13 @@
         </button>
       </RouterLink>
 
+    </div>
+
+
+    <div class="back-button">
+      <RouterLink to="/bag" class="router-link">
+        <button class="red_button" id="back-button">Back</button>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -58,6 +84,12 @@
     justify-content: center;
   }
 
+  .back-button {
+    text-align: center;
+    margin-bottom: 40px;
+    order: -1;
+    margin-left: auto;
+  }
 
   @media (min-width: 600px) {
     .form {
@@ -69,8 +101,13 @@
       justify-content: center;
       margin: 1rem;
     }
+
     button {
       max-width: 20rem;
+    }
+    .back-button {
+      order: 2;
+      margin-top: 2rem;
     }
   }
 </style>
