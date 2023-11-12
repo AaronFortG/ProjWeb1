@@ -1,0 +1,57 @@
+/* Classes for the views Login and Sign Up */
+.login_and_signUp-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.buttons_login_and_signUp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+#login-button,
+#register-button {
+    display: block;
+    padding: 1rem;
+    width: 10rem;
+    margin-top: 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#register-button {
+    background-color: #28A745;
+}
+
+.login_and_signUp_form-group {
+    max-width: 16rem;
+    margin: 20px auto;
+}
+
+.login_and_signUp_form-group label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.login_and_signUp_form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+h2.login_and_signUp {
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+    margin-top: 4rem;
+}

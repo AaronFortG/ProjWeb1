@@ -110,17 +110,22 @@ import {RouterLink} from "vue-router";
         </div>
       </li>
     </ol>
+
+    <div class="back-button">
+      <RouterLink to="/home" class="router-link">
+        <button class="red_button" id="back-button">Back</button>
+      </RouterLink>
+    </div>
+
   </div>
 
-  <div class="button-end">
-    <RouterLink to="/home" class="router-link">
-      <button class="red_button" id="back-button">Back</button>
-    </RouterLink>
-  </div>
+
 </template>
 
 <style scoped>
   .container {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     max-width: 100%;
     margin: 0 20px; /* Establece un margen constante a ambos lados */
@@ -172,10 +177,12 @@ import {RouterLink} from "vue-router";
     padding: 10px;
   }
 
-  .button-end {
+  .back-button {
     text-align: center;
-    margin-top: 1px; /* Ajusta el margen superior del botón */
+    margin-top: 2rem; /* Ajusta el margen superior del botón */
     margin-bottom: 40px;
+    order: -1;
+    margin-left: auto;
   }
 
   .red_button {
@@ -211,6 +218,10 @@ import {RouterLink} from "vue-router";
       margin-bottom: 0;
       margin-right: 20px; /* Ajusta el margen derecho en pantallas más grandes */
       margin-left: 20px; /* Ajusta el margen izquierdo en pantallas más grandes */
+    }
+
+    .back-button {
+      order: 0;
     }
   }
 </style>

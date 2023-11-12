@@ -1,5 +1,5 @@
 @import './base.css';
-
+@import './logIn_SignUp.css';
 /* Classe per posar els elements un sota de l'altre, utilitzant flex. */
 .big_container {
     display: grid;
@@ -55,7 +55,7 @@
 
 .title {
     font-family: "Title font", serif;
-    font-size: 60px;
+    font-size: 2.5rem;
     text-align: center; /* Alinea el contenido de cada elemento en el centro */
     color: white;
     word-wrap: break-word;
@@ -70,6 +70,30 @@ button {
 a:link, a:visited, a:active {
     text-decoration: none;
     color: white;
+}
+
+/* FOOTER */
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    background-color: #2F2F2F;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Times New Roman", serif;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 1.5rem;
 }
 
 @media (min-width: 600px) {
