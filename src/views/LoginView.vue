@@ -1,7 +1,6 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
-import '../assets/login.css'
 
 </script>
 
@@ -24,7 +23,7 @@ import '../assets/login.css'
         <button id="login-button" type="submit">Login</button>
       </RouterLink>
       <RouterLink to="/sign-up">
-        <button id="register-button" @click="register">Create Account</button>
+        <button id="register-button" @click="register">Sign Up</button>
       </RouterLink>
       <footer>
         <p>Created by Marcos, Aaron and Gemma</p>
@@ -69,4 +68,70 @@ export default {
 
 
 <style scoped>
+  .login-container {
+    text-align: center;
+    margin: 20px;
+  }
+
+  .form-group {
+    margin: 20px;
+  }
+
+  h2.Log.in {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  footer p {
+    background-color: #2F2F2F;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Times New Roman", serif;
+    padding: 10px;
+    position: relative; /* Cambiado de absolute a relative */
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px; /* Añadido espacio superior */
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  #login-button,
+  #register-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #login-button {
+    background-color: #007BFF;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  #register-button {
+    background-color: #28A745;
+  }
 </style>

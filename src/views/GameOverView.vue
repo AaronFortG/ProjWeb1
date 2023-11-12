@@ -10,9 +10,7 @@ import {RouterLink} from "vue-router";
     <div class="buttons_container">
 
       <RouterLink to="/home" class="router-link">
-        <button class="main-button">
-          Continue
-        </button>
+        <button class="main-button">Continue</button>
       </RouterLink>
 
     </div>

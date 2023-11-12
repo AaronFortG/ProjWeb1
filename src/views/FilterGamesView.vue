@@ -1,8 +1,6 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
-import "../assets/joinArena.css";
-import "../assets/filterArenas.css";
 
 </script>
 
@@ -134,4 +132,132 @@ export default {
 
 <style scoped>
 
+  .header-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    position: sticky;
+    background-color: #2F2F2F;
+    top: 0;
+  }
+
+  h1.title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  section {
+    margin: 2rem;
+  }
+
+  p#arena-join-description {
+    color: white;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+  }
+
+  section article {
+    background-color: #181414;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  section article p,
+  section article h2 {
+    color: white;
+  }
+
+  section article div.arena-info {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  section article div.arena-info h2,
+  section article div.arena-size p {
+    display: inline;
+  }
+
+  section article:hover {
+    outline: white 1px solid;
+  }
+
+  .popUp {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: #cccccc 1px solid;
+    padding: 1rem;
+    width: 20rem;
+    z-index: 999; /* Per posar-lo per sobre dels elements */
+  }
+
+  .popUp *:nth-child(2) {
+    margin-bottom: 1rem;
+  }
+
+  .popUp button:hover {
+    font-weight: bold;
+  }
+
+  @media (min-width: 1000px) {
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 2rem;
+    }
+
+    section article.arena {
+      flex: 1;
+      max-width: 21.5rem;
+      min-width: 21.5rem;
+      box-sizing: border-box;
+    }
+  }
+
+  #center-button {
+    justify-content: center;
+  }
+
+  form#arena-filters {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  label {
+    color: white;
+  }
+
+  form select,
+  form input {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    margin-right: 2rem;
+    padding: 1rem;
+    box-sizing: border-box; /* Fer que l'element no sobresurti de la pantalla */
+    width: 100%;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 1000px) {
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 2rem;
+    }
+
+    form div {
+      flex: 1;
+      min-width: 20rem;
+    }
+  }
 </style>
