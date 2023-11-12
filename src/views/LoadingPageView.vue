@@ -28,7 +28,15 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<template>
+  <div class="loading_container">
+    <h1 class="title">Loading...</h1>
+    <p>Waiting for someone to join</p>
+    <progress id="file" :value="progressBarValue" max="100" > </progress>
+  </div>
+</template>
+
+<style scoped>
   .loading_container {
     display: flex;
     flex-direction: column;
@@ -50,18 +58,4 @@ onMounted(() => {
   progress::-webkit-progress-value {
     background-color: #00d0ff;
   }
-
-</style>
-
-<template>
-  <div class="loading_container">
-    <h1 class="title">Loading...</h1>
-    <p>Waiting for someone to join</p>
-    <progress id="file" :value="progressBarValue" max="100" > </progress>
-  </div>
-
-</template>
-
-<style scoped>
-
 </style>

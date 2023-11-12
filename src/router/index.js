@@ -58,12 +58,12 @@ const router = createRouter({
     {
       path: '/last-games',
       name: 'last-games',
-      component: () => import('../views/GamesView.vue')
+      component: () => import('../views/LastGamesView.vue')
     },
     {
       path: '/list-players',
       name: 'listPlayers',
-      component: () => import('../views/listPlayers.vue')
+      component: () => import('../views/RankingView.vue')
     },
     {
       path: '/player-info',

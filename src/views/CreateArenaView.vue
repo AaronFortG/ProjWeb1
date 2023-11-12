@@ -1,6 +1,5 @@
 <script setup>
 import {RouterLink} from "vue-router";
-import '../assets/createArena.css'
 </script>
 
 <script>
@@ -61,3 +60,25 @@ export default {
   </div>
 </template>
 
+<style scoped>
+  .form-group {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .form-group label {
+    color: white;
+    margin: 0.5rem;
+  }
+  .form-group input {
+    padding: 5px;
+  }
+
+  @media (min-width: 600px) {
+    .form {
+      margin-bottom: 5rem;
+    }
+  }
+</style>
