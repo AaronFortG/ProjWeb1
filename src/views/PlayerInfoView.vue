@@ -92,7 +92,7 @@ export default {
         </div>
       </article>
 
-      <article class="main-attack">
+      <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -104,7 +104,7 @@ export default {
         </div>
       </article>
 
-      <article class="main-attack">
+      <article class="main-attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -124,7 +124,7 @@ export default {
     <h2>Owned attacks</h2>
 
     <div id="owned-attacks">
-      <article class="attack">
+      <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -136,7 +136,7 @@ export default {
         </div>
       </article>
 
-      <article class="attack">
+      <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -148,7 +148,7 @@ export default {
         </div>
       </article>
 
-      <article class="attack">
+      <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -160,7 +160,7 @@ export default {
         </div>
       </article>
 
-      <article class="attack">
+      <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -172,7 +172,7 @@ export default {
         </div>
       </article>
 
-      <article class="attack">
+      <article class="attack" @click="showPopUpMethod">
         <h3>Name of the attack</h3>
         <div class="main-attack-power">
           <p>Power </p>
@@ -311,6 +311,10 @@ export default {
   }
 
   @media (min-width: 1100px) {
+    .header-buttons-container {
+      padding-bottom: 0;
+    }
+
     #player-info {
       display: grid;
       grid-template-columns: 1fr 1fr;
