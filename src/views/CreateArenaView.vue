@@ -22,8 +22,8 @@ export default {
 
       if (input.value > max) {
         input.value = max
-      } else if (input.value.length > input.maxLength) {
-        input.value = input.value.slice(0, input.maxLength)
+      } else if (input.value.length > 2) {
+        input.value = input.value.slice(0, 2)
       }
     }
   }

@@ -282,7 +282,7 @@ window.addEventListener('popstate', function () {
       </div>
     </div>
 
-    <RouterLink to="/home" class="red_button"> Leave match </RouterLink>
+    <RouterLink to="/game-over" class="red_button"> Leave match </RouterLink>
   </div>
 </template>
 

@@ -27,7 +27,7 @@ export default {
       this.$router.push('/')
     },
     handleYesClick() {
-      alert('Join arena')
+      alert('Attack changed')
       this.hidePopUp()
     },
     handleNoClick() {
@@ -195,8 +195,8 @@ export default {
   </section>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
-    <p class="popUp-question"><b>Are you sure you want to join the game?</b></p>
-    <p @click="handleYesClick">Join arena</p>
+    <p class="popUp-question"><b>Confirm to change the attack.</b></p>
+    <p @click="handleYesClick">Change attack</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 
