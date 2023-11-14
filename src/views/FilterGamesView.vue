@@ -178,6 +178,16 @@ section article div.arena-info {
   margin-bottom: 1rem;
 }
 
+/* Espai al costat de la data */
+.arena-info h2:last-child {
+  margin-left: 0.5rem;
+}
+
+/* Espai al costat del grid size */
+.arena-size p:last-child {
+  margin-left: 0.5rem;
+}
+
 section article div.arena-info h2,
 section article div.arena-size p {
   display: inline;

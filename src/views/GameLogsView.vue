@@ -4,11 +4,11 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <div id="container">
-    <RouterLink to="/filter-arenas" class="red_button">Back</RouterLink>
-
-    <h1 class="title">Game Logs</h1>
+    <RouterLink to="/filter-arenas" class="red_button" id="back_button">Back</RouterLink>
 
     <section>
+      <h1 class="title">Game Logs</h1>
+
       <article id="grid-size">
         <p>Grid Size:</p>
         <p>5x5</p>
@@ -25,11 +25,11 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 #container {
-  margin: 2rem;
+  margin: 3rem 2rem 2rem;
 }
 
 h1 {
-  padding: 2rem 0 2rem 0;
+  margin: 3rem 0 2rem 0;
 }
 
 p {
@@ -41,6 +41,10 @@ article#grid-size p {
   font-weight: bolder;
   font-size: 1.5rem;
   display: inline;
+}
+
+#grid-size p:first-child {
+  margin-right: 1rem;
 }
 
 article#grid-size {

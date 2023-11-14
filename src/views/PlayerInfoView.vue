@@ -27,7 +27,7 @@ export default {
       this.$router.push('/')
     },
     handleYesClick() {
-      alert('Join arena')
+      alert('Attack changed')
       this.hidePopUp()
     },
     handleNoClick() {
@@ -49,7 +49,11 @@ export default {
 
   <div id="player-info">
     <div id="player-info-image">
-      <img src="/src/assets/images/playerInfo_profilePicture.jpg" alt="User profile image" />
+      <img
+        src="/src/assets/images/playerInfo_profilePicture.jpg"
+        alt="User profile image"
+        loading="lazy"
+      />
     </div>
 
     <div id="player-info-data">
@@ -191,8 +195,8 @@ export default {
   </section>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
-    <p class="popUp-question"><b>Are you sure you want to join the game?</b></p>
-    <p @click="handleYesClick">Join arena</p>
+    <p class="popUp-question"><b>Confirm to change the attack.</b></p>
+    <p @click="handleYesClick">Change attack</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 
@@ -286,6 +290,16 @@ h3 {
 #equipped-attacks article,
 #owned-attacks article {
   margin-bottom: 1.5rem;
+}
+
+/* Espai al costat del poder */
+.main-attack-power p:last-child {
+  margin-left: 0.5rem;
+}
+
+/* Espai al costat de la posició */
+.main-attack-positions p:last-child {
+  margin-left: 0.5rem;
 }
 
 /* Treure l'espai final de l'últim atac quan aquest està abaix */
