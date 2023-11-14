@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import MySecondComponent from "@/components/InputComponent.vue";
 </script>
 
 <template>
@@ -11,12 +12,12 @@ import { RouterLink } from 'vue-router'
 
       <div class="login_and_signUp_form-group">
         <label for="email">Email:</label>
-        <input type="text" id="email" v-model="email" required placeholder="example@gmail.com" />
+        <MySecondComponent placeHolder="example@gmail.com" type="text"/>
       </div>
 
       <div class="login_and_signUp_form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required placeholder="password" />
+        <MySecondComponent placeHolder="password" type="password"/>
       </div>
 
       <div class="buttons_login_and_signUp">
