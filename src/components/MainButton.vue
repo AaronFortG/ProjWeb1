@@ -20,9 +20,13 @@ export default {
   border: 1px solid #181414;
   border-radius: 4px;
   margin-bottom: 15px;
-  padding: 10px 20px;
+  padding: 20px 20px;
   background-color: #181414;
   color: white;
   text-align: center;
+}
+
+.main-button:hover {
+  border: 1px solid rgba(226, 222, 211, 0.89);
 }
 </style>
