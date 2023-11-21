@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import MainButton from "@/components/MainButton.vue";
 </script>
 
 <template>
@@ -18,7 +19,8 @@ import { RouterLink } from 'vue-router'
 
       <RouterLink to="/list-players" class="router-link main-button"> Ranking </RouterLink>
 
-      <RouterLink to="/" class="router-link main-button"> Log out </RouterLink>
+      <RouterLink to="/" class="router-link main-button"> Log out</RouterLink>
+      <MainButton link="/player-info" text="Log Out" padding="2rem 2rem"></MainButton>
     </div>
   </div>
 </template>
