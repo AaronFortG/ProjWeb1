@@ -1,6 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import MainButton from "@/components/MainButton.vue";
+import MainButton from "@/components/MainButtonComponent.vue";
 </script>
 
 <template>

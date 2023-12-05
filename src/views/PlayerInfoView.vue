@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import AttackComponnt from "@/components/AttackComponent.vue";
 </script>
 
 <script>
@@ -45,39 +46,41 @@ export default {
     >
   </header>
 
-  <h1 class="title">Player information</h1>
+  <section>
+    <h1 class="title">Player information</h1>
 
-  <div id="player-info">
-    <div id="player-info-image">
-      <img
-        src="/src/assets/images/playerInfo_profilePicture.jpg"
-        alt="User profile image"
-        loading="lazy"
-      />
+    <div id="player-info">
+      <div id="player-info-image">
+        <img
+            src="/src/assets/images/playerInfo_profilePicture.jpg"
+            alt="User profile image"
+            loading="lazy"
+        />
+      </div>
+
+      <div id="player-info-data">
+        <div id="player-info-name">
+          <p><b>Player name: </b></p>
+          <p id="player-name">SrFox3999</p>
+        </div>
+
+        <div id="player-info-level">
+          <p><b>Level: </b></p>
+          <p id="player-level">2</p>
+        </div>
+
+        <div id="player-info-xp">
+          <p><b>XP: </b></p>
+          <p id="player-xp">369</p>
+        </div>
+
+        <div id="player-info-coins">
+          <p><b>Coins: </b></p>
+          <p id="player-coins">199</p>
+        </div>
+      </div>
     </div>
-
-    <div id="player-info-data">
-      <div id="player-info-name">
-        <p><b>Player name: </b></p>
-        <p id="player-name">SrFox3999</p>
-      </div>
-
-      <div id="player-info-level">
-        <p><b>Level: </b></p>
-        <p id="player-level">2</p>
-      </div>
-
-      <div id="player-info-xp">
-        <p><b>XP: </b></p>
-        <p id="player-xp">369</p>
-      </div>
-
-      <div id="player-info-coins">
-        <p><b>Coins: </b></p>
-        <p id="player-coins">199</p>
-      </div>
-    </div>
-  </div>
+  </section>
 
   <hr />
 
@@ -88,41 +91,9 @@ export default {
     </div>
 
     <div id="equipped-attacks">
-      <article class="main-attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>1</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
-
-      <article class="main-attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>2</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
-
-      <article class="main-attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>3</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
     </div>
   </section>
 
@@ -132,65 +103,11 @@ export default {
     <h2>Owned attacks</h2>
 
     <div id="owned-attacks">
-      <article class="attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>1</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
-
-      <article class="attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>2</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
-
-      <article class="attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>3</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
-
-      <article class="attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>4</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
-
-      <article class="attack" @click="showPopUpMethod">
-        <h3>Name of the attack</h3>
-        <div class="main-attack-power">
-          <p>Power</p>
-          <p>5</p>
-        </div>
-        <div class="main-attack-positions">
-          <p>Positions:</p>
-          <p>x=2, y=3</p>
-        </div>
-      </article>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
+      <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
     </div>
   </section>
 

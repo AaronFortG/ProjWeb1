@@ -4,7 +4,6 @@ import { RouterLink } from 'vue-router'
 
 <script>
 export default {
-  setup() {},
   methods: {
     // Function to check if the value of the input is negative
     negativeValueCheck(event, min) {
