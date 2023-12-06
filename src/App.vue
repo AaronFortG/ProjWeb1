@@ -24,8 +24,8 @@
 
 <template>
   <vertical-menu-component v-if="showVerticalMenu"/>
-  <RouterView />
-  <horizontal-menu-component v-if="showVerticalMenu"></horizontal-menu-component>
+  <RouterView/>
+  <horizontal-menu-component v-if="showVerticalMenu"/>
 </template>
 
 <style scoped></style>
