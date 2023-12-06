@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import InputNumberComponent from "@/components/InputNumberComponent.vue";
 </script>
 
 <script>
@@ -39,40 +40,21 @@ export default {
     <h1 class="title">Create an arena</h1>
 
     <div class="buttons_container">
-      <form class="form">
+      <form class="form_container">
         <div class="form-group">
           <label>Size [2..10]</label>
-          <input
-            type="number"
-            name="size"
-            id="size-input"
-            required
-            min="2"
-            max="10"
-            @change="maxLengthCheck($event, 2, 10)"
-            placeholder="[2..10]"
-          />
+          <InputNumberComponent placeHolder="[2..10]" type="number" min="2" max="10"/>
         </div>
 
         <div class="form-group">
           <label>HP max</label>
-          <input
-            type="number"
-            id="hp-input"
-            required
-            min="1"
-            @change="negativeValueCheck($event, 1)"
-            placeholder="HP"
-          />
+          <InputNumberComponent placeHolder="HP" type="number" min="1" max="1000000"/>
         </div>
       </form>
 
       <RouterLink to="/loading-page" class="router-link main-button"> Create arena </RouterLink>
     </div>
 
-    <div class="back-button">
-      <RouterLink to="/home" class="router-link red_button"> Back </RouterLink>
-    </div>
   </div>
 </template>
 
@@ -99,21 +81,9 @@ export default {
   width: 17rem;
 }
 
-.back-button {
-  text-align: center;
-  margin-bottom: 40px;
-  order: -1;
-  margin-left: auto;
-}
-
 @media (min-width: 600px) {
   .form {
     margin-bottom: 5rem;
-  }
-
-  .back-button {
-    order: 2;
-    margin-top: 2rem;
   }
 }
 </style>
