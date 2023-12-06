@@ -20,7 +20,7 @@ import { RouterLink } from 'vue-router'
       </div>
 
       <div class="buttons_login_and_signUp">
-        <router-link id="login-button" type="submit" to="/home" class="router-link"
+        <router-link id="login-button" type="submit" to="/player-info" class="router-link"
           >Login</router-link
         >
 

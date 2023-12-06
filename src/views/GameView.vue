@@ -1,6 +1,11 @@
 <script setup></script>
 
 <script>
+  export default {
+    mounted() {
+      this.$root.$data.showVerticalMenu = false;
+    },
+  }
 function setButtonState(buttonId, isPressed) {
   const button = document.getElementById(buttonId)
   if (isPressed) {

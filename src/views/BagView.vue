@@ -10,6 +10,9 @@ export default {
       showPopUp: false
     }
   },
+  mounted() {
+    this.$root.$data.showVerticalMenu = false;
+  },
   methods: {
     showPopUpMethod() {
       this.showPopUp = true

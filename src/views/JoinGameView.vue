@@ -5,6 +5,9 @@ import { RouterLink } from 'vue-router'
 <script>
 export default {
   setup() {},
+  mounted() {
+    this.$root.$data.showVerticalMenu = true;
+  },
   data() {
     return {
       showPopUp: false

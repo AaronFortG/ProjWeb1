@@ -2,6 +2,14 @@
 import { RouterLink } from 'vue-router'
 </script>
 
+<script>
+export default {
+  mounted() {
+    this.$root.$data.showVerticalMenu = true;
+  },
+}
+</script>
+
 <template>
   <div class="big_container">
     <h1 class="title" style="color: #da4e39; text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7)">

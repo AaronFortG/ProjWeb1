@@ -44,6 +44,9 @@ import MySecondComponent from "@/components/InputComponent.vue";
 
 export default {
   components: { RouterLink },
+  mounted() {
+    this.$root.$data.showVerticalMenu = false;
+  },
   data() {
     return {
       email: '',

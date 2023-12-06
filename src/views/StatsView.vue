@@ -2,6 +2,14 @@
 import { RouterLink } from 'vue-router'
 </script>
 
+<script>
+export default {
+  mounted() {
+    this.$root.$data.showVerticalMenu = true;
+  },
+}
+</script>
+
 <template>
   <div class="container">
     <div class="back-button">

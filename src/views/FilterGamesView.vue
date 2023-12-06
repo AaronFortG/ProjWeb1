@@ -22,6 +22,9 @@ export default {
       showPopUp: false
     }
   },
+  mounted() {
+    this.$root.$data.showVerticalMenu = true;
+  },
   methods: {
     navigateLogs() {
       this.$router.push('/game-logs')

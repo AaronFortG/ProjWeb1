@@ -2,6 +2,14 @@
 import { RouterLink } from 'vue-router'
 </script>
 
+<script>
+  export default {
+    mounted() {
+      this.$root.$data.showVerticalMenu = true;
+    },
+  }
+</script>
+
 <template>
   <div id="container">
     <RouterLink to="/filter-arenas" class="red_button" id="back_button">Back</RouterLink>

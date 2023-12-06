@@ -6,6 +6,9 @@ import AttackComponnt from "@/components/AttackComponent.vue";
 <script>
 export default {
   setup() {},
+  mounted() {
+    this.$root.$data.showVerticalMenu = true;
+  },
   data() {
     return {
       showPopUp: false,
@@ -36,6 +39,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <template>
