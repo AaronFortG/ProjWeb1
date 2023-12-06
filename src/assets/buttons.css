@@ -110,7 +110,7 @@
     background: transparent url('src/assets/images/components/button-golden-left.png') no-repeat right center;
     background-size: 100% 100%;
     margin: 0 0 0 0;
-    left: 0px;
+    left: 0;
     float: left;
     margin-left: -46px;
     margin-top: -5%;
@@ -127,7 +127,7 @@
     background: transparent url('src/assets/images/components/button-golden-right.png') no-repeat left center;
     background-size: 100% 100%;
     margin: 0 0 0 0;
-    right: 0px;
+    right: 0;
     float: right;
     margin-right: -46px;
     margin-top: -5%;

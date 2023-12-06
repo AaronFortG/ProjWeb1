@@ -7,7 +7,6 @@
 
 <script>
   import VerticalMenuComponent from "@/components/VerticalMenuComponent.vue";
-  import LoginView from "@/views/LoginView.vue";
 
   export default {
     data() {
@@ -17,7 +16,6 @@
     },
     components: {
       VerticalMenuComponent,
-      LoginView,
     },
   };
 </script>
