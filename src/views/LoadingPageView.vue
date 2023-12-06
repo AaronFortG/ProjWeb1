@@ -34,6 +34,14 @@ window.addEventListener('popstate', function () {
 })
 </script>
 
+<script>
+export default {
+  mounted() {
+    this.$root.$data.showVerticalMenu = false;
+  },
+}
+</script>
+
 <template>
   <div class="loading_container">
     <h1 class="title">Loading...</h1>

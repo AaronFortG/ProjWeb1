@@ -3,13 +3,13 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <div class="login_and_signUp-container">
+  <div class="login_and_signUp-container ">
     <h1 class="title">Welcome to Dungeon Clash</h1>
 
-    <form @submit.prevent="login">
+    <div class="form_container">
       <h2 class="login_and_signUp">Log in</h2>
 
-      <div class="login_and_signUp_form-group">
+      <div class="login_and_signUp_form-group ">
         <label for="email">Email:</label>
         <input type="text" id="email" v-model="email" required placeholder="example@gmail.com" />
       </div>
@@ -26,7 +26,7 @@ import { RouterLink } from 'vue-router'
 
         <router-link to="/sign-up" id="register-button" class="router-link">Sign Up</router-link>
       </div>
-    </form>
+    </div>
   </div>
 
   <footer>
@@ -46,6 +46,9 @@ export default {
     /**
      * Válidamos el email del usuario que almenos contenga un @
      */
-  }
+  },
+  mounted() {
+    this.$root.$data.showVerticalMenu = false;
+  },
 }
 </script>

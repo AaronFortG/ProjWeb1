@@ -1,41 +1,39 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import MySecondComponent from "@/components/InputComponent.vue";
 </script>
 
 <template>
-  <div class="login_and_signUp-container">
+  <div class="login_and_signUp-container ">
     <h1 class="title">Welcome to Dungeon Clash</h1>
 
-    <h2 class="login_and_signUp">Sign Up</h2>
+    <div class="form_container">
+      <h2 class="login_and_signUp">Sign Up</h2>
 
-    <div class="login_and_signUp_form-group">
-      <label for="email">Email:</label>
-      <input type="text" id="email" v-model="email" required placeholder="example@gmail.com" />
+      <div class="login_and_signUp_form-group">
+        <label for="email">Email:</label>
+        <MySecondComponent placeHolder="example@gmail.com" type="text"/>
+      </div>
+
+      <div class="login_and_signUp_form-group">
+        <label for="password">Password:</label>
+        <MySecondComponent v-on:data="getValuePassword" placeHolder="password" type="password"/>
+      </div>
+
+      <div class="login_and_signUp_form-group">
+        <label for="confirm-password">Confirm Password:</label>
+        <MySecondComponent v-on:data="getValueConfirmPassword" placeHolder="password" type="password"/>
+      </div>
+
+      <div class="buttons_login_and_signUp">
+        <router-link id="login-button" type="submit" to="/" class="router-link">Login</router-link>
+        <router-link id="register-button" to="/home" class="router-link">Create account</router-link>
+      </div>
+
+      <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
     </div>
-
-    <div class="login_and_signUp_form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password" required placeholder="password" />
-    </div>
-
-    <div class="login_and_signUp_form-group">
-      <label for="confirm-password">Confirm Password:</label>
-      <input
-        type="password"
-        id="confirm-password"
-        v-model="confirmPassword"
-        required
-        placeholder="password"
-      />
-    </div>
-
-    <div class="buttons_login_and_signUp">
-      <router-link id="login-button" type="submit" to="/" class="router-link">Login</router-link>
-      <router-link id="register-button" to="/home" class="router-link">Create account</router-link>
-    </div>
-
-    <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
   </div>
+
 
   <footer>
     <p>Created by Marcos Ruiz-Flores, Aaron Fort and Gemma Yebra.</p>
@@ -43,6 +41,7 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <script>
+
 export default {
   components: { RouterLink },
   data() {
@@ -52,7 +51,15 @@ export default {
       confirmPassword: ''
     }
   },
-  methods: {}
+  methods: {
+    // get payload in parameter
+    getValuePassword(event) {
+      this.password = event;
+    },
+    getValueConfirmPassword(event) {
+      this.confirmPassword = event;
+    }
+  }
 }
 </script>
 

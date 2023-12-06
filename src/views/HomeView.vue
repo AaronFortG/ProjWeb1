@@ -2,6 +2,15 @@
 import MainButton from "@/components/MainButtonComponent.vue";
 </script>
 
+<script>
+  export default {
+    mounted() {
+      this.$root.$data.showVerticalMenu = true;
+    },
+  }
+</script>
+
+
 <template>
   <div class="big_container">
     <h1 class="title">Dungeon Clash</h1>

@@ -53,5 +53,31 @@ h2.login_and_signUp {
   color: #ffffff;
   font-weight: bold;
   margin-bottom: 2.5rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.form_container {
+  max-width: 20rem;
+  margin: 2rem auto;
+  padding-bottom: 2rem;
+  border-style: solid;
+  border-image-source: url("../assets/images/components/border-image.png");
+  border-image-slice: 6 6 6 6;
+  border-image-width: 18px;
+  border-width: 15px;
+
+  /* internal border */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  /* background */
+  background-color: rgb(76, 73, 76);
+  background-clip: padding-box;
+  background-origin: padding-box;
+  background-position: center;
+
+  padding-right: 2rem;
+  padding-left: 2rem;
 }

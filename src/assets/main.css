@@ -1,6 +1,9 @@
 @import './base.css';
 @import './logIn_SignUp.css';
 @import './popUp.css';
+@import './buttons.css';
+@import "./input.css";
+@import "./rpg.css";
 
 /* Classe per posar els elements un sota de l'altre, utilitzant flex. */
 .big_container {
