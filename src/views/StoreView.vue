@@ -47,7 +47,6 @@ export default {
           <img src="../assets/images/bag.png" alt="bag" style="max-width: 5.5rem" />
         </RouterLink>
 
-        <RouterLink to="/home" class="router-link red_button"> Back </RouterLink>
       </div>
 
       <h2>Attacks</h2>

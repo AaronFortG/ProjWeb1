@@ -117,9 +117,6 @@
       </li>
     </ol>
 
-    <div class="back-button">
-      <router-link class="red_button" id="back-button" to="/home">Back</router-link>
-    </div>
   </div>
 </template>
 

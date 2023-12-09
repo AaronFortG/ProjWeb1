@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <script>
 export default {
   mounted() {
-    this.$root.$data.showVerticalMenu = true;
+    this.$root.$data.showVerticalMenu = false;
   },
 }
 </script>
@@ -16,6 +16,6 @@ export default {
       Game Over
     </h1>
 
-    <RouterLink to="/home" class="router-link main-button"> Continue </RouterLink>
+    <RouterLink to="/player-info" class="router-link main-button"> Continue </RouterLink>
   </div>
 </template>

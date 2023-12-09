@@ -44,7 +44,7 @@ export default {
 
 <template>
   <header class="header-buttons-container">
-    <router-link to="/home" class="red_button" id="back_button">Back</router-link>
+    <p></p>
     <router-link to="" @click="showDeletePopUp" class="main-button" id="delete-account"
       >Delete account</router-link
     >

@@ -33,7 +33,7 @@ export default {
 
 <template>
   <header class="header-buttons-container">
-    <router-link to="/home" class="red_button" id="back-button">Back</router-link>
+    <p></p>
     <router-link to="/filter-arenas" class="main-button" id="filter-button"
       >Filter Arenas</router-link
     >

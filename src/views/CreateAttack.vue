@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <script>
 export default {
   mounted() {
-    this.$root.$data.showVerticalMenu = true;
+    this.$root.$data.showVerticalMenu = false;
   },
   methods: {
     // Function to check if the value of the input is negative

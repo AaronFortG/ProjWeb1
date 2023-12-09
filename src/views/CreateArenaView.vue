@@ -76,10 +76,6 @@ export default {
   color: white;
   margin: 0.5rem;
 }
-.form-group input {
-  padding: 5px;
-  width: 17rem;
-}
 
 @media (min-width: 600px) {
   .form {

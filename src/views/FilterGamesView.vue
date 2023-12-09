@@ -23,7 +23,7 @@ export default {
     }
   },
   mounted() {
-    this.$root.$data.showVerticalMenu = true;
+    this.$root.$data.showVerticalMenu = false;
   },
   methods: {
     navigateLogs() {
