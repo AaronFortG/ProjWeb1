@@ -1,13 +1,13 @@
 class ApiClient {
   // Constructor to set the base URL of the API (without endpoints)
-  constructor(baseURL) {
-    this.baseURL = baseURL;
+  constructor() {
+    this.baseURL = 'http://balandrau.salle.url.edu';
   }
 
   // Generic request method for different HTTP methods
   async request(url, method, data, token = null, delay = 1000) {
     // Construct the full endpoint URL
-    const endpoint = `${this.baseURL}/${url}`;
+    const endpoint = '${this.baseURL}/${url}';
 
     // Set default headers
     const headers = {
@@ -15,8 +15,8 @@ class ApiClient {
     };
 
     // Include Bearer token in headers if provided
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+    if (token != null) {
+      headers['Bearer'] = '${token}';
     }
 
     // Construct options object for the Fetch API
@@ -26,7 +26,7 @@ class ApiClient {
     };
 
     // Include request body if provided
-    if (data) {
+    if (data != null) {
       options.body = JSON.stringify(data);
     }
 
