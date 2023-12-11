@@ -29,8 +29,8 @@ import MySecondComponent from "@/components/InputComponent.vue";
       </div>
 
       <div class="buttons_login_and_signUp">
-        <router-link id="login-button" type="submit" to="/" class="router-link">Login</router-link>
-        <router-link id="register-button" to="/home" class="router-link">Create account</router-link>
+        <router-link id="login-button" type="submit" to="/" class="router-link" @click="postData()">Login</router-link>
+        <router-link id="register-button" to="/player-info" class="router-link">Create account</router-link>
       </div>
 
       <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
@@ -44,7 +44,6 @@ import MySecondComponent from "@/components/InputComponent.vue";
 </template>
 
 <script>
-
 export default {
   components: { RouterLink },
   mounted() {
@@ -64,6 +63,40 @@ export default {
     },
     getValueConfirmPassword(event) {
       this.confirmPassword = event;
+    },
+    postData() {
+      const url = "https://balandrau.salle.url.edu/i3/players";
+      const data = {
+        player_ID: "srfoxtest",
+        password: "srfoxtest",
+        img: "srfoxtest"
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => {
+          if (response.status === 201) {
+            console.log('Successfully created. Status code:', response.status);
+            // Redirect to the home page or perform other actions on success
+          } else if (response.status === 400) {
+            return response.json(); // Parse the response body as JSON
+          } else {
+            console.error('Unexpected status code:', response.status);
+          }
+        })
+        .then(errorData => {
+          if (errorData) {
+            console.error('Error:', errorData.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error during the request:', error);
+        });
     }
   }
 }
