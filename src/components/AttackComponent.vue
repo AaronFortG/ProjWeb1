@@ -25,7 +25,7 @@ export default {
 <style scoped>
 p {
   color: white;
-  font-size: 18px;
+  font-size: 1.2rem;
 }
 
 h3 {
@@ -42,6 +42,10 @@ h3 {
 
 .attack :nth-child(2) {
   margin: 1rem 0;
+}
+
+.attack:hover {
+  outline: 1px solid white;
 }
 
 @media (min-width: 1100px) {
