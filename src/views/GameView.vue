@@ -75,22 +75,50 @@ window.addEventListener('popstate', function () {
     </div>
 
     <!-- Create: the game board -->
-    <table class="board-game">
-      <tr>
-        <td><img src="../assets/images/game/wall_outer_left.png" alt="Wall left" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
-        <td><img src="../assets/images/game/wall_outer_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+    <div class="board-game">
+      <div class="row">
+        <div><img src="../assets/images/game/wall_outer_left.png" alt="Wall left" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></div>
+        <div><img src="../assets/images/game/wall_outer_right.png" alt="Wall right" /></div>
+      </div>
+      <div class="row">
+        <div><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></div>
+      </div>
+      <div class="row">
+        <div><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/floor_1.png" alt="Floor" /></div>
+        <div><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></div>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -103,8 +131,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -117,8 +145,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -131,8 +159,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -145,8 +173,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -159,8 +187,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -173,8 +201,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
@@ -187,36 +215,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
-        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
-        <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
-        <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-      <tr>
+      </div>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_spikes_anim_f3.png" alt="Floor" /></td>
@@ -229,10 +229,10 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/floor_1.png" alt="Floor" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
+      </div>
 
       <!-- Last row -->
-      <tr>
+      <div class="row">
         <td><img src="../assets/images/game/wall_outer_mid_left.png" alt="Wall left" /></td>
         <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
         <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
@@ -245,8 +245,8 @@ window.addEventListener('popstate', function () {
         <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
         <td><img src="../assets/images/game/wall-up-game.png" alt="Wall up" /></td>
         <td><img src="../assets/images/game/wall_outer_mid_right.png" alt="Wall right" /></td>
-      </tr>
-    </table>
+      </div>
+    </div>
 
     <!-- Create: player's (2) name and his life -->
     <div class="player-info" id="players2">
@@ -317,24 +317,18 @@ h2 {
 .board-game {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   margin: 1rem auto;
 }
 
-td {
-  width: 30px;
-  height: 30px;
-  position: relative;
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
-td img {
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
+.row img {
+  width: 30px;
+  height: 30px;
 }
 
 .game_container {
@@ -452,11 +446,11 @@ td img {
 
   .board-game {
     margin-top: 14rem;
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     min-width: 20rem;
   }
-
   .rows_together_container {
     grid-column: 1 / 4; /* Ocupa des de la columna 1 fins la columna 4 (3 columnes) */
     grid-row: 2 / 2; /* Ocupa la fila 2 */

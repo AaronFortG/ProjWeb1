@@ -34,6 +34,7 @@ import {RouterLink} from "vue-router";
 </template>
 
 <style scoped>
+
 .mobile-nav {
   background: #F1F1F1;
   position: fixed;

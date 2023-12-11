@@ -106,7 +106,7 @@ export default {
   <section>
     <h2>Owned attacks</h2>
 
-    <div id="owned-attacks">
+    <div id="owned-attacks" style="margin-bottom: 5rem">
       <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
       <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>
       <AttackComponnt name="Demon Attack" pos-x="3" pos-y="4" power="20"></AttackComponnt>

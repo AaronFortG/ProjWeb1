@@ -39,7 +39,7 @@ export default {
     >
   </header>
 
-  <section>
+  <section style="margin-bottom: 5rem">
     <h1 class="title">Join an arena</h1>
     <p id="arena-join-description">Right click an arena to join it.</p>
 

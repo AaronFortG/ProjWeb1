@@ -4,12 +4,15 @@ import MySecondComponent from "@/components/InputComponent.vue";
 </script>
 
 <template>
-  <div class="login_and_signUp-container ">
+  <div class="login_and_signUp-container" style="margin-bottom: 5rem">
     <h1 class="title">Welcome to Dungeon Clash</h1>
 
     <div class="form_container">
       <h2 class="login_and_signUp">Sign Up</h2>
 
+      <button style="background-color: transparent">
+        <img src="../assets/images/userProfile.png" style="max-width: 7rem">
+      </button>
       <div class="login_and_signUp_form-group">
         <label for="email">Email:</label>
         <MySecondComponent placeHolder="example@gmail.com" type="text"/>

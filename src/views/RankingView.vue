@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" style="margin-bottom: 5rem">
     <h1 class="title">Ranking</h1>
     <ol id="ListPlayers">
       <li class="player-item">

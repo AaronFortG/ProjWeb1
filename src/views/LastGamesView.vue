@@ -7,14 +7,14 @@ import { RouterLink } from 'vue-router'
     <h1 class="title">Last games</h1>
     <div v-for="(game, index) in games" :key="index" class="game-container">
       <hr class="separator" />
-      <div class="info_player-1">
+      <div class="info_player">
         <p>Player1: {{ game.player1.name }}</p>
         <p>Victory / Loss: {{ game.player1.result }}</p>
         <p>Attacks: {{ game.player1.attacks }}</p>
       </div>
       <hr class="separator" />
 
-      <div class="info_player-2">
+      <div class="info_player">
         <p>Player2: {{ game.player2.name }}</p>
         <p>Victory / Loss: {{ game.player2.result }}</p>
         <p>Attacks: {{ game.player2.attacks }}</p>
@@ -22,7 +22,7 @@ import { RouterLink } from 'vue-router'
       <hr class="separator" />
     </div>
     <div class="separator"></div>
-    <router-link class="register-button" to="/stats">Back</router-link>
+    <router-link class="red_button register-button" to="/stats">Back</router-link>
   </div>
 </template>
 
@@ -85,22 +85,15 @@ p {
   width: 100%;
 }
 
-.register-button {
-  padding: 10px 20px;
-  background-color: #da4e39;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 20%;
-  margin: 0 auto;
-  display: block;
+.info_player p {
+  margin-bottom: 1rem;
 }
 
-.info_player-1,
-.info_player-2 {
+.info_player {
   background-color: #ffc;
-  padding: 25px;
+  padding: 1rem;
+  width: 50rem;
+  text-align: center;
   border-radius: 30px;
   color: #333333;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);

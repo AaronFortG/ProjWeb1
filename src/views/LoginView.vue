@@ -4,7 +4,7 @@ import MySecondComponent from "@/components/InputComponent.vue";
 </script>
 
 <template>
-  <div class="login_and_signUp-container ">
+  <div class="login_and_signUp-container" style="margin-bottom: 5rem">
     <h1 class="title">Welcome to Dungeon Clash</h1>
 
     <div class="form_container">

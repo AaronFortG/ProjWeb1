@@ -198,6 +198,7 @@ h2 {
 .container_shop {
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
 }
 
 .content {
