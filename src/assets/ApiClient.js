@@ -5,7 +5,7 @@ export class ApiClient {
   }
 
   // Generic request method for different HTTP methods
-  async request(url, method, data, token = null, delay = 1000) {
+  async request(url, method, data, token = null) {
     // Construct the full endpoint URL
     const endpoint = `${this.baseURL}/${url}`;
 
@@ -35,42 +35,49 @@ export class ApiClient {
       // Make the API request
       const response = await fetch(endpoint, options);
 
-      // Check if the response status is OK
+      // Check if the response status is OK (returned 200's family)
       if (!response.ok) {
         // If not OK, parse error response and throw an error
         const errorData = await response.json();
-        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorData.message}`);
+
+        // Get the 'error' nested property of the 'error' object shown when the status is not valid.
+        const errorMessage = errorData.error ? errorData.error.message : 'Unknown error';
+
+        // Show the error to the receiver.
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
       }
 
-      console.log('Response:', response); // Log the entire response
-
-      // Wait for the specified delay before resolving the promise
-      await new Promise(resolve => setTimeout(resolve, delay));
-
       // Parse and return the JSON response
-      return response.json();
+      const text = await response.text();
+
+      // Check if the answer has text to JSONIFY it or just return an empty object.
+      if (text.length === 0) {
+        return {};  // Return empty object or status text
+      } else {
+        return JSON.parse(text);
+      }
     } catch (error) {
-      // Handle errors and log them
+      // Handle local errors (bad request = family not 200) and network issues (fetch rejected) and log them
       console.error('Error during the request:', error);
       throw error; // Rethrow the error to be caught by the caller
     }
   }
 
   // Convenience methods for specific HTTP methods
-  async get(url, token = null, delay = 1000) {
-    return this.request(url, 'GET', null, token, delay);
+  async get(url, token = null) {
+    return this.request(url, 'GET', null, token);
   }
 
-  async post(url, data, token = null, delay = 1000) {
-    return this.request(url, 'POST', data, token, delay);
+  async post(url, data, token = null) {
+    return this.request(url, 'POST', data, token);
   }
 
-  async put(url, data, token = null, delay = 1000) {
-    return this.request(url, 'PUT', data, token, delay);
+  async put(url, data, token = null) {
+    return this.request(url, 'PUT', data, token);
   }
 
-  async delete(url, token = null, delay = 1000) {
-    return this.request(url, 'DELETE', null, token, delay);
+  async delete(url, token = null) {
+    return this.request(url, 'DELETE', null, token);
   }
 }
 

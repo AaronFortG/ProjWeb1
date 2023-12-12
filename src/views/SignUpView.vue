@@ -11,11 +11,11 @@ import MySecondComponent from "@/components/InputComponent.vue";
       <h2 class="login_and_signUp">Sign Up</h2>
 
       <button style="background-color: transparent">
-        <img src="../assets/images/userProfile.png" style="max-width: 7rem">
+        <img src="../assets/images/userProfile.png" style="max-width: 7rem" alt="User profile image.">
       </button>
       <div class="login_and_signUp_form-group">
         <label for="email">Email:</label>
-        <MySecondComponent placeHolder="example@gmail.com" type="text"/>
+        <MySecondComponent v-on:data="getValueEmail" placeHolder="example@gmail.com" type="text"/>
       </div>
 
       <div class="login_and_signUp_form-group">
@@ -61,27 +61,23 @@ export default {
     getValueConfirmPassword(event) {
       this.confirmPassword = event;
     },
+    getValueEmail(event) {
+      this.email = event;
+    },
     async postData() {
+      console.log('Entering postData');
       const endpoint = 'players';
       const data = {
-        player_ID: 'srfoxtest6',
-        password: 'srfoxtest6',
-        img: 'srfoxtest6',
+        player_ID: this.email,
+        password: this.password,
+        img: 'srfoxtest30', // TODO: Get the image from the user and post it online to get its URL.
       };
 
       try {
         const api = new ApiClient();
         const response = await api.post(endpoint, data);
 
-        if (response.status === 201) {
-          console.log('Successfully created. Status code:', response.status);
-          // Redirect to the home page or perform other actions on success
-        } else if (response.status === 400) {
-          const errorData = await response.json();
-          console.error('Error:', errorData.error);
-        } else {
-          console.error('Unexpected status code:', response.status);
-        }
+        console.log('Successfully created. Status code:', response.status);
       } catch (error) {
         console.error('Error during the request:', error);
       }
