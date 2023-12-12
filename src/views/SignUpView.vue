@@ -44,62 +44,50 @@ import MySecondComponent from "@/components/InputComponent.vue";
 </template>
 
 <script>
+import { ApiClient } from '@/assets/ApiClient'; // Adjust the path accordingly
+
 export default {
-  components: { RouterLink },
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
   data() {
     return {
       email: '',
       password: '',
       confirmPassword: ''
-    }
+    };
   },
   methods: {
-    // get payload in parameter
     getValuePassword(event) {
       this.password = event;
     },
     getValueConfirmPassword(event) {
       this.confirmPassword = event;
     },
-    postData() {
-      const url = "https://balandrau.salle.url.edu/i3/players";
+    async postData() {
+      const endpoint = 'players';
       const data = {
-        player_ID: "srfoxtest",
-        password: "srfoxtest",
-        img: "srfoxtest"
+        player_ID: 'srfoxtest6',
+        password: 'srfoxtest6',
+        img: 'srfoxtest6',
       };
 
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then(response => {
-          if (response.status === 201) {
-            console.log('Successfully created. Status code:', response.status);
-            // Redirect to the home page or perform other actions on success
-          } else if (response.status === 400) {
-            return response.json(); // Parse the response body as JSON
-          } else {
-            console.error('Unexpected status code:', response.status);
-          }
-        })
-        .then(errorData => {
-          if (errorData) {
-            console.error('Error:', errorData.error);
-          }
-        })
-        .catch(error => {
-          console.error('Error during the request:', error);
-        });
-    }
-  }
-}
+      try {
+        const api = new ApiClient();
+        const response = await api.post(endpoint, data);
+
+        if (response.status === 201) {
+          console.log('Successfully created. Status code:', response.status);
+          // Redirect to the home page or perform other actions on success
+        } else if (response.status === 400) {
+          const errorData = await response.json();
+          console.error('Error:', errorData.error);
+        } else {
+          console.error('Unexpected status code:', response.status);
+        }
+      } catch (error) {
+        console.error('Error during the request:', error);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>

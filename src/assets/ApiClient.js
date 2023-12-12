@@ -1,13 +1,13 @@
-class ApiClient {
+export class ApiClient {
   // Constructor to set the base URL of the API (without endpoints)
   constructor() {
-    this.baseURL = 'http://balandrau.salle.url.edu';
+    this.baseURL = 'https://balandrau.salle.url.edu/i3';
   }
 
   // Generic request method for different HTTP methods
   async request(url, method, data, token = null, delay = 1000) {
     // Construct the full endpoint URL
-    const endpoint = '${this.baseURL}/${url}';
+    const endpoint = `${this.baseURL}/${url}`;
 
     // Set default headers
     const headers = {
@@ -16,7 +16,7 @@ class ApiClient {
 
     // Include Bearer token in headers if provided
     if (token != null) {
-      headers['Bearer'] = '${token}';
+      headers['Bearer'] = token;
     }
 
     // Construct options object for the Fetch API
@@ -27,6 +27,7 @@ class ApiClient {
 
     // Include request body if provided
     if (data != null) {
+      console.log('Body: ', data);
       options.body = JSON.stringify(data);
     }
 
@@ -41,6 +42,8 @@ class ApiClient {
         throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorData.message}`);
       }
 
+      console.log('Response:', response); // Log the entire response
+
       // Wait for the specified delay before resolving the promise
       await new Promise(resolve => setTimeout(resolve, delay));
 
@@ -49,7 +52,7 @@ class ApiClient {
     } catch (error) {
       // Handle errors and log them
       console.error('Error during the request:', error);
-      throw error;
+      throw error; // Rethrow the error to be caught by the caller
     }
   }
 
