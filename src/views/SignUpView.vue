@@ -29,11 +29,17 @@ import MySecondComponent from "@/components/InputComponent.vue";
       </div>
 
       <div class="buttons_login_and_signUp">
-        <router-link id="login-button" type="submit" to="" class="router-link" @click="postData()">Login</router-link>
-        <router-link id="register-button" to="/player-info" class="router-link">Create account</router-link>
+        <router-link id="login-button" type="submit" to="/" class="router-link">Login</router-link>
+        <router-link id="register-button" :to="isValidSignUp() ? '/player-info' : '/sign-up'" class="router-link" @click="postData()">
+          Create account
+        </router-link>
+
       </div>
 
-      <p v-if="password !== confirmPassword" class="error-message">Passwords do not match.</p>
+      <p v-if="password !== confirmPassword || !isValidEmail()" class="error-message">
+        {{ isValidEmail() ? 'Passwords do not match.' : 'Invalid email address.' }}
+      </p>
+
     </div>
   </div>
 
@@ -55,6 +61,9 @@ export default {
     };
   },
   methods: {
+    isValidSignUp() {
+      return this.isValidEmail() && this.isPasswordValid();
+    },
     getValuePassword(event) {
       this.password = event;
     },
@@ -67,6 +76,7 @@ export default {
     async postData() {
       console.log('Entering postData');
       const endpoint = 'players';
+
       const data = {
         player_ID: this.email,
         password: this.password,
@@ -81,6 +91,32 @@ export default {
       } catch (error) {
         console.error('Error during the request:', error);
       }
+    },
+
+    async handleSignUp() {
+
+      if (!this.isValidEmail()) {
+        console.error('Correo electrónico no válido');
+        return;
+      }
+
+      if (!this.isPasswordValid()) {
+        console.error('Las contraseñas no coinciden');
+        return;
+      }
+      // Realiza el POST
+      const postDataSuccessful = await this.postData();
+
+      // Verifica si la solicitud POST fue exitosa
+      if (!postDataSuccessful) {
+        console.error('Error al crear la cuenta'); // Otra lógica de manejo de errores si es necesario
+      }
+    },
+    isValidEmail() {
+      return this.email.includes('@') && this.email.includes('.com');
+    },
+    isPasswordValid() {
+      return this.password === this.confirmPassword;
     },
   },
 };
