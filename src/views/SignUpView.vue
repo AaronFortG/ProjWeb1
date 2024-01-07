@@ -29,7 +29,7 @@ import MySecondComponent from "@/components/InputComponent.vue";
       </div>
 
       <div class="buttons_login_and_signUp">
-        <router-link id="login-button" type="submit" to="/" class="router-link" @click="postData()">Login</router-link>
+        <router-link id="login-button" type="submit" to="" class="router-link" @click="postData()">Login</router-link>
         <router-link id="register-button" to="/player-info" class="router-link">Create account</router-link>
       </div>
 
