@@ -1,122 +1,50 @@
 <script setup>
-  import { RouterLink } from 'vue-router'
-</script>
+import { ref, onMounted } from 'vue';
+import { ApiClient } from 'https://balandrau.salle.url.edu/i3';
 
-<script>
-  export default {
-    mounted() {
-      this.$root.$data.showVerticalMenu = true;
-    },
+const players = ref([]);
+
+const api = new ApiClient();
+
+onMounted(async () => {
+  try {
+    const playersEndpoint = 'players';
+    const playersResponse = await api.get(playersEndpoint);
+
+    // Almacena la lista de jugadores en la variable players
+    players.value = playersResponse.data;
+
+    // obtenemos las partidas ganadas para cada jugador
+    await Promise.all(players.value.map(async (player) => {
+      const statsResponse = await api.get(`players/${player.player_ID}/statistics`);
+      player.games_won = statsResponse.data.games_won;
+    }));
+
+    // ordenamos de manera ascendente
+    players.value.sort((a, b) => a.games_won - b.games_won);
+
+    console.log('Players:', players.value);
+  } catch (error) {
+    console.error('Error fetching players:', error);
   }
+});
 </script>
 
 <template>
   <div class="container" style="margin-bottom: 5rem">
     <h1 class="title">Ranking</h1>
     <ol id="ListPlayers">
-      <li class="player-item">
-        <router-link to="/stats">
+      <li class="player-item" v-for="(player, index) in players" :key="index">
+        <router-link :to="'/stats'">
           <div class="player-info">
-            <div class="player-rank">1</div>
-            <div class="player-name">Nombre 0</div>
+            <div class="player-rank">{{ index + 1 }}</div>
+            <div class="player-name">{{ player.player_ID }}</div>
+            <div class="games-won">Games Won: {{ player.games_won }}</div>
           </div>
         </router-link>
         <div class="player-bar"></div>
-        <div class="recent-results">
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-        </div>
-      </li>
-
-      <li class="player-item">
-        <router-link to="/stats">
-          <div class="player-info">
-            <div class="player-rank">2</div>
-            <div class="player-name">Nombre 1</div>
-          </div>
-        </router-link>
-        <div class="player-bar"></div>
-        <div class="recent-results">
-          <div class="result-box victory"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box victory"></div>
-        </div>
-      </li>
-
-      <li class="player-item">
-        <router-link to="/stats">
-          <div class="player-info">
-            <div class="player-rank">3</div>
-            <div class="player-name">Nombre 2</div>
-          </div>
-        </router-link>
-        <div class="player-bar"></div>
-        <div class="recent-results">
-          <div class="result-box victory"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box victory"></div>
-        </div>
-      </li>
-
-      <li class="player-item">
-        <router-link to="/stats">
-          <div class="player-info">
-            <div class="player-rank">4</div>
-            <div class="player-name">Nombre 3</div>
-          </div>
-        </router-link>
-        <div class="player-bar"></div>
-        <div class="recent-results">
-          <div class="result-box victory"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box victory"></div>
-        </div>
-      </li>
-
-      <li class="player-item">
-        <router-link to="/stats">
-          <div class="player-info">
-            <div class="player-rank">5</div>
-            <div class="player-name">Nombre 4</div>
-          </div>
-        </router-link>
-        <div class="player-bar"></div>
-        <div class="recent-results">
-          <div class="result-box victory"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box victory"></div>
-        </div>
-      </li>
-
-      <li class="player-item">
-        <router-link to="/stats">
-          <div class="player-info">
-            <div class="player-rank">6</div>
-            <div class="player-name">Nombre 5</div>
-          </div>
-        </router-link>
-        <div class="player-bar"></div>
-        <div class="recent-results">
-          <div class="result-box defeat"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box victory"></div>
-          <div class="result-box defeat"></div>
-          <div class="result-box victory"></div>
-        </div>
       </li>
     </ol>
-
   </div>
 </template>
 
