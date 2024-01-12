@@ -1,6 +1,7 @@
 <script setup>
+
 import { ref, onMounted } from 'vue';
-import { ApiClient } from 'https://balandrau.salle.url.edu/i3';
+import { ApiClient } from '@/assets/ApiClient'; // Ajusta la ruta según la estructura de tu proyecto
 
 const players = ref([]);
 
@@ -8,15 +9,17 @@ const api = new ApiClient();
 
 onMounted(async () => {
   try {
-    const playersEndpoint = 'players';
-    const playersResponse = await api.get(playersEndpoint);
+
+    // falla aqui con la autenticacion
+    const playersEndpoint = '/players';
+    const playersResponse = await api.get(playersEndpoint, "6d207e02198a847aa98d0a2a901485a5");
 
     // Almacena la lista de jugadores en la variable players
     players.value = playersResponse.data;
-
+    console.log("entrea 2");
     // obtenemos las partidas ganadas para cada jugador
     await Promise.all(players.value.map(async (player) => {
-      const statsResponse = await api.get(`players/${player.player_ID}/statistics`);
+      const statsResponse = await api.get(`players/${player.player_ID}/statistics`, "6d207e02198a847aa98d0a2a901485a5");
       player.games_won = statsResponse.data.games_won;
     }));
 

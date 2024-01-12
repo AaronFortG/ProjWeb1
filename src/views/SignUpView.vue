@@ -80,7 +80,7 @@ export default {
       const data = {
         player_ID: this.email,
         password: this.password,
-        img: 'srfoxtest30', // TODO: Get the image from the user and post it online to get its URL.
+        img: 'srfo', // TODO: Get the image from the user and post it online to get its URL.
       };
 
       try {
