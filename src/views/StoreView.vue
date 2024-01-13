@@ -15,7 +15,7 @@ const showPopUp = ref(false);
 
 
 onMounted(async () => {
-  // Accede a la propiedad $root para establecer showVerticalMenu en false
+  // Accede a la propiedad $root para establecer showVerticalMenu en true
   proxy.$root.$data.showVerticalMenu = true;
 
   try {
@@ -39,7 +39,8 @@ onMounted(async () => {
   }
 });
 
-const showPopUpMethod = () => {
+const showPopUpMethod = (attack) => {
+  selectedAttack.value = attack;
   showPopUp.value = true;
 };
 
@@ -80,7 +81,7 @@ const getUserCoins = async () => {
       player.value = playerResponse;
       console.log('Player:', player.value);
       console.log('Coins: ', player.value.coins);
-      const coins = player.value.coins
+      const coins = player.value.coins;
       return coins;
     } else {
       console.error('Invalid response format. Missing "data" property.');
