@@ -3,7 +3,7 @@
   import HorizontalMenuComponent from "@/components/HorizontalMenuComponent.vue";
   import { ref, onMounted } from 'vue';
 
-  // Definir referencias para el token y el nombre
+
   const token = ref('');
 
 
