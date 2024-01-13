@@ -12,33 +12,41 @@ const selectedAttack = ref(null);
 
 const api = new ApiClient();
 
+// Show the vertical menu.
+const updateShowVerticalMenu = inject('updateShowVerticalMenu');
+updateShowVerticalMenu(true);
+
+// Get the user's credentials from the Singletone.
 const token = inject('token');
 const playerID = inject('playerID');
 
-console.log("Token: ", token, "Player ID", playerID);
-
+// Show the popup to equip an attack.
 const showPopUpEquipAttack = (attackID) => {
   console.log("Selected attack: ", attackID);
   selectedAttack.value = attackID;
   showPopUpEquip.value = true;
 };
 
+// Show the popup to unequip and attack.
 const showPopUpUnequipAttack = (attackID) => {
   console.log("Selected attack: ", attackID);
   selectedAttack.value = attackID;
   showPopUpUnequip.value = true;
 };
 
+// Hide any popup visible.
 const hidePopUp = () => {
   showPopUpEquip.value = false;
   deleteAccPopUp.value = false;
   showPopUpUnequip.value = false;
 };
 
-const showDeletePopUp = () => {
+// Show the delete account's popup
+const showDeleteAccountPopUp = () => {
   deleteAccPopUp.value = true;
 };
 
+// Function to delete the player's account
 const confirmDeleteAccount = (playerID) => {
   api.delete(`players/`, token)
     .then(() => {
@@ -54,11 +62,8 @@ const confirmDeleteAccount = (playerID) => {
   this.$router.push('/');
 };
 
+// Function to equip an attack.
 const equipAttack = (attackID) => {
-  //const token = inject('token');
-  //console.log("Token: ", token);
-
-  console.log(`Token:${token} - Attack:${attackID}`);
   api.post(`players/attacks/${attackID}`, null, token)
     .then(() => {
       // Handle success
@@ -74,10 +79,8 @@ const equipAttack = (attackID) => {
   hidePopUp();
 };
 
+// Function to unequip an attack.
 const unequipAttack = (attackID) => {
-  //const token = inject('token');
-
-  console.log(`Token:${token} - Attack:${attackID}`);
   api.delete(`players/attacks/${attackID}`, token)
     .then(() => {
       // Handle success
@@ -91,6 +94,7 @@ const unequipAttack = (attackID) => {
   hidePopUp();
 };
 
+// Function to hide the popups when the users cancels the action.
 const handleNoClick = () => {
   hidePopUp();
 };
@@ -100,6 +104,7 @@ const playerAttacks = ref([]);
 const equippedAttacks = ref([]);
 const notEquippedAttacks = ref([]);
 
+// Filter all the attacks by "equipped" value.
 const filterAttacks = (attacksList) => {
   // Filter all the attacks
   for (const attack of attacksList) {
@@ -113,6 +118,7 @@ const filterAttacks = (attacksList) => {
   }
 };
 
+// Get the "x" and "y" position from an attack (given by the API).
 const getAttackPosition = (positionString) => {
   const positionArray = positionString.slice(1, -1).split(',');
   const x = parseInt(positionArray[0]);
@@ -120,6 +126,7 @@ const getAttackPosition = (positionString) => {
   return { x, y };
 };
 
+// Check if a URL is valid to show the image of the player.
 const isValidURL = (url) => {
   try {
     new URL(url);
@@ -154,7 +161,7 @@ onMounted(async () => {
 
 <template>
   <header class="header-buttons-container">
-    <router-link to="" @click="showDeletePopUp" class="main-button" id="delete-account"
+    <router-link to="" @click="showDeleteAccountPopUp" class="main-button" id="delete-account"
       >Delete account</router-link
     >
   </header>

@@ -6,6 +6,13 @@ const playerToken = ref('');
 const playerID = ref('');
 const showVerticalMenu = ref(false);
 
+// Function to enable the visibility of the vertical menu in another view.
+const updateShowVerticalMenu = (value) => {
+  showVerticalMenu.value = value;
+};
+
+provide('updateShowVerticalMenu', updateShowVerticalMenu);
+
 // Function to get data from localStorage
 const getLocalStorageData = () => {
   playerToken.value = localStorage.getItem('token') || '';
