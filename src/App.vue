@@ -1,19 +1,31 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, provide } from 'vue';
 import VerticalMenuComponent from "@/components/VerticalMenuComponent.vue";
 
-const token = ref('');
+const playerToken = ref('');
+const playerID = ref('');
 const showVerticalMenu = ref(false);
 
 // Function to get data from localStorage
 const getLocalStorageData = () => {
-  token.value = localStorage.getItem('token') || '';
+  playerToken.value = localStorage.getItem('token') || '';
 };
 
-// Call the function when the component is mounted
+// Allow provide() to get the updated value using onBeforeMounted().
 onMounted(() => {
   getLocalStorageData();
+  updateToken("b9936a38-c0b4-4e13-ab82-630724b68a59", "aaronElMejor");
+
+  // Provide the variable to the components
+  provide('token', playerToken.value);
+  provide('playerID', playerID.value);
 });
+
+// Function to update the global variable
+const updateToken = (newToken, newPlayerID) => {
+  playerToken.value = newToken;
+  playerID.value = newPlayerID;
+};
 </script>
 
 <script>
@@ -29,7 +41,7 @@ export default {
 <template>
   <div>
     <VerticalMenuComponent v-if="showVerticalMenu" />
-    <RouterView />
+    <RouterView :updateToken="updateToken" />
     <HorizontalMenuComponent v-if="showVerticalMenu" />
   </div>
 </template>

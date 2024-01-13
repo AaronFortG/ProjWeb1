@@ -1,46 +1,61 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { onBeforeMount, ref, inject } from 'vue'
+import { RouterLink } from 'vue-router';
+import { ApiClient } from '../assets/ApiClient';
 import AttackComponent from "@/components/AttackComponent.vue";
-import PlayerInformationComponent from '@/components/PlayerInformationComponent.vue'
-</script>
+import PlayerInformationComponent from '@/components/PlayerInformationComponent.vue';
 
-<script>
-export default {
-  setup() {},
-  mounted() {
-    this.$root.$data.showVerticalMenu = true;
-  },
-  data() {
-    return {
-      showPopUp: false,
-      deleteAccPopUp: false
-    }
-  },
-  methods: {
-    showPopUpMethod() {
-      this.showPopUp = true
-    },
-    hidePopUp() {
-      this.showPopUp = false
-      this.deleteAccPopUp = false
-    },
-    showDeletePopUp() {
-      this.deleteAccPopUp = true
-    },
-    confirmDelete() {
-      alert('Account successfully deleted!')
-      this.$router.push('/')
-    },
-    handleYesClick() {
-      alert('Attack changed')
-      this.hidePopUp()
-    },
-    handleNoClick() {
-      this.hidePopUp()
-    }
+const showPopUp = ref(false);
+const deleteAccPopUp = ref(false);
+
+const showPopUpMethod = () => {
+  showPopUp.value = true;
+};
+
+const hidePopUp = () => {
+  showPopUp.value = false;
+  deleteAccPopUp.value = false;
+};
+
+const showDeletePopUp = () => {
+  deleteAccPopUp.value = true;
+};
+
+const confirmDelete = () => {
+  alert('Account successfully deleted!');
+  this.$router.push('/');
+};
+
+const handleYesClick = () => {
+  alert('Attack changed');
+  hidePopUp();
+};
+
+const handleNoClick = () => {
+  hidePopUp();
+};
+
+const playerInfo = ref(null);
+const playerAttacks = ref([]);
+
+// Allow inject() to get the updated value using onBeforeMounted().
+onBeforeMount(async () => {
+  try {
+    const api = new ApiClient();
+    const token = inject('token');
+    const playerID = inject('playerID');
+    console.log("Token: ", token, "Player ID", playerID)
+    // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
+    const response = await api.get(`/players/${playerID}`, token);
+    playerInfo.value = response;
+
+    const response2 = await api.get(`/players/attacks`, token);
+    playerAttacks.value = response2;
+    console.log(response2);
+  } catch (error) {
+    console.error('Error fetching player information:', error);
   }
-}
-
+});
 </script>
 
 <template>
@@ -62,7 +77,7 @@ export default {
         />
       </section>
 
-      <PlayerInformationComponent name="SrFox3999" level="2" xp="369" coins="199"></PlayerInformationComponent>
+      <PlayerInformationComponent v-bind:name=playerInfo.player_ID v-bind:level=playerInfo.level v-bind:xp=playerInfo.xp v-bind:coins=playerInfo.coins></PlayerInformationComponent>
     </section>
   </section>
 
@@ -78,9 +93,9 @@ export default {
 <!--    <h2>(Click to change)</h2>-->
 
     <div id="equipped-attacks">
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
+      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20" v-on:click="showPopUpMethod"></AttackComponent>
+      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20" v-on:click="showPopUpMethod"></AttackComponent>
+      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20" v-on:click="showPopUpMethod"></AttackComponent>
     </div>
   </section>
 
