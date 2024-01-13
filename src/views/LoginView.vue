@@ -12,18 +12,18 @@ import MySecondComponent from "@/components/InputComponent.vue";
 
       <div class="login_and_signUp_form-group ">
         <label for="email">Email:</label>
-        <MySecondComponent placeHolder="example@gmail.com" type="text"/>
+        <MySecondComponent v-on:data="getPlayer" placeHolder="example@gmail.com" type="text"/>
       </div>
+
+
 
       <div class="login_and_signUp_form-group">
         <label for="password">Password:</label>
-        <MySecondComponent placeHolder="password" type="password"/>
+        <MySecondComponent v-on:data="getPassword" placeHolder="password" type="password"/>
       </div>
 
       <div class="buttons_login_and_signUp">
-        <router-link id="login-button" type="submit" to="/player-info" class="router-link">
-          Login
-        </router-link>
+        <router-link id="login-button" type="submit" to="/player-info" class="router-link">Login</router-link>
 
         <router-link to="/sign-up" id="register-button" class="router-link">Sign Up</router-link>
       </div>
@@ -36,6 +36,8 @@ import MySecondComponent from "@/components/InputComponent.vue";
 </template>
 
 <script>
+import {ApiClient} from "@/assets/ApiClient";
+
 export default {
   data() {
     return {
@@ -44,9 +46,39 @@ export default {
     }
   },
   methods: {
-    /**
-     * Válidamos el email del usuario que almenos contenga un @
-     */
+    getPlayer(event){
+      this.player = event;
+    },
+    getPassword(event){
+      this.password = event;
+    },
+
+    async postData() {
+      console.log('Entering postData');
+      const endpoint = 'players';
+
+      try {
+        const api = new ApiClient();
+        const response = await api.get(endpoint, null);
+
+        console.log('Successfully obtained player data. Status code:', response.status);
+
+        // Realizar la comparación con el player_ID introducido
+        const myPlayerID = this.player; // Reemplaza con tu variable
+        const matchingPlayers = response.data.filter(player => player.player_ID === myPlayerID);
+
+        if (matchingPlayers.length > 0) {
+          console.log('El player_ID introducido coincide con uno de los jugadores obtenidos:', matchingPlayers[0]);
+        } else {
+          console.log('El player_ID introducido no coincide con ninguno de los jugadores obtenidos.');
+        }
+
+      } catch (error) {
+        console.error('Error during the request:', error);
+      }
+    },
+
+    // ... Otros métodos ...
   },
   mounted() {
     this.$root.$data.showVerticalMenu = false;

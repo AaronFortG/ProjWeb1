@@ -1,29 +1,37 @@
 <script setup>
-  import { RouterView } from 'vue-router'
-  import HorizontalMenuComponent from "@/components/HorizontalMenuComponent.vue";
-  // Patrons Vue -> observer (quan canvia una cosa de l'element observat, els observadors reven el canvi) + singleton (punt únic de consulta de dades de l'app).
-  // Framework reactiu = tots els elements tenen la base de dades dins de la vista; quan es modifica, la vista canvia.
+import { ref, onMounted } from 'vue';
+import VerticalMenuComponent from "@/components/VerticalMenuComponent.vue";
+
+const token = ref('');
+const showVerticalMenu = ref(false);
+
+// Function to get data from localStorage
+const getLocalStorageData = () => {
+  token.value = localStorage.getItem('token') || '';
+};
+
+// Call the function when the component is mounted
+onMounted(() => {
+  getLocalStorageData();
+});
 </script>
 
 <script>
-  import VerticalMenuComponent from "@/components/VerticalMenuComponent.vue";
+import HorizontalMenuComponent from "@/components/HorizontalMenuComponent.vue";
 
-  export default {
-    data() {
-      return {
-        showVerticalMenu: false
-      };
-    },
-    components: {
-      VerticalMenuComponent,
-    },
-  };
+export default {
+  components: {
+    HorizontalMenuComponent,
+  },
+};
 </script>
 
 <template>
-  <vertical-menu-component v-if="showVerticalMenu"/>
-  <RouterView/>
-  <horizontal-menu-component v-if="showVerticalMenu"/>
+  <div>
+    <VerticalMenuComponent v-if="showVerticalMenu" />
+    <RouterView />
+    <HorizontalMenuComponent v-if="showVerticalMenu" />
+  </div>
 </template>
 
 <style scoped></style>

@@ -2,13 +2,7 @@
 import { RouterLink } from 'vue-router'
 </script>
 
-<script>
-export default {
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
-}
-</script>
+
 
 <template>
   <div class="container">
@@ -42,10 +36,11 @@ export default {
           </div>
         </article>
 
+
+
         <article>
           <p class="win-rate">Winrate 50%</p>
           <p class="total-games">Total Games: 10 games</p>
-          <p class="favorite champ">Favorite Champion LeBlanc</p>
         </article>
       </section>
 
@@ -62,7 +57,54 @@ export default {
     </div>
   </div>
 </template>
+<script>
+import { ApiClient } from '@/assets/ApiClient'; // Adjust the path accordingly
 
+export default {
+  data() {
+    return {
+      gamesPlayed: '',
+      gamesWon: '',
+    };
+  },
+
+  methods: {
+    async getInfoPlayer() {
+      const endpoint = 'players/{id}/statistics';
+
+      const token = '';
+      const userName = '';
+      console.log(token);
+      console.log(userName);
+
+
+      try {
+        const api = new ApiClient();
+
+        const response = await api.get(endpoint);
+
+        let gamesPlayed = response.data[0].gamesPlayed;
+        let gamesWon = response.data[0].gamesWon;
+        let gamesLost = gamesPlayed - gamesWon;
+
+        let winRatio = (gamesWon / gamesPlayed) * 100;
+        let loseRatio = (gamesLost / gamesPlayed) * 100;
+
+        console.log('Win Ratio:', winRatio.toFixed(2) + '%');
+        console.log('Lose Ratio:', loseRatio.toFixed(2) + '%');
+
+        console.log('Successfully created. Status code:', response.status);
+      } catch (error) {
+        console.error('Error during the request:', error);
+      }
+    },
+
+
+
+
+  },
+};
+</script>
 <style scoped>
 .container {
   text-align: center;
