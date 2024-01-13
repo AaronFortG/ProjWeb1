@@ -1,37 +1,3 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-</script>
-
-<script>
-export default {
-  setup() {},
-  mounted() {
-    this.$root.$data.showVerticalMenu = true;
-  },
-  data() {
-    return {
-      showPopUp: false
-    }
-  },
-  methods: {
-    showPopUpMethod() {
-      this.showPopUp = true
-    },
-    hidePopUp() {
-      this.showPopUp = false
-    },
-    handleYesClick() {
-      alert('Yes')
-      this.hidePopUp()
-    },
-    handleNoClick() {
-      alert('No')
-      this.hidePopUp()
-    }
-  }
-}
-</script>
-
 <template>
   <div class="container_shop">
     <h1 class="title">Shop</h1>
@@ -46,88 +12,27 @@ export default {
         <RouterLink to="/bag">
           <img src="../assets/images/bag.png" alt="bag" style="max-width: 5.5rem" />
         </RouterLink>
-
       </div>
 
       <h2>Attacks</h2>
 
       <div class="shop_container">
-        <article class="item_container">
-          <h3>Attack 1</h3>
+        <article v-for="(item, index) in items" :key="index" class="item_container">
+          <h3>{{ item.attack_ID }}</h3>
 
           <div class="rows_container">
             <p>Level</p>
-            <p id="level-1">level</p>
+            <p>{{ item.level_needed }}</p>
           </div>
 
           <div class="rows_container">
             <p>Power</p>
-            <p id="power-1">power</p>
+            <p>{{ item.power }}</p>
           </div>
 
           <div class="rows_container">
             <p>Price</p>
-            <p id="price-1">price</p>
-          </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
-        </article>
-
-        <article class="item_container">
-          <h3>Attack 2</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p id="level-2">level</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p id="power-2">power</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p id="price-2">price</p>
-          </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
-        </article>
-
-        <article class="item_container">
-          <h3>Attack 3</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p id="level-3">level</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p id="power-3">power</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p id="price-3">price</p>
-          </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
-        </article>
-
-        <article class="item_container">
-          <h3>Attack 4</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p id="level-4">level</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p id="power-4">power</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p id="price-4">price</p>
+            <p>{{ item.price }}</p>
           </div>
           <button class="red_button" @click="showPopUpMethod">Buy</button>
         </article>
@@ -141,6 +46,56 @@ export default {
     <p @click="handleNoClick">No</p>
   </div>
 </template>
+
+<script setup>
+import { RouterLink } from 'vue-router'
+import { ref, onMounted } from 'vue';
+import { ApiClient } from '@/assets/ApiClient';
+
+const items = ref([]);
+const api = new ApiClient();
+const showPopUp = ref(false);
+
+onMounted(async () => {
+  try {
+    const itemsEndpoint = '/shop/attacks';
+    const itemsResponse = await api.get(itemsEndpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
+
+    console.log('Items Response:', itemsResponse);
+
+    if (itemsResponse) {
+      items.value = Array.isArray(itemsResponse) ? itemsResponse : [];
+      console.log('Items:', items.value);
+    } else {
+      console.error('Invalid response format. Missing "data" property.');
+    }
+  } catch (error) {
+    console.error('Error fetching items:', error);
+  }
+});
+
+
+
+
+const showPopUpMethod = () => {
+  showPopUp.value = true;
+};
+
+const handleYesClick = () => {
+  alert('Yes');
+  hidePopUp();
+};
+
+const handleNoClick = () => {
+  alert('No');
+  hidePopUp();
+};
+
+const hidePopUp = () => {
+  showPopUp.value = false;
+};
+
+</script>
 
 <style scoped>
 h2 {
