@@ -1,35 +1,110 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-</script>
+import { ref, onMounted, getCurrentInstance } from 'vue'
+import { ApiClient } from '@/assets/ApiClient';
 
-<script>
-export default {
-  setup() {},
-  mounted() {
-    this.$root.$data.showVerticalMenu = true;
-  },
-  data() {
-    return {
-      showPopUp: false
+const { proxy } = getCurrentInstance(); // Obtiene la instancia actual
+
+const items = ref([]);
+const player = ref([]);
+const selectedAttack = ref(null);
+const coins = ref(0);
+
+const api = new ApiClient();
+const showPopUp = ref(false);
+
+
+onMounted(async () => {
+  // Accede a la propiedad $root para establecer showVerticalMenu en true
+  proxy.$root.$data.showVerticalMenu = true;
+
+  try {
+    const itemsEndpoint = '/shop/attacks';
+    const itemsResponse = await api.get(itemsEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+
+    console.log('Items Response:', itemsResponse);
+
+    if (itemsResponse) {
+      items.value = Array.isArray(itemsResponse) ? itemsResponse : [];
+      console.log('Items:', items.value);
+
+      // Actualiza las monedas después de obtener la información del jugador
+      coins.value = await getUserCoins();
+
+    } else {
+      console.error('Invalid response format. Missing "data" property.');
     }
-  },
-  methods: {
-    showPopUpMethod() {
-      this.showPopUp = true
-    },
-    hidePopUp() {
-      this.showPopUp = false
-    },
-    handleYesClick() {
-      alert('Yes')
-      this.hidePopUp()
-    },
-    handleNoClick() {
-      alert('No')
-      this.hidePopUp()
-    }
+  } catch (error) {
+    console.error('Error fetching items:', error);
   }
-}
+});
+
+const showPopUpMethod = (attack) => {
+  selectedAttack.value = attack;
+  showPopUp.value = true;
+};
+
+
+const handleYesClick = async () => {
+  hidePopUp();
+
+  // Aquí debes verificar si el usuario tiene monedas suficientes para comprar el ataque
+  const attackToBuy = selectedAttack.value;
+
+  console.log("PRICE: " + attackToBuy.price);
+
+  const coins = await getUserCoins();
+  if (attackToBuy && attackToBuy.price <= coins) {
+    // Usuario tiene monedas suficientes, realiza la compra
+    await buyAttack(attackToBuy.attack_ID);
+  } else {
+    alert('Not enough coins to buy the attack!');
+  }
+};
+
+const handleNoClick = () => {
+  alert('No');
+  hidePopUp();
+};
+
+const hidePopUp = () => {
+  showPopUp.value = false;
+};
+
+const getUserCoins = async () => {
+  try {
+    let selectedPlayer = "laGemmaYebra";
+    const playerInfoEndpoint = `/players/${selectedPlayer}`;
+    const playerResponse = await api.get(playerInfoEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+
+    if (playerResponse) {
+      player.value = playerResponse;
+      console.log('Player:', player.value);
+      console.log('Coins: ', player.value.coins);
+      const coins = player.value.coins;
+      return coins;
+    } else {
+      console.error('Invalid response format. Missing "data" property.');
+    }
+  } catch (error) {
+    console.error('Error fetching player information:', error);
+    return 0;
+  }
+};
+
+
+const buyAttack = async (attackId) => {
+  try {
+    // Lógica para realizar la compra del ataque
+    const buyEndpoint = `/shop/attacks/${attackId}/buy`;
+    await api.post(buyEndpoint, "", "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    alert('Attack bought successfully!');
+    location.reload();
+  } catch (error) {
+    console.error('Error buying attack:', error);
+    alert('Failed to buy the attack. Please try again.');
+  }
+};
 </script>
 
 <template>
@@ -39,97 +114,36 @@ export default {
     <div style="margin: 0 2rem 2rem 2rem" class="content">
       <div class="left_row_container">
         <img src="../assets/images/coin.png" alt="coin" style="max-width: 2rem" />
-        <p id="coins">Coins</p>
+        <p id="coins">{{ coins }}</p>
       </div>
 
       <div class="rows_container" id="BagAndButton">
         <RouterLink to="/bag">
           <img src="../assets/images/bag.png" alt="bag" style="max-width: 5.5rem" />
         </RouterLink>
-
       </div>
 
       <h2>Attacks</h2>
 
       <div class="shop_container">
-        <article class="item_container">
-          <h3>Attack 1</h3>
+        <article v-for="(item, index) in items" :key="index" class="item_container">
+          <h3>{{ item.attack_ID }}</h3>
 
           <div class="rows_container">
             <p>Level</p>
-            <p id="level-1">level</p>
+            <p>{{ item.level_needed }}</p>
           </div>
 
           <div class="rows_container">
             <p>Power</p>
-            <p id="power-1">power</p>
+            <p>{{ item.power }}</p>
           </div>
 
           <div class="rows_container">
             <p>Price</p>
-            <p id="price-1">price</p>
+            <p>{{ item.price }}</p>
           </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
-        </article>
-
-        <article class="item_container">
-          <h3>Attack 2</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p id="level-2">level</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p id="power-2">power</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p id="price-2">price</p>
-          </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
-        </article>
-
-        <article class="item_container">
-          <h3>Attack 3</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p id="level-3">level</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p id="power-3">power</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p id="price-3">price</p>
-          </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
-        </article>
-
-        <article class="item_container">
-          <h3>Attack 4</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p id="level-4">level</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p id="power-4">power</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p id="price-4">price</p>
-          </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
+          <button class="red_button" @click="() => showPopUpMethod(item)">Buy</button>
         </article>
       </div>
     </div>
@@ -238,7 +252,7 @@ h2 {
     justify-content: center;
 
     width: 100%; /* Establece el ancho deseado */
-    height: 20rem; /* Establece la altura deseada */
+    height: 30rem; /* Establece la altura deseada */
     overflow: auto; /* Agrega barras de desplazamiento cuando sea necesario */
   }
 

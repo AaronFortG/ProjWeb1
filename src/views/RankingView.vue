@@ -1,48 +1,45 @@
 <script setup>
-
 import { ref, onMounted } from 'vue';
-import { ApiClient } from '@/assets/ApiClient'; // Ajusta la ruta según la estructura de tu proyecto
+import { ApiClient } from '@/assets/ApiClient';
 
 const players = ref([]);
-
 const api = new ApiClient();
 
 onMounted(async () => {
   try {
-
-    // falla aqui con la autenticacion
     const playersEndpoint = '/players';
-    const playersResponse = await api.get(playersEndpoint, "6d207e02198a847aa98d0a2a901485a5");
+    const playersResponse = await api.get(playersEndpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
 
-    // Almacena la lista de jugadores en la variable players
-    players.value = playersResponse.data;
-    console.log("entrea 2");
-    // obtenemos las partidas ganadas para cada jugador
-    await Promise.all(players.value.map(async (player) => {
-      const statsResponse = await api.get(`players/${player.player_ID}/statistics`, "6d207e02198a847aa98d0a2a901485a5");
-      player.games_won = statsResponse.data.games_won;
-    }));
+    console.log('Players Response:', playersResponse);
 
-    // ordenamos de manera ascendente
-    players.value.sort((a, b) => a.games_won - b.games_won);
 
-    console.log('Players:', players.value);
+      players.value = playersResponse;
+
+
+      //const prueba = await api.get(`players/armand/statistics`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+      //console.log("prueba de juegos ganados", prueba.games_won);
+      // Ordenamos de manera ascendente
+      players.value.sort((b, a) => a.coins - b.coins);
+
+      console.log('Players:', players.value);
+
   } catch (error) {
     console.error('Error fetching players:', error);
   }
 });
 </script>
 
+
 <template>
   <div class="container" style="margin-bottom: 5rem">
     <h1 class="title">Ranking</h1>
     <ol id="ListPlayers">
       <li class="player-item" v-for="(player, index) in players" :key="index">
-        <router-link :to="'/stats'">
+        <router-link :to="'/stats/' + player.player_ID">
           <div class="player-info">
             <div class="player-rank">{{ index + 1 }}</div>
             <div class="player-name">{{ player.player_ID }}</div>
-            <div class="games-won">Games Won: {{ player.games_won }}</div>
+            <div class="player-name">Level: {{ player.coins }}</div>
           </div>
         </router-link>
         <div class="player-bar"></div>
