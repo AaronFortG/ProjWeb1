@@ -4,6 +4,22 @@ export class ApiClient {
     this.baseURL = 'https://balandrau.salle.url.edu/i3';
   }
 
+  savePlayerToken(tokenValue) {
+    window.localStorage.setItem('token', tokenValue);
+  }
+
+  savePlayerID(playerIDValue) {
+    window.localStorage.setItem('playerID', playerIDValue);
+  }
+
+  getPlayerToken() {
+    return window.localStorage.getItem('token');
+  }
+
+  getPlayerID() {
+    return window.localStorage.getItem('playerID');
+  }
+
   // Generic request method for different HTTP methods
   async request(url, method, data, token = null) {
     // Construct the full endpoint URL
@@ -44,7 +60,7 @@ export class ApiClient {
         const errorMessage = errorData.error ? errorData.error.message : 'Unknown error';
 
         // Show the error to the receiver.
-        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+        throw new Error(`${errorMessage}`);
       }
 
       // Parse and return the JSON response

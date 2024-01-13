@@ -1,33 +1,93 @@
 <script setup>
-import { onBeforeMount, ref, inject } from 'vue'
-import { RouterLink } from 'vue-router';
-import { ApiClient } from '../assets/ApiClient';
-import AttackComponent from "@/components/AttackComponent.vue";
-import PlayerInformationComponent from '@/components/PlayerInformationComponent.vue';
+import { inject, onMounted, ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import { ApiClient } from '../assets/ApiClient'
+import AttackComponent from '@/components/AttackComponent.vue'
+import PlayerInformationComponent from '@/components/PlayerInformationComponent.vue'
 
-const showPopUp = ref(false);
+const showPopUpEquip = ref(false);
+const showPopUpUnequip = ref(false);
 const deleteAccPopUp = ref(false);
+const selectedAttack = ref(null);
 
-const showPopUpMethod = () => {
-  showPopUp.value = true;
+const api = new ApiClient();
+
+const token = inject('token');
+const playerID = inject('playerID');
+
+console.log("Token: ", token, "Player ID", playerID);
+
+const showPopUpEquipAttack = (attackID) => {
+  console.log("Selected attack: ", attackID);
+  selectedAttack.value = attackID;
+  showPopUpEquip.value = true;
+};
+
+const showPopUpUnequipAttack = (attackID) => {
+  console.log("Selected attack: ", attackID);
+  selectedAttack.value = attackID;
+  showPopUpUnequip.value = true;
 };
 
 const hidePopUp = () => {
-  showPopUp.value = false;
+  showPopUpEquip.value = false;
   deleteAccPopUp.value = false;
+  showPopUpUnequip.value = false;
 };
 
 const showDeletePopUp = () => {
   deleteAccPopUp.value = true;
 };
 
-const confirmDelete = () => {
-  alert('Account successfully deleted!');
+const confirmDeleteAccount = (playerID) => {
+  api.delete(`players/`, token)
+    .then(() => {
+      // Handle success
+      location.reload();
+      alert('Account successfully deleted!');
+      console.log(`Attack ${playerID} equipped successfully.`);
+    })
+    .catch((error) => {
+      // Handle error
+      alert(`Error equipping attack ${playerID}: ${error.message}`);
+    });
   this.$router.push('/');
 };
 
-const handleYesClick = () => {
-  alert('Attack changed');
+const equipAttack = (attackID) => {
+  //const token = inject('token');
+  //console.log("Token: ", token);
+
+  console.log(`Token:${token} - Attack:${attackID}`);
+  api.post(`players/attacks/${attackID}`, null, token)
+    .then(() => {
+      // Handle success
+      location.reload();
+      console.log(`Attack ${attackID} equipped successfully.`);
+    })
+    .catch((error) => {
+      // Handle error
+      console.log(error);
+      alert(`Error equipping attack ${attackID}: ${error.message}`);
+    });
+
+  hidePopUp();
+};
+
+const unequipAttack = (attackID) => {
+  //const token = inject('token');
+
+  console.log(`Token:${token} - Attack:${attackID}`);
+  api.delete(`players/attacks/${attackID}`, token)
+    .then(() => {
+      // Handle success
+      location.reload();
+      console.log(`Attack ${attackID} equipped successfully.`);
+    })
+    .catch((error) => {
+      // Handle error
+      alert(`Error equipping attack ${attackID}: ${error.message}`);
+    });
   hidePopUp();
 };
 
@@ -37,21 +97,55 @@ const handleNoClick = () => {
 
 const playerInfo = ref(null);
 const playerAttacks = ref([]);
+const equippedAttacks = ref([]);
+const notEquippedAttacks = ref([]);
+
+const filterAttacks = (attacksList) => {
+  // Filter all the attacks
+  for (const attack of attacksList) {
+    console.log(attack);
+    if (attack.equipped) {
+      equippedAttacks.value.push(attack);
+    }
+    else {
+      notEquippedAttacks.value.push(attack);
+    }
+  }
+};
+
+const getAttackPosition = (positionString) => {
+  const positionArray = positionString.slice(1, -1).split(',');
+  const x = parseInt(positionArray[0]);
+  const y = parseInt(positionArray[1]);
+  return { x, y };
+};
+
+const isValidURL = (url) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 
 // Allow inject() to get the updated value using onBeforeMounted().
-onBeforeMount(async () => {
+onMounted(async () => {
   try {
-    const api = new ApiClient();
-    const token = inject('token');
-    const playerID = inject('playerID');
-    console.log("Token: ", token, "Player ID", playerID)
-    // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
-    const response = await api.get(`/players/${playerID}`, token);
-    playerInfo.value = response;
+    //api.savePlayerID("aaronElMejor");
+    //api.savePlayerToken("b9936a38-c0b4-4e13-ab82-630724b68a59");
+    //const token = api.getPlayerToken();
+    //const playerID = api.getPlayerID();
+    //const token = inject('token');
+    //const playerID = inject('playerID')
 
-    const response2 = await api.get(`/players/attacks`, token);
-    playerAttacks.value = response2;
-    console.log(response2);
+    //console.log("Token: ", token, "Player ID", playerID);
+
+    // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
+    playerInfo.value = await api.get(`/players/${playerID}`, token);
+    playerAttacks.value = await api.get(`/players/attacks`, token);
+
+    filterAttacks(playerAttacks.value);
   } catch (error) {
     console.error('Error fetching player information:', error);
   }
@@ -71,13 +165,13 @@ onBeforeMount(async () => {
     <section id="player-info">
       <section id="player-info-image">
         <img
-            src="/src/assets/images/playerInfo_profilePicture.jpg"
-            alt="User profile image"
-            loading="lazy"
+          :src="isValidURL(playerInfo?.img) ? playerInfo?.img : '/src/assets/images/playerInfo_profilePicture.jpg'"
+          alt="User profile image"
+          loading="lazy"
         />
       </section>
 
-      <PlayerInformationComponent v-bind:name=playerInfo.player_ID v-bind:level=playerInfo.level v-bind:xp=playerInfo.xp v-bind:coins=playerInfo.coins></PlayerInformationComponent>
+      <PlayerInformationComponent v-bind:name=playerInfo?.player_ID v-bind:level=playerInfo?.level v-bind:xp=playerInfo?.xp v-bind:coins=playerInfo?.coins></PlayerInformationComponent>
     </section>
   </section>
 
@@ -89,13 +183,8 @@ onBeforeMount(async () => {
       <h2>(Click to change)</h2>
     </div>
 
-<!--    <h2 id="equipped-attacks-title">Equipped attacks</h2>-->
-<!--    <h2>(Click to change)</h2>-->
-
     <div id="equipped-attacks">
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20" v-on:click="showPopUpMethod"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20" v-on:click="showPopUpMethod"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20" v-on:click="showPopUpMethod"></AttackComponent>
+      <AttackComponent v-for="attack in equippedAttacks" v-bind:key="attack.attack_ID" v-bind:name=attack.attack_ID v-bind:posX=getAttackPosition(attack.positions).x v-bind:posY=getAttackPosition(attack.positions).y v-bind:power=attack.power v-on:click="() => showPopUpUnequipAttack(attack.attack_ID)"></AttackComponent>
     </div>
   </section>
 
@@ -105,23 +194,25 @@ onBeforeMount(async () => {
     <h2>Owned attacks</h2>
 
     <div id="owned-attacks" style="margin-bottom: 5rem">
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
-      <AttackComponent name="Demon Attack" posX="3" posY="4" power="20"></AttackComponent>
+      <AttackComponent v-for="attack in notEquippedAttacks" v-bind:key="attack.attack_ID" v-bind:name=attack.attack_ID v-bind:posX=getAttackPosition(attack.positions).x v-bind:posY=getAttackPosition(attack.positions).y v-bind:power=attack.power v-on:click="() => showPopUpEquipAttack(attack.attack_ID)"></AttackComponent>
     </div>
   </section>
 
-  <div id="popUp" class="popUp" v-show="showPopUp">
-    <p class="popUp-question"><b>Confirm to change the attack.</b></p>
-    <p @click="handleYesClick">Change attack</p>
+  <div id="popUp" class="popUp" v-show="showPopUpUnequip">
+    <p class="popUp-question"><b>Confirm to unequip {{ selectedAttack }} attack.</b></p>
+    <p @click="unequipAttack(selectedAttack)">Unequip attack</p>
+    <p @click="handleNoClick">Cancel</p>
+  </div>
+
+  <div id="popUp" class="popUp" v-show="showPopUpEquip">
+    <p class="popUp-question"><b>Confirm to equip {{ selectedAttack }} attack.</b></p>
+    <p @click="equipAttack(selectedAttack)">Equip attack</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 
   <div id="popUp" class="popUp" v-show="deleteAccPopUp">
     <p class="popUp-question"><b>Confirm to delete your account, all progress will be lost.</b></p>
-    <p @click="confirmDelete">Delete account</p>
+    <p @click="confirmDeleteAccount(playerID)">Delete account</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 </template>
