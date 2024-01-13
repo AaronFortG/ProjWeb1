@@ -48,9 +48,14 @@
 </template>
 
 <script setup>
-
 import { RouterLink } from 'vue-router'
 import MySecondComponent from "@/components/InputComponent.vue";
+</script>
+
+
+<script>
+
+
 import Swal from 'sweetalert2';
 
 import { ref } from 'vue';
@@ -78,7 +83,7 @@ const openImageDialog = async () => {
   const { value: selectedName } = await Swal.fire({
     title: 'Select Your Profile Image',
     inputOptions: nameOptions,
-    imageUrl: imageOptions[nameOptions[selectedName]], // Imagen por defecto para el nombre seleccionado
+    imageUrl: imageOptions[0], // Imagen por defecto para el nombre seleccionado
 
     imageAlt: 'User profile image',
     input: 'select',
@@ -88,6 +93,7 @@ const openImageDialog = async () => {
     preConfirm: (selectedName) => {
       // Set the selected image URL based on the selected name
       selectedImage.value = imageOptions[nameOptions[selectedName]];
+      selectedImage.value = imageOptions[0];
     },
   });
 
@@ -122,7 +128,7 @@ const postData = async () => {
   const data = {
     player_ID: email.value,
     password: password.value,
-    img: selectedImage.value, // Use the selected image URL
+    img: selectedImage.value,
   };
 
 
