@@ -1,12 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { getCurrentInstance, onMounted, ref } from 'vue'
+import { inject, onMounted, ref } from 'vue'
 import { ApiClient } from '@/assets/ApiClient'
 import InputComponent from '@/components/InputComponent.vue'
-import MySecondComponent from '@/components/InputComponent.vue'
-import InputNumberComponent from '@/components/InputNumberComponent.vue'
-
-const { proxy } = getCurrentInstance(); // Obtiene la instancia actual
 
 const items = ref([]);
 const player = ref([]);
@@ -18,13 +14,12 @@ const selectedAttack = ref(null);
 const api = new ApiClient();
 
 const showPopUp = ref(false);
-const showPopUpInformation = ref(false);
 
+// Hide the vertical menu.
+const updateShowVerticalMenu = inject('updateShowVerticalMenu');
+updateShowVerticalMenu(false);
 
 onMounted(async () => {
-  // Accede a la propiedad $root para establecer showVerticalMenu en false
-  proxy.$root.$data.showVerticalMenu = false;
-
   try {
     let selectedPlayer = "laGemmaYebra";
     const itemsEndpoint = `/players/${selectedPlayer}/attacks`;
@@ -58,8 +53,6 @@ const handleYesClick = async () => {
 
   // Aquí debes verificar si el usuario tiene monedas suficientes para comprar el ataque
   const attackToSell = selectedAttack.value;
-
-  console.log("PRICE: " + attackToSell.attack_ID);
 
   if (attackToSell) {
     // Usuario tiene monedas suficientes, realiza la compra
@@ -127,36 +120,6 @@ const getPrice = async (event) => {
   price.value = event;
 }
 
-</script>
-
-<script>
-export default {
-  setup() {},
-  data() {
-    return {
-      showPopUp: false
-    }
-  },
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
-  methods: {
-    showPopUpMethod() {
-      this.showPopUp = true
-    },
-    hidePopUp() {
-      this.showPopUp = false
-    },
-    handleYesClick() {
-      alert('Yes')
-      this.hidePopUp()
-    },
-    handleNoClick() {
-      alert('No')
-      this.hidePopUp()
-    }
-  }
-}
 </script>
 
 <template>
