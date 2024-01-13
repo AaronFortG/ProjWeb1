@@ -99,6 +99,7 @@ const buyAttack = async (attackId) => {
     const buyEndpoint = `/shop/attacks/${attackId}/buy`;
     await api.post(buyEndpoint, "", "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
     alert('Attack bought successfully!');
+    location.reload();
   } catch (error) {
     console.error('Error buying attack:', error);
     alert('Failed to buy the attack. Please try again.');

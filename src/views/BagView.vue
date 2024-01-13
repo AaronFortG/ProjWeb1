@@ -2,17 +2,23 @@
 import { RouterLink } from 'vue-router'
 import { getCurrentInstance, onMounted, ref } from 'vue'
 import { ApiClient } from '@/assets/ApiClient'
+import InputComponent from '@/components/InputComponent.vue'
+import MySecondComponent from '@/components/InputComponent.vue'
+import InputNumberComponent from '@/components/InputNumberComponent.vue'
 
 const { proxy } = getCurrentInstance(); // Obtiene la instancia actual
 
 const items = ref([]);
 const player = ref([]);
 const coins = ref(0);
+let price = ref(0);
+
 const selectedAttack = ref(null);
 
 const api = new ApiClient();
 
 const showPopUp = ref(false);
+const showPopUpInformation = ref(false);
 
 
 onMounted(async () => {
@@ -41,7 +47,6 @@ onMounted(async () => {
   }
 });
 
-
 const showPopUpMethod = (attack) => {
   selectedAttack.value = attack;
   showPopUp.value = true;
@@ -52,21 +57,19 @@ const handleYesClick = async () => {
   hidePopUp();
 
   // Aquí debes verificar si el usuario tiene monedas suficientes para comprar el ataque
-  const attackToBuy = selectedAttack.value;
+  const attackToSell = selectedAttack.value;
 
-  console.log("PRICE: " + attackToBuy.price);
+  console.log("PRICE: " + attackToSell.attack_ID);
 
-  const coins = await getUserCoins();
-  if (attackToBuy && attackToBuy.price <= coins) {
+  if (attackToSell) {
     // Usuario tiene monedas suficientes, realiza la compra
-    await sellAttack(attackToBuy.attack_ID);
+    await sellAttack(attackToSell.attack_ID);
   } else {
     alert('Not enough coins to buy the attack!');
   }
 };
 
 const handleNoClick = () => {
-  alert('No');
   hidePopUp();
 };
 
@@ -94,6 +97,36 @@ const getUserCoins = async () => {
     return 0;
   }
 };
+
+const sellAttack = async (attackId) => {
+  try {
+    const sellEndpoint = `/shop/attacks/${attackId}/sell`;
+    const sellData = {
+      price: Number(price.value) // Pasar precio a número
+    };
+
+    const sellResponse = await api.post(sellEndpoint, sellData, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+
+    if (sellResponse) {
+      // Venta exitosa
+      console.log('Attack sold successfully');
+      // Actualiza las monedas después de la venta
+      coins.value = await getUserCoins();
+      location.reload();
+    } else {
+      console.error('Error selling attack:', sellResponse);
+      alert('Failed to sell the attack. Do you already have it for sale?');
+    }
+  } catch (error) {
+    console.error('Error selling attack:', error);
+    alert('Failed to sell the attack. Do you already have it for sale?');
+  }
+};
+
+const getPrice = async (event) => {
+  price.value = event;
+}
+
 </script>
 
 <script>
@@ -173,6 +206,10 @@ export default {
             <p>Power</p>
             <p>{{ item.power }}</p>
           </div>
+
+          <div class="rows_container">
+            <input-component v-on:data="getPrice" placeHolder="Price" type="number"></input-component>
+          </div>
           <button class="red_button" @click="() => showPopUpMethod(item)">Sell</button>
         </article>
       </div>
@@ -184,6 +221,7 @@ export default {
     <p @click="handleYesClick">Yes</p>
     <p @click="handleNoClick">No</p>
   </div>
+
 </template>
 
 <style scoped>
