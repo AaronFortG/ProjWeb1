@@ -242,7 +242,7 @@ h2 {
     justify-content: center;
 
     width: 100%; /* Establece el ancho deseado */
-    height: 20rem; /* Establece la altura deseada */
+    height: 30rem; /* Establece la altura deseada */
     overflow: auto; /* Agrega barras de desplazamiento cuando sea necesario */
   }
 

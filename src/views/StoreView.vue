@@ -1,51 +1,3 @@
-<template>
-  <div class="container_shop">
-    <h1 class="title">Shop</h1>
-
-    <div style="margin: 0 2rem 2rem 2rem" class="content">
-      <div class="left_row_container">
-        <img src="../assets/images/coin.png" alt="coin" style="max-width: 2rem" />
-        <p id="coins">{{ coins }}</p>
-      </div>
-
-      <div class="rows_container" id="BagAndButton">
-        <RouterLink to="/bag">
-          <img src="../assets/images/bag.png" alt="bag" style="max-width: 5.5rem" />
-        </RouterLink>
-      </div>
-
-      <h2>Attacks</h2>
-
-      <div class="shop_container">
-        <article v-for="(item, index) in items" :key="index" class="item_container">
-          <h3>{{ item.attack_ID }}</h3>
-
-          <div class="rows_container">
-            <p>Level</p>
-            <p>{{ item.level_needed }}</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Power</p>
-            <p>{{ item.power }}</p>
-          </div>
-
-          <div class="rows_container">
-            <p>Price</p>
-            <p>{{ item.price }}</p>
-          </div>
-          <button class="red_button" @click="() => showPopUpMethod(item)">Buy</button>
-        </article>
-      </div>
-    </div>
-  </div>
-
-  <div id="popUp" class="popUp" v-show="showPopUp">
-    <p class="popUp-question"><b>Are you sure you want to buy the attack?</b></p>
-    <p @click="handleYesClick">Yes</p>
-    <p @click="handleNoClick">No</p>
-  </div>
-</template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
@@ -148,6 +100,55 @@ const buyAttack = async (attackId) => {
 };
 </script>
 
+<template>
+  <div class="container_shop">
+    <h1 class="title">Shop</h1>
+
+    <div style="margin: 0 2rem 2rem 2rem" class="content">
+      <div class="left_row_container">
+        <img src="../assets/images/coin.png" alt="coin" style="max-width: 2rem" />
+        <p id="coins">{{ coins }}</p>
+      </div>
+
+      <div class="rows_container" id="BagAndButton">
+        <RouterLink to="/bag">
+          <img src="../assets/images/bag.png" alt="bag" style="max-width: 5.5rem" />
+        </RouterLink>
+      </div>
+
+      <h2>Attacks</h2>
+
+      <div class="shop_container">
+        <article v-for="(item, index) in items" :key="index" class="item_container">
+          <h3>{{ item.attack_ID }}</h3>
+
+          <div class="rows_container">
+            <p>Level</p>
+            <p>{{ item.level_needed }}</p>
+          </div>
+
+          <div class="rows_container">
+            <p>Power</p>
+            <p>{{ item.power }}</p>
+          </div>
+
+          <div class="rows_container">
+            <p>Price</p>
+            <p>{{ item.price }}</p>
+          </div>
+          <button class="red_button" @click="() => showPopUpMethod(item)">Buy</button>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div id="popUp" class="popUp" v-show="showPopUp">
+    <p class="popUp-question"><b>Are you sure you want to buy the attack?</b></p>
+    <p @click="handleYesClick">Yes</p>
+    <p @click="handleNoClick">No</p>
+  </div>
+</template>
+
 <style scoped>
 h2 {
   color: white;
@@ -244,7 +245,7 @@ h2 {
     justify-content: center;
 
     width: 100%; /* Establece el ancho deseado */
-    height: 20rem; /* Establece la altura deseada */
+    height: 30rem; /* Establece la altura deseada */
     overflow: auto; /* Agrega barras de desplazamiento cuando sea necesario */
   }
 
