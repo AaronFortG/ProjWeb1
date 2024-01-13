@@ -12,8 +12,8 @@ export default {
       const input = event.target
       const numericValue = parseInt(input.value)
 
-      if (numericValue < min) {
-        input.value = min
+      if (numericValue < Number(min)) {
+        input.value = Number(min)
       }
     },
     // Function to check the value of the input
@@ -29,8 +29,6 @@ export default {
 
       if (numericValue > max) {
         input.value = max
-      } else if (input.value.length > 2) {
-        input.value = input.value.slice(0, 2)
       }
     }
   }

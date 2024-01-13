@@ -1,23 +1,51 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-</script>
+import { inject, ref } from 'vue'
+import InputComponent from '@/components/InputComponent.vue'
+import { ApiClient } from '@/assets/ApiClient'
 
-<script>
-export default {
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
-  methods: {
-    // Function to check if the value of the input is negative
-    negativeValueCheck(event, min) {
-      const input = event.target
+let attack_ID = ref("");
+let positions = ref("");
 
-      if (input.value < min) {
-        input.value = min
-      }
+const api = new ApiClient();
+
+// Hide the vertical menu.
+const updateShowVerticalMenu = inject('updateShowVerticalMenu');
+updateShowVerticalMenu(false);
+
+const getName = async (event) => {
+  attack_ID.value = event;
+}
+
+const getPositions = async (event) => {
+  positions.value = event;
+}
+
+const createAttack = async () => {
+  try {
+    const createEndpoint = `/shop/attacks/`;
+    const createData = {
+      attack_ID: attack_ID.value,
+      positions: positions.value,
+      img: "string"
+    };
+
+    const createResponse = await api.post(createEndpoint, createData, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+
+    if (createResponse) {
+      // Ataque creado correctamente
+      console.log('Attack created successfully');
+      location.reload();
+    } else {
+      console.error('Error creating attack:', createResponse);
+      alert('Error creating attack:' + createResponse);
     }
+  } catch (error) {
+    console.error('Error creating attack:', error);
+    alert(error);
   }
 }
+
 </script>
 
 <template>
@@ -27,43 +55,31 @@ export default {
     <div class="buttons_container">
       <form class="form">
         <div class="form-group">
-          <label>Positions</label>
-          <input
-            type="number"
+          <label>Name</label>
+          <input-component
+            type="text"
             name="positions"
-            id="positions-input"
+            id="name"
             required
-            @change="negativeValueCheck($event, 1)"
-            placeholder="43"
+            placeholder="attack3"
+            v-on:data="getName"
           />
         </div>
 
         <div class="form-group">
-          <label>Price</label>
-          <input
-            type="number"
-            name="price"
+          <label>Positions</label>
+          <input-component
+            type="text"
+            name="positions"
             id="price-input"
             required
-            @change="negativeValueCheck($event, 1)"
-            placeholder="78"
-          />
-        </div>
-
-        <div class="form-group">
-          <label>Level needed</label>
-          <input
-            type="number"
-            name="level-needed"
-            id="level-input"
-            required
-            @change="negativeValueCheck($event, 1)"
-            placeholder="15"
+            placeholder="(x,y)"
+            v-on:data="getPositions"
           />
         </div>
       </form>
 
-      <RouterLink to="/bag" class="router-link main-button"> Create attack </RouterLink>
+      <button class="router-link main-button" @click="() => createAttack()"> Create attack </button>
     </div>
 
     <div class="back-button">
