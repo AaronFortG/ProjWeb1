@@ -5,7 +5,7 @@
     <div style="margin: 0 2rem 2rem 2rem" class="content">
       <div class="left_row_container">
         <img src="../assets/images/coin.png" alt="coin" style="max-width: 2rem" />
-        <p id="coins">Coins</p>
+        <p id="coins">{{ coins }}</p>
       </div>
 
       <div class="rows_container" id="BagAndButton">
@@ -34,7 +34,7 @@
             <p>Price</p>
             <p>{{ item.price }}</p>
           </div>
-          <button class="red_button" @click="showPopUpMethod">Buy</button>
+          <button class="red_button" @click="() => showPopUpMethod(item)">Buy</button>
         </article>
       </div>
     </div>
@@ -53,19 +53,27 @@ import { ref, onMounted } from 'vue';
 import { ApiClient } from '@/assets/ApiClient';
 
 const items = ref([]);
+const player = ref([]);
+const selectedAttack = ref(null);
+const coins = ref(0);
+
 const api = new ApiClient();
 const showPopUp = ref(false);
 
 onMounted(async () => {
   try {
     const itemsEndpoint = '/shop/attacks';
-    const itemsResponse = await api.get(itemsEndpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    const itemsResponse = await api.get(itemsEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
 
     console.log('Items Response:', itemsResponse);
 
     if (itemsResponse) {
       items.value = Array.isArray(itemsResponse) ? itemsResponse : [];
       console.log('Items:', items.value);
+
+      // Actualiza las monedas después de obtener la información del jugador
+      coins.value = await getUserCoins();
+
     } else {
       console.error('Invalid response format. Missing "data" property.');
     }
@@ -74,16 +82,26 @@ onMounted(async () => {
   }
 });
 
-
-
-
 const showPopUpMethod = () => {
   showPopUp.value = true;
 };
 
-const handleYesClick = () => {
-  alert('Yes');
+
+const handleYesClick = async () => {
   hidePopUp();
+
+  // Aquí debes verificar si el usuario tiene monedas suficientes para comprar el ataque
+  const attackToBuy = selectedAttack.value;
+
+  console.log("PRICE: " + attackToBuy.price);
+
+  const coins = await getUserCoins();
+  if (attackToBuy && attackToBuy.price <= coins) {
+    // Usuario tiene monedas suficientes, realiza la compra
+    await buyAttack(attackToBuy.attack_ID);
+  } else {
+    alert('Not enough coins to buy the attack!');
+  }
 };
 
 const handleNoClick = () => {
@@ -95,6 +113,39 @@ const hidePopUp = () => {
   showPopUp.value = false;
 };
 
+const getUserCoins = async () => {
+  try {
+    let selectedPlayer = "laGemmaYebra";
+    const playerInfoEndpoint = `/players/${selectedPlayer}`;
+    const playerResponse = await api.get(playerInfoEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+
+    if (playerResponse) {
+      player.value = playerResponse;
+      console.log('Player:', player.value);
+      console.log('Coins: ', player.value.coins);
+      const coins = player.value.coins
+      return coins;
+    } else {
+      console.error('Invalid response format. Missing "data" property.');
+    }
+  } catch (error) {
+    console.error('Error fetching player information:', error);
+    return 0;
+  }
+};
+
+
+const buyAttack = async (attackId) => {
+  try {
+    // Lógica para realizar la compra del ataque
+    const buyEndpoint = `/shop/attacks/${attackId}/buy`;
+    await api.post(buyEndpoint, "", "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    alert('Attack bought successfully!');
+  } catch (error) {
+    console.error('Error buying attack:', error);
+    alert('Failed to buy the attack. Please try again.');
+  }
+};
 </script>
 
 <style scoped>
