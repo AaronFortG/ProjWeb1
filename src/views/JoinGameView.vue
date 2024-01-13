@@ -1,34 +1,73 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-</script>
+import { computed, inject, onMounted, ref } from 'vue'
+import { ApiClient } from '../assets/ApiClient'
+import ArenaComponent from '../components/ArenaComponent.vue'
 
-<script>
-export default {
-  setup() {},
-  mounted() {
-    this.$root.$data.showVerticalMenu = true;
-  },
-  data() {
-    return {
-      showPopUp: false
-    }
-  },
-  methods: {
-    showPopUpMethod() {
-      this.showPopUp = true
-    },
-    hidePopUp() {
-      this.showPopUp = false
-    },
-    handleYesClick() {
-      alert('Join arena')
-      this.hidePopUp()
-    },
-    handleNoClick() {
-      this.hidePopUp()
-    }
+const showPopUp = ref(false);
+const selectedArena = ref(null);
+
+// Show the popup to join an arena.
+const showJoinArenaPopUp = (arena_ID) => {
+  selectedArena.value = arena_ID;
+  showPopUp.value = true;
+};
+
+// Hide the popup of the join.
+const hidePopUp = () => {
+  showPopUp.value = false;
+};
+
+// Join the arena.
+const joinArena = (arena_ID) => {
+
+  api.post(`arenas/${arena_ID}/play`, null, token)
+    .then(() => {
+      // TODO: Reenviar l'usuari a /play-arena/:idArena
+    })
+    .catch((error) => {
+      alert(error);
+    });
+
+  hidePopUp();
+};
+
+const handleNoClick = () => {
+  hidePopUp();
+};
+
+const api = new ApiClient();
+
+// Get the user's credentials from the Singletone.
+const token = inject('token');
+
+const gamesList = ref([]);
+onMounted(async () => {
+  try {
+    // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
+    gamesList.value = await api.get('/arenas/', token);
+  } catch (error) {
+    console.error('Error fetching player information:', error);
   }
+});
+
+// Computed property to filter out finished arenas
+const unfinishedArenas = computed(() => {
+  return gamesList.value.filter(arena => !arena.start);
+});
+
+// Get the date with format 'DD/MM/YYYY' given the response from the API.
+function formatDate(inputDateString) {
+  const dateObject = new Date(inputDateString);
+
+  const day = String(dateObject.getDate()).padStart(2, '0');
+  const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = dateObject.getFullYear();
+
+  const formattedDate = `${day}/${month}/${year}`;
+
+  return formattedDate;
 }
+
 </script>
 
 <template>
@@ -43,63 +82,14 @@ export default {
     <h1 class="title">Join an arena</h1>
     <p id="arena-join-description">Right click an arena to join it.</p>
 
-    <div id="available-arenas">
-      <article class="arena" @click="showPopUpMethod">
-        <div class="arena-info">
-          <h2>Arena #1 - Date:</h2>
-          <h2>20/10/2023</h2>
-        </div>
-        <div class="arena-size">
-          <p>Grid size:</p>
-          <p>2x2</p>
-        </div>
-      </article>
-      <article class="arena" @click="showPopUpMethod">
-        <div class="arena-info">
-          <h2>Arena #2 - Date:</h2>
-          <h2>31/10/2023</h2>
-        </div>
-        <div class="arena-size">
-          <p>Grid size:</p>
-          <p>3x3</p>
-        </div>
-      </article>
-      <article class="arena" @click="showPopUpMethod">
-        <div class="arena-info">
-          <h2>Arena #3 - Date:</h2>
-          <h2>05/11/2023</h2>
-        </div>
-        <div class="arena-size">
-          <p>Grid size:</p>
-          <p>5x5</p>
-        </div>
-      </article>
-      <article class="arena" @click="showPopUpMethod">
-        <div class="arena-info">
-          <h2>Arena #4 - Date:</h2>
-          <h2>09/11/2023</h2>
-        </div>
-        <div class="arena-size">
-          <p>Grid size:</p>
-          <p>10x10</p>
-        </div>
-      </article>
-      <article class="arena" @click="showPopUpMethod">
-        <div class="arena-info">
-          <h2>Arena #5 - Date:</h2>
-          <h2>11/11/2023</h2>
-        </div>
-        <div class="arena-size">
-          <p>Grid size:</p>
-          <p>8x8</p>
-        </div>
-      </article>
-    </div>
+    <section id="available-arenas">
+      <ArenaComponent v-for="arena in unfinishedArenas" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-on:click="() => showJoinArenaPopUp(arena.game_ID)"></ArenaComponent>
+    </section>
   </section>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
-    <p class="popUp-question"><b>Are you sure you want to join the game?</b></p>
-    <p @click="handleYesClick">Join arena</p>
+    <p class="popUp-question"><b>Are you sure you want to join the arena "{{ selectedArena }}"?</b></p>
+    <p @click="joinArena(selectedArena)">Join arena</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 </template>
@@ -126,41 +116,16 @@ h1.title {
 }
 
 section {
-  margin: 2rem;
+  margin: 1rem 1rem 1rem 2rem;
+}
+
+section#available-arenas {
+  margin-left: 0;
 }
 
 #arena-join-description {
   color: white;
   margin-bottom: 2rem;
-}
-
-h2 {
-  font-size: 1rem;
-}
-
-section div article {
-  background-color: #181414;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-section div article p,
-section div article h2 {
-  color: white;
-}
-
-section div article div.arena-info {
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-section div article div.arena-info h2,
-section div article div.arena-size p {
-  display: inline;
-}
-
-section div article:hover {
-  outline: white 1px solid;
 }
 
 @media (min-width: 1000px) {
@@ -170,11 +135,8 @@ section div article:hover {
     column-gap: 2rem;
   }
 
-  section div article.arena {
-    flex: 1;
-    max-width: 21.5rem;
-    min-width: 21.5rem;
-    box-sizing: border-box;
+  section {
+    margin-left: 4rem;
   }
 }
 </style>
