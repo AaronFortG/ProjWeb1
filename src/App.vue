@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue';
 import VerticalMenuComponent from "@/components/VerticalMenuComponent.vue";
 
 const token = ref('');
-const showVerticalMenu = ref(false);
 
 // Function to get data from localStorage
 const getLocalStorageData = () => {
@@ -20,6 +19,11 @@ onMounted(() => {
 import HorizontalMenuComponent from "@/components/HorizontalMenuComponent.vue";
 
 export default {
+  data() {
+    return {
+      showVerticalMenu: false
+    };
+  },
   components: {
     HorizontalMenuComponent,
   },

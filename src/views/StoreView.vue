@@ -1,8 +1,9 @@
-
 <script setup>
 import { RouterLink } from 'vue-router'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, getCurrentInstance } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
+
+const { proxy } = getCurrentInstance(); // Obtiene la instancia actual
 
 const items = ref([]);
 const player = ref([]);
@@ -12,7 +13,11 @@ const coins = ref(0);
 const api = new ApiClient();
 const showPopUp = ref(false);
 
+
 onMounted(async () => {
+  // Accede a la propiedad $root para establecer showVerticalMenu en false
+  proxy.$root.$data.showVerticalMenu = true;
+
   try {
     const itemsEndpoint = '/shop/attacks';
     const itemsResponse = await api.get(itemsEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
