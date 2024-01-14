@@ -43,7 +43,6 @@ export class ApiClient {
 
     // Include request body if provided
     if (data != null) {
-      console.log('Body: ', data);
       options.body = JSON.stringify(data);
     }
 
@@ -74,7 +73,6 @@ export class ApiClient {
       }
     } catch (error) {
       // Handle local errors (bad request = family not 200) and network issues (fetch rejected) and log them
-      console.error('Error during the request:', error);
       throw error; // Rethrow the error to be caught by the caller
     }
   }

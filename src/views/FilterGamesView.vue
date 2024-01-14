@@ -47,7 +47,7 @@ onMounted(async () => {
     const allGames = response;
     gamesList.value = filterGamesByStatus(allGames, selectedStatus.value);
   } catch (error) {
-    console.error('Error fetching player information:', error);
+    // Errors cannot be shown in console.
   }
 });
 
@@ -102,7 +102,7 @@ watch(selectedStatus, async (newValue, oldValue) => {
       const response = await api.get('arenas', token);
       gamesList.value = filterGamesByStatus(response, newValue);
     } catch (error) {
-      console.error('Error fetching arenas:', error);
+      // Errors cannot be shown in console.
     }
   }
 });
@@ -156,16 +156,14 @@ watch(dateRange, async (newValue, oldValue) => {
 });
 
 async function fetchArenasByDates(startDate, endDate) {
-  console.log(startDate, endDate);
   try {
     const response = await api.get('arenas', token);
-    console.log(response);
     gamesList.value = response.filter(game => {
       const gameDate = formatDate(game.creation_date);
       return gameDate >= startDate && gameDate <= endDate;
     });
   } catch (error) {
-    console.error('Error fetching arenas:', error);
+    // Errors cannot be shown in console.
   }
 }
 

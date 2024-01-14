@@ -1,6 +1,8 @@
-# project-base
+# Battle Arena | 	PWIA_P12
 
-This template should help get you started developing with Vue 3 in Vite.
+Final project made by Aaron Fort Garcia, Yemma Gebra Berenguer and Marcos Ruiz-Flores Vicente.
+
+Link to the GitHub Repository: https://github.com/AaronFortG/ProjWeb1.git
 
 ## Recommended IDE Setup
 
