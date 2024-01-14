@@ -22,14 +22,24 @@ const router = useRouter();
 
 const token = inject('token');
 const playerID = inject('playerID');
+const playerID_2 = ref(null);
 
 const x_game_P1 = ref(null);
 const x_game_P2 = ref(null);
 const y_game_P1 = ref(null);
 const y_game_P2 = ref(null);
 
-const currentDirection = ref(null);
+// ** Const to get the HP of the players **
+// Player 1
+const hp1 = ref(null);
+const initialHP1 = ref(null);
+// Player 2
+const hp2 = ref(null);
+const initialHP2 = ref(null);
 
+
+// Const to know the direction of the player
+const currentDirection = ref(null);
 
 // *** METHODS ***
 onMounted(async () => {
@@ -39,10 +49,12 @@ onMounted(async () => {
     const id = arenaID.value;
     const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
-
-
     console.log(gameData.value);
     checkIfGameFinished();
+
+    // Save the initial HP of the players
+    initialHP1.value = hp1.value;
+    initialHP2.value = hp2.value;
 
   } catch (error) {
     console.error('Error fetching game data:', error);
@@ -75,11 +87,20 @@ const checkIfGameFinished = async () => {
 
       for (let i = 0; i < playerData.value.players_games.length; i++) {
         if (playerData.value.players_games[i].player_ID === playerID) {
+          // Get the position of the player
           x_game_P1.value = playerData.value.players_games[i].x_game;
           y_game_P1.value = playerData.value.players_games[i].y_game;
+
+          // Get the HP of the player
+          hp1.value = playerData.value.players_games[i].hp;
         } else {
+          // Get the position of the player
           x_game_P2.value = playerData.value.players_games[i].x_game;
           y_game_P2.value = playerData.value.players_games[i].y_game;
+          playerID_2.value = playerData.value.players_games[i].player_ID;
+
+          // Get the HP of the player
+          hp2.value = playerData.value.players_games[i].hp;
           break;
         }
       }
@@ -186,7 +207,18 @@ document.addEventListener('keyup', function (event) {
   }
 })
 
+const generateHeartIndices1 = () => {
+  const heartsCount = Math.min(5, Math.ceil((hp1.value / initialHP1.value) * 5));
+  return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
+const generateHeartIndices2 = () => {
+  const heartsCount = Math.min(5, Math.ceil((hp2.value / initialHP2.value) * 5));
+  return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
 onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
+
 
 </script>
 
@@ -203,12 +235,10 @@ window.addEventListener('popstate', function () {
   <div class="game_container">
     <!-- Create: player's (1) name and his life -->
     <div class="player-info">
-      <p>Player name</p>
+      <p>{{playerID}}</p>
       <div>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/half-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30" />
+        <!-- Lógica para mostrar corazones según el número de vidas -->
+        <img v-for="heartIndex in generateHeartIndices1()" :key="heartIndex" src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
       </div>
     </div>
 
@@ -236,12 +266,10 @@ window.addEventListener('popstate', function () {
 
     <!-- Create: player's (2) name and his life -->
     <div class="player-info" id="players2">
-      <p>Player name</p>
+      <p>{{playerID_2}}</p>
       <div>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/half-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
+        <!-- Lógica para mostrar corazones según el número de vidas -->
+        <img v-for="heartIndex in generateHeartIndices2()" :key="heartIndex" src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
       </div>
     </div>
 
