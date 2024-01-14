@@ -25,7 +25,7 @@ const postData = async () => {
     const api = new ApiClient();
     const response = await api.get(endpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
     players.value = response;
-    console.log('dsdsd', response);
+    console.log(response);
 
     // Realizar la comparación con el player_ID introducido
     const myPlayerID = email.value;
@@ -51,11 +51,11 @@ const postData = async () => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 const showVerticalMenu = ref(false);
 
-const mounted = () => {
-  showVerticalMenu.value = false;
-};
+// eslint-disable-next-line no-unused-vars
+
 </script>
 
 <template>
