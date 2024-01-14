@@ -25,16 +25,13 @@ const token = window.localStorage.getItem('token');
 // *** METHODS ***
 onMounted(async () => {
   arenaID.value = route.params.arenaID;
-  console.log(arenaID.value);
 
   updateProgressBar()
   try {
     checkIfGameStarted();
-    console.log(gameData.value);
 
   } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    // Error cannot be shown in console.
   }
 })
 

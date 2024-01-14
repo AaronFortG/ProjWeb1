@@ -35,14 +35,14 @@ const createAttack = async () => {
 
     if (createResponse) {
       // Ataque creado correctamente
-      console.log('Attack created successfully');
+      alert('Attack created successfully');
       location.reload();
     } else {
-      console.error('Error creating attack:', createResponse);
+      // Error cannot be shown in console.
       alert('Error creating attack:' + createResponse);
     }
   } catch (error) {
-    console.error('Error creating attack:', error);
+    // Error cannot be shown in console.
     alert(error);
   }
 }

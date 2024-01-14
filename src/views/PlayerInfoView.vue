@@ -1,6 +1,6 @@
 <script setup>
 import { inject, onMounted, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { ApiClient } from '../assets/ApiClient'
 import AttackComponent from '@/components/AttackComponent.vue'
 import PlayerInformationComponent from '@/components/PlayerInformationComponent.vue'
@@ -11,6 +11,7 @@ const deleteAccPopUp = ref(false);
 const selectedAttack = ref(null);
 
 const api = new ApiClient();
+const router = useRouter();
 
 // Show the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
@@ -19,7 +20,6 @@ updateShowVerticalMenu(true);
 // Get the user's credentials from the Singletone.
 const token = window.localStorage.getItem('token');
 const playerID = window.localStorage.getItem('playerID');
-console.log("Token: ", token, "Player ID:", playerID);
 
 // Show the popup to equip an attack.
 const showPopUpEquipAttack = (attackID) => {
@@ -52,26 +52,22 @@ const confirmDeleteAccount = (playerID) => {
       // Handle success
       location.reload();
       alert('Account successfully deleted!');
-      console.log(`Attack ${playerID} equipped successfully.`);
+      router.push('/');
     })
     .catch((error) => {
       // Handle error
-      alert(`Error equipping attack ${playerID}: ${error.message}`);
+      alert(`Error deleting account ${playerID}: ${error.message}`);
     });
-  this.$router.push('/');
 };
 
 // Function to equip an attack.
 const equipAttack = (attackID) => {
   api.post(`players/attacks/${attackID}`, null, token)
     .then(() => {
-      // Handle success
       location.reload();
-      console.log(`Attack ${attackID} equipped successfully.`);
+      alert(`Attack ${attackID} equipped successfully.`);
     })
     .catch((error) => {
-      // Handle error
-      console.log(error);
       alert(`Error equipping attack ${attackID}: ${error.message}`);
     });
 
@@ -82,12 +78,10 @@ const equipAttack = (attackID) => {
 const unequipAttack = (attackID) => {
   api.delete(`players/attacks/${attackID}`, token)
     .then(() => {
-      // Handle success
       location.reload();
-      console.log(`Attack ${attackID} equipped successfully.`);
+      alert(`Attack ${attackID} equipped successfully.`);
     })
     .catch((error) => {
-      // Handle error
       alert(`Error equipping attack ${attackID}: ${error.message}`);
     });
   hidePopUp();
@@ -107,7 +101,6 @@ const notEquippedAttacks = ref([]);
 const filterAttacks = (attacksList) => {
   // Filter all the attacks
   for (const attack of attacksList) {
-    console.log(attack);
     if (attack.equipped) {
       equippedAttacks.value.push(attack);
     }
@@ -138,23 +131,13 @@ const isValidURL = (url) => {
 // Allow inject() to get the updated value using onBeforeMounted().
 onMounted(async () => {
   try {
-    //api.savePlayerID("aaronElMejor");
-    //api.savePlayerToken("b9936a38-c0b4-4e13-ab82-630724b68a59");
-    //const token = api.getPlayerToken();
-    //const playerID = api.getPlayerID();
-    //const token = inject('token');
-    //const playerID = inject('playerID')
-
-    //console.log("Token: ", token, "Player ID", playerID);
-
     // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
     playerInfo.value = await api.get(`/players/${playerID}`, token);
     playerAttacks.value = await api.get(`/players/attacks`, token);
-    console.log(token);
 
     filterAttacks(playerAttacks.value);
   } catch (error) {
-    console.error('Error fetching player information:', error);
+    // Error cannot be shown in console.
   }
 });
 </script>

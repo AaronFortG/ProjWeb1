@@ -38,7 +38,6 @@ const postData = async () => {
     // Update token to the App.vue (Singleton)
     updateToken(result.token, email.value);
     router.push(`/player-info`);
-    //location.reload();
   } catch(error) {
     // Error cannot be shown in console.
     alert(error);

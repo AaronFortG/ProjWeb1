@@ -23,7 +23,7 @@ onMounted(async () => {
     arenaInfo.value = await api.get(`/arenas/${arenaID.value}`, token);
     logsList.value = await api.get(`/arenas/${arenaID.value}/logs`, token);
   } catch (error) {
-    console.error('Error fetching player information:', error);
+    // Error cannot be shown in console.
   }
 });
 

@@ -41,7 +41,7 @@ const updateToken = (newToken, newPlayerID) => {
   provide('playerID', playerID.value);
 };
 
-provide('updateToken', updateToken);
+//provide('updateToken', updateToken);
 </script>
 
 <script>
@@ -61,7 +61,7 @@ export default {
 
 <template>
   <VerticalMenuComponent v-if="showVerticalMenu" />
-  <RouterView :updateToken="updateToken" />
+  <RouterView />
   <HorizontalMenuComponent v-if="showVerticalMenu" />
 </template>
 

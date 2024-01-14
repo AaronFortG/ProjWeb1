@@ -27,20 +27,17 @@ onMounted(async () => {
     const itemsEndpoint = `/players/${playerID}/attacks`;
     const itemsResponse = await api.get(itemsEndpoint, token);
 
-    console.log('Items Response:', itemsResponse);
-
     if (itemsResponse) {
       items.value = Array.isArray(itemsResponse) ? itemsResponse : [];
-      console.log('Items:', items.value);
 
       // Actualiza las monedas después de obtener la información del jugador
       coins.value = await getUserCoins();
 
     } else {
-      console.error('Invalid response format. Missing "data" property.');
+      // Error cannot be shown in console.
     }
   } catch (error) {
-    console.error('Error fetching items:', error);
+    // Error cannot be shown in console.
   }
 });
 
@@ -79,15 +76,13 @@ const getUserCoins = async () => {
 
     if (playerResponse) {
       player.value = playerResponse;
-      console.log('Player:', player.value);
-      console.log('Coins: ', player.value.coins);
       const coins = player.value.coins;
       return coins;
     } else {
-      console.error('Invalid response format. Missing "data" property.');
+      // Error cannot be shown in console.
     }
   } catch (error) {
-    console.error('Error fetching player information:', error);
+    // Error cannot be shown in console.
     return 0;
   }
 };
@@ -103,16 +98,14 @@ const sellAttack = async (attackId) => {
 
     if (sellResponse) {
       // Venta exitosa
-      console.log('Attack sold successfully');
+      alert('Attack sold successfully');
       // Actualiza las monedas después de la venta
       coins.value = await getUserCoins();
       location.reload();
     } else {
-      console.error('Error selling attack:', sellResponse);
       alert('Failed to sell the attack. Do you already have it for sale?');
     }
   } catch (error) {
-    console.error('Error selling attack:', error);
     alert('Failed to sell the attack. Do you already have it for sale?');
   }
 };

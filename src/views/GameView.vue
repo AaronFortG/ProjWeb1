@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, onBeforeUnmount } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
 import { inject } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
@@ -53,26 +53,20 @@ async function getEquippedAttacks() {
   try {
     const response = await api.get(`players/attacks`, token);
     equippedAttacks.value = response.filter(attack => attack.equipped);
-    console.log(equippedAttacks)
   } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    // Error cannot be shown in console.
   }
 }
 
 // *** METHODS ***
 onMounted(async () => {
   arenaID.value = route.params.arenaID;
-  console.log(arenaID.value);
   currentDirection.value = 'down';
-  console.log (currentDirection.value);
 
   try {
     const id = arenaID.value;
-    console.log(id);
     const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
-    console.log('GAME:', gameData.value);
     checkIfGameFinished();
 
     // Save the initial HP of the players
@@ -83,8 +77,7 @@ onMounted(async () => {
     getEquippedAttacks();
 
   } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    // Error cannot be shown in console.
   }
 });
 
@@ -93,13 +86,8 @@ const leaveGame = async() => {
     const id = arenaID.value;
     const response = await api.delete(`/arenas/${id}/play`, token);
     gameData.value = response;
-
-    console.log(gameData.value);
-
-
   } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    // Error cannot be shown in console.
   }
 }
 
@@ -109,10 +97,16 @@ const checkIfGameFinished = async () => {
     try {
       // Obtener los datos del jugador actualizado
       const playerResponse = await api.get('/players/arenas/current', token);
+
+      // Check if game has ended
+      if (Array.isArray(playerResponse) && playerResponse.length === 0) {
+        clearInterval(intervalId);
+        await router.push('/player-info');
+      }
+
       playerData.value = playerResponse[0];
-      //console.log('PLAYER: ', playerID);
+
       for (let i = 0; i < playerData.value.players_games.length; i++) {
-        console.log('PLAYER: ', playerData.value.players_games[i].player_ID);
 
         if (playerData.value.players_games[i].player_ID === playerID) {
           // Get the position of the player
@@ -124,8 +118,6 @@ const checkIfGameFinished = async () => {
           // Get the HP of the player
           hp1.value = playerData.value.players_games[i].hp;
 
-          console.log('PLAYER: ', playerData.value.players_games[i].player_ID);
-
         } else {
           // Get the position of the player
           x_game_P2.value = playerData.value.players_games[i].x_game;
@@ -136,18 +128,15 @@ const checkIfGameFinished = async () => {
         }
       }
 
-      // Verificar si el juego ha terminado
-      if (gameData.value.finished === true) {
-        clearInterval(intervalId);
-        console.log("JUEGO TERMINADO");
-        router.push('/player-info');
-      }
     } catch (error) {
-      console.error('Error al obtener los datos del jugador:', error);
-      alert(error);
+      // Error cannot be shown in console.
     }
   }, 1000); // Actualizar cada 1000 milisegundos
 }
+
+onBeforeUnmount(() => {
+  clearInterval(intervalId.value);
+});
 
 const setButtonState = (buttonId, isPressed) => {
   const button = document.getElementById(buttonId)
@@ -166,16 +155,13 @@ const moveDirection = async (movement) => {
         direction: movement
       };
 
-      const response = await api.post(`/arenas/direction`, moveData, token);
-      console.log(response.value);
-
+      await api.post(`/arenas/direction`, moveData, token);
       movePosition(movement);
     }
     // Actualiza la dirección actual
     currentDirection.value = movement;
   } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    // Error cannot be shown in console.
   }
 }
 
@@ -185,12 +171,9 @@ const movePosition = async (movement) => {
       movement: movement
     };
 
-    const response = await api.post(`/arenas/move`, moveData, token);
-    console.log(response.value);
-
-  } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    await api.post(`/arenas/move`, moveData, token);
+  } catch {
+    // Error cannot be shown in console.
   }
 }
 
@@ -262,11 +245,9 @@ const attack = async () => {
   try {
     const attack_ID = equippedAttacks.value[selectedButtonIndex].attack_ID;
     const response = await api.post(`/arenas/attack/${attack_ID}`, null, token);
-    console.log(response);
 
   } catch (error) {
-    console.error('Error fetching game data:', error);
-    alert(error);
+    // Error cannot be shown in console.
   }
 };
 

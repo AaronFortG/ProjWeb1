@@ -87,7 +87,7 @@ onMounted(async () => {
       <hr class="separator" />
     </div>
     <div class="back-button">
-      <router-link class="main-button red_button" to="/player-info">Back</router-link>
+      <router-link class="main-button red_button" to="/list-players" @click:="updateShowVerticalMenu(true);">Back</router-link>
     </div>
   </div>
 </template>

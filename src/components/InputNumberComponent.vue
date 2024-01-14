@@ -21,11 +21,7 @@ export default {
       const input = event.target
       const numericValue = parseInt(input.value)
 
-      console.log(numericValue)
       this.negativeValueCheck(event, min)
-      console.log("Input: " + numericValue)
-      console.log("Max: " + max)
-      console.log(numericValue > max)
 
       if (numericValue > max) {
         input.value = max

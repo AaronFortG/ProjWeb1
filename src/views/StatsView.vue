@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import { ApiClient } from '@/assets/ApiClient';
 
 const token = window.localStorage.getItem('token');
-const playerID = window.localStorage.getItem('playerID');
+const playerID = ref('');
 const gamesPlayed = ref(0);
 const gamesWon = ref(0);
 const winPercentage = ref(0);

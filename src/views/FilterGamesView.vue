@@ -79,7 +79,7 @@ function filterGamesByStatus(allGames, status) {
 const joinArena = (arena_ID) => {
   api.post(`arenas/${arena_ID}/play`, null, token)
     .then(() => {
-      // TODO: Reenviar l'usuari a /play-arena/:idArena
+      router.push(`/game/${arena_ID}`);
     })
     .catch((error) => {
       alert(error);

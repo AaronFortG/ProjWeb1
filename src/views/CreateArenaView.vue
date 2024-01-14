@@ -43,17 +43,16 @@ const createArena = async () => {
 
     if (createResponse) {
       // Arena creada correctamente
-      console.log('Arena created successfully');
 
       // Cambia la URL
       router.push(`/loading-page/${game_ID.value}`);
 
     } else {
-      console.error('Error creating arena:', createResponse);
+      // Error cannot be shown in console.
       alert(createResponse);
     }
   } catch (error) {
-    console.error('Error creating arena:', error);
+    // Error cannot be shown in console.
     alert(error);
   }
 }

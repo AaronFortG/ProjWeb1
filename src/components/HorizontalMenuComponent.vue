@@ -1,9 +1,11 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
-import { inject } from 'vue'
 
-const updateToken = inject('updateToken');
+const updateToken = (newToken, newPlayerID) => {
+  window.localStorage.setItem('token', newToken);
+  window.localStorage.setItem('playerID', newPlayerID);
+};
 </script>
 
 <template>

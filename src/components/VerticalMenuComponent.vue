@@ -1,5 +1,9 @@
 <script setup>
 
+const updateToken = (newToken, newPlayerID) => {
+  window.localStorage.setItem('token', newToken);
+  window.localStorage.setItem('playerID', newPlayerID);
+};
 </script>
 
 <template>
@@ -15,7 +19,7 @@
       <li><router-link class ="menu__item" to="/player-info">Player information</router-link></li>
       <li><router-link class ="menu__item" to="/store">Store</router-link></li>
       <li><router-link class ="menu__item" to="/list-players">Ranking</router-link></li>
-      <li><router-link class ="menu__item" to="/">Log out</router-link></li>
+      <li><router-link class ="menu__item" to="/" v-on:click="updateToken('', '')">Log out</router-link></li>
     </ul>
   </div>
 </template>

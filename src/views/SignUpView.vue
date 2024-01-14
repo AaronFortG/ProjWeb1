@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import MySecondComponent from "@/components/InputComponent.vue";
 
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ const imageOptions = [
   'https://i.postimg.cc/wB3tHL5q/Captura-de-Pantalla-2024-01-13-a-las-14-47-46.png',
 ];
 
-const selectedImage = ref('');
+const selectedImage = ref('https://i.postimg.cc/wB3tHL5q/Captura-de-Pantalla-2024-01-13-a-las-14-47-46.png');
 const nameOptions = {
   0: 'Marcos',
   1: 'Gemma',
@@ -56,9 +56,11 @@ const getValueEmail = (event) => {
 };
 
 const updateToken = (newToken, newPlayerID) => {
-  localStorage.setItem('token', newToken);
-  localStorage.setItem('playerID', newPlayerID);
+  window.localStorage.setItem('token', newToken);
+  window.localStorage.setItem('playerID', newPlayerID);
 };
+
+const router = useRouter();
 
 const postData = async () => {
   const endpointRegister = 'players';
@@ -75,24 +77,32 @@ const postData = async () => {
     password: password.value
   };
 
-  try {
-    // Register the user
-    const api = new ApiClient();
-    await api.post(endpointRegister, dataRegister);
+  if (isPasswordValid()) {
+    try {
+      // Register the user
+      const api = new ApiClient();
+      await api.post(endpointRegister, dataRegister);
 
-    // Login the user to get its token.
-    const result = await api.post(endpointLogin, dataLogin);
+      // Login the user to get its token.
+      const result = await api.post(endpointLogin, dataLogin);
 
-    // Update token to the App.vue (Singleton)
-    updateToken(result.token, email.value);
-  } catch {
-    // Aquí no haces nada, el bloque está vacío
+      // Update token to the App.vue (Singleton)
+      updateToken(result.token, email.value);
+      router.push('/player-info');
+    } catch(error) {
+      // Aquí no haces nada, el bloque está vacío
+      alert(error);
+    }
+  }
+  else {
+    alert("Passwords do not match.");
   }
 
 };
 
-// eslint-disable-next-line no-unused-vars
-const isValidEmail = () => email.value.includes('@') && email.value.includes('.com');
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i;
+
+const isValidEmail = () => emailRegex.test(email.value);
 const isPasswordValid = () => password.value === confirmPassword.value;
 </script>
 
@@ -124,9 +134,7 @@ const isPasswordValid = () => password.value === confirmPassword.value;
 
       <div class="buttons_login_and_signUp">
         <router-link id="login-button" type="submit" to="/" class="router-link">Login</router-link>
-        <router-link id="register-button" :to="isValidSignUp() ? '/player-info' : '/sign-up'" class="router-link" @click="postData()">
-          Create account
-        </router-link>
+        <button @click="postData" id="register-button" class="router-link">Create account</button>
       </div>
 
       <p v-if="password !== confirmPassword || !isValidEmail()" class="error-message">

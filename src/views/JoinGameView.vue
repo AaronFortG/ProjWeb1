@@ -47,7 +47,7 @@ onMounted(async () => {
   try {
     gamesList.value = await api.get('/arenas/', token);
   } catch (error) {
-    console.error('Error fetching player information:', error);
+    // Error cannot be shown in console.
   }
 });
 
