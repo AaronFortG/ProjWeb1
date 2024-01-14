@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 import MySecondComponent from "@/components/InputComponent.vue";
 
 import Swal from 'sweetalert2';
-import {inject, ref} from 'vue';
+import {ref} from 'vue';
 import { ApiClient } from '@/assets/ApiClient';
 
 const email = ref('');
@@ -28,18 +28,16 @@ const openImageDialog = async () => {
   const { value: selectedName } = await Swal.fire({
     title: 'Select Your Profile Image',
     inputOptions: nameOptions,
-    imageUrl: imageOptions[nameOptions[selectedName]],
+    imageUrl: imageOptions[0], // Utiliza la primera imagen como predeterminada
     imageAlt: 'User profile image',
     input: 'select',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     confirmButtonText: 'Select',
     preConfirm: (selectedName) => {
-      selectedImage.value = imageOptions[nameOptions[selectedName]];
-      selectedImage.value = imageOptions[1];
+      selectedImage.value = imageOptions[selectedName];
     },
   });
-
 };
 
 
@@ -57,19 +55,36 @@ const getValueEmail = (event) => {
   email.value = event;
 };
 
-const postData = async () => {
-  const endpoint = 'players';
+const updateToken = (newToken, newPlayerID) => {
+  localStorage.setItem('token', newToken);
+  localStorage.setItem('playerID', newPlayerID);
+};
 
-  const data = {
+const postData = async () => {
+  const endpointRegister = 'players';
+  const endpointLogin = 'players/join';
+
+  const dataRegister = {
     player_ID: email.value,
     password: password.value,
     img: selectedImage.value,
   };
 
+  const dataLogin = {
+    player_ID: email.value,
+    password: password.value
+  };
 
   try {
+    // Register the user
     const api = new ApiClient();
-    await api.post(endpoint, data);
+    await api.post(endpointRegister, dataRegister);
+
+    // Login the user to get its token.
+    const result = await api.post(endpointLogin, dataLogin);
+
+    // Update token to the App.vue (Singleton)
+    updateToken(result.token, email.value);
   } catch {
     // Aquí no haces nada, el bloque está vacío
   }

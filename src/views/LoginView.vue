@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import MySecondComponent from "@/components/InputComponent.vue";
 import { ApiClient } from "@/assets/ApiClient";
 import { useRouter } from 'vue-router';
@@ -9,6 +9,7 @@ const password = ref('');
 const router = useRouter();
 const players = ref([]);
 
+
 const getPlayer = (event) => {
   email.value = event;
 };
@@ -17,31 +18,28 @@ const getPassword = (event) => {
   password.value = event;
 };
 
-const postData = async () => {
+const updateToken = (newToken, newPlayerID) => {
+  localStorage.setItem('token', newToken);
+  localStorage.setItem('playerID', newPlayerID);
+};
 
-  const endpoint = 'players';
+const postData = async () => {
+  const endpoint = 'players/join';
+
+  const dataLogin = {
+    player_ID: email.value,
+    password: password.value
+  };
 
   try {
     const api = new ApiClient();
-    const response = await api.get(endpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
-    players.value = response;
 
+    // Login the user to get its token.
+    const result = await api.post(endpoint, dataLogin);
 
-    // Realizar la comparación con el player_ID introducido
-    const myPlayerID = email.value;
-
-    let matchFound = false;
-
-    for (const player of players.value) {
-      if (player.player_ID === myPlayerID) {
-        matchFound = true;
-        break;
-      }
-    }
-
-    if (matchFound) {
-      router.push('/player-info');
-    }
+    // Update token to the App.vue (Singleton)
+    updateToken(result.token, email.value);
+    router.push(`/player-info`);
   } catch {
     // Error cannot be shown in console.
   }

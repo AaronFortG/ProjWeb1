@@ -19,6 +19,7 @@ updateShowVerticalMenu(true);
 // Get the user's credentials from the Singletone.
 const token = inject('token');
 const playerID = inject('playerID');
+console.log("Token: ", token, "Player ID:", playerID);
 
 // Show the popup to equip an attack.
 const showPopUpEquipAttack = (attackID) => {
@@ -149,6 +150,7 @@ onMounted(async () => {
     // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
     playerInfo.value = await api.get(`/players/${playerID}`, token);
     playerAttacks.value = await api.get(`/players/attacks`, token);
+    console.log(token);
 
     filterAttacks(playerAttacks.value);
   } catch (error) {
@@ -209,13 +211,13 @@ onMounted(async () => {
     <p @click="handleNoClick">Cancel</p>
   </div>
 
-  <div id="popUp" class="popUp" v-show="showPopUpEquip">
+  <div id="popUp2" class="popUp" v-show="showPopUpEquip">
     <p class="popUp-question"><b>Confirm to equip {{ selectedAttack }} attack.</b></p>
     <p @click="equipAttack(selectedAttack)">Equip attack</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 
-  <div id="popUp" class="popUp" v-show="deleteAccPopUp">
+  <div id="popUp3" class="popUp" v-show="deleteAccPopUp">
     <p class="popUp-question"><b>Confirm to delete your account, all progress will be lost.</b></p>
     <p @click="confirmDeleteAccount(playerID)">Delete account</p>
     <p @click="handleNoClick">Cancel</p>

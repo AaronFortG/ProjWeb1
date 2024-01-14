@@ -17,14 +17,13 @@ provide('updateShowVerticalMenu', updateShowVerticalMenu);
 // Function to get data from localStorage
 const getLocalStorageData = () => {
   playerToken.value = localStorage.getItem('token') || '';
+  playerID.value = localStorage.getItem('playerID') || '';
 };
 
 // Allow provide() to get the updated value using onBeforeMounted().
 onMounted(() => {
   getLocalStorageData();
-  updateToken("b9936a38-c0b4-4e13-ab82-630724b68a59", "aaronElMejor");
 
-  // Provide the variable to the components
   provide('token', playerToken.value);
   provide('playerID', playerID.value);
 });
@@ -33,7 +32,13 @@ onMounted(() => {
 const updateToken = (newToken, newPlayerID) => {
   playerToken.value = newToken;
   playerID.value = newPlayerID;
+  localStorage.setItem('token', newToken);
+  localStorage.setItem('playerID', newPlayerID);
+  console.log("Token updated!")
+  // Provide the updated values to the components
 };
+
+provide('updateToken', updateToken);
 </script>
 
 <script>
