@@ -25,7 +25,17 @@ onMounted(async () => {
 });
 
 const leaveGame = async() => {
+  try {
+    const id = "holalkjhlkjl";
+    const response = await api.delete(`/arenas/${id}/play`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    gameData.value = response;
 
+    console.log(gameData.value);
+    this.$router.push('/game-over');
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
 }
 
 </script>
@@ -333,7 +343,7 @@ h2 {
     max-width: 14rem;
   }
   .red_button {
-    max-height: 1rem;
+    max-height: 4rem;
     grid-column: 2 / 2;
     grid-row: 1 / 1;
   }
