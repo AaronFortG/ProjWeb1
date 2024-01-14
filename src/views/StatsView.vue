@@ -1,9 +1,10 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router';
 import { ApiClient } from '@/assets/ApiClient';
 
-const playerID = ref('');
+const token = inject('token');
+const playerID = inject('playerID');
 const gamesPlayed = ref(0);
 const gamesWon = ref(0);
 const winPercentage = ref(0);
@@ -13,13 +14,14 @@ const attacks = ref([]);
 const route = useRoute();
 
 onMounted(async () => {
+  console.log("Token: ", token, "Player IDDDD: ", playerID);
   try {
     // Accede al parámetro a través de route.params.playerID
     playerID.value = route.params.playerID;
 
-
+    console.log("Token: ", token, "Player IDDDD: ", playerID);
     const api = new ApiClient();
-    const response = await api.get(`players/${playerID.value}/statistics`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    const response = await api.get(`players/${playerID.value}/statistics`, token);
 
     gamesWon.value = response.games_won;
     gamesPlayed.value = response.games_played;
@@ -28,7 +30,7 @@ onMounted(async () => {
     lossPercentage.value = (gamesPlayed.value - gamesWon.value) / gamesPlayed.value * 100;
 
     // Obtener los ataques y asignarlos a la variable de referencia attacks
-    attacks.value = await api.get(`players/${playerID.value}/attacks`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    attacks.value = await api.get(`players/${playerID.value}/attacks`, token);
 
   } catch {
     // Error cannot be shown in console.

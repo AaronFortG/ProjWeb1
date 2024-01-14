@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, inject } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
 import { useRoute } from 'vue-router';
 
@@ -7,6 +7,11 @@ const games = ref([]);
 const route = useRoute();
 const playerID = ref('');
 const finishedGames = ref([]);
+const token = inject('token');
+
+// Hide the vertical menu.
+const updateShowVerticalMenu = inject('updateShowVerticalMenu');
+updateShowVerticalMenu(false);
 
 const formatDate = (rawDate) => {
   const date = new Date(rawDate);
@@ -19,9 +24,8 @@ onMounted(async () => {
     const api = new ApiClient();
     playerID.value = route.params.playerID;
 
-    const finishedGamesResponse = await api.get(`/players/${playerID.value}/games/finished`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    const finishedGamesResponse = await api.get(`/players/${playerID.value}/games/finished`, token);
     finishedGames.value = finishedGamesResponse;
-
 
     if (finishedGames.value && finishedGames.value.length > 0) {
       const lastTwoGames = finishedGames.value.slice(0, 5);

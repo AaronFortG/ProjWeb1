@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, inject } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
 
 // Define a reactive reference for players
@@ -7,12 +7,13 @@ const players = ref([]);
 
 // Initialize the API client
 const api = new ApiClient();
+const token = inject('token');
 
 // Fetch players when the component is mounted
 onMounted(async () => {
   try {
     const playersEndpoint = '/players';
-    const playersResponse = await api.get(playersEndpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    const playersResponse = await api.get(playersEndpoint, token);
 
     players.value = playersResponse;
 
