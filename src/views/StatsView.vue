@@ -16,7 +16,7 @@ onMounted(async () => {
   try {
     // Accede al parámetro a través de route.params.playerID
     playerID.value = route.params.playerID;
-    console.log('Parámetro recibido:', playerID.value);
+
 
     const api = new ApiClient();
     const response = await api.get(`players/${playerID.value}/statistics`, "46679998-2095-4a74-a1e6-6ca67be66f43");
@@ -30,8 +30,8 @@ onMounted(async () => {
     // Obtener los ataques y asignarlos a la variable de referencia attacks
     attacks.value = await api.get(`players/${playerID.value}/attacks`, "46679998-2095-4a74-a1e6-6ca67be66f43");
 
-  } catch (error) {
-    console.error('Error fetching players:', error);
+  } catch {
+    // Error cannot be shown in console.
   }
 });
 </script>

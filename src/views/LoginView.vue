@@ -18,14 +18,14 @@ const getPassword = (event) => {
 };
 
 const postData = async () => {
-  console.log('Entering postData');
+
   const endpoint = 'players';
 
   try {
     const api = new ApiClient();
     const response = await api.get(endpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
     players.value = response;
-    console.log(response);
+
 
     // Realizar la comparación con el player_ID introducido
     const myPlayerID = email.value;
@@ -34,20 +34,16 @@ const postData = async () => {
 
     for (const player of players.value) {
       if (player.player_ID === myPlayerID) {
-        console.log('El player_ID introducido coincide con uno de los jugadores obtenidos:', player);
         matchFound = true;
         break;
       }
     }
 
-    if (!matchFound) {
-      console.log('El player_ID introducido no coincide con ninguno de los jugadores obtenidos.');
-    } else {
+    if (matchFound) {
       router.push('/player-info');
     }
-
-  } catch (error) {
-    console.error('Error during the request:', error);
+  } catch {
+    // Error cannot be shown in console.
   }
 };
 

@@ -28,27 +28,18 @@ const openImageDialog = async () => {
   const { value: selectedName } = await Swal.fire({
     title: 'Select Your Profile Image',
     inputOptions: nameOptions,
-    imageUrl: imageOptions[2], // Imagen por defecto para el nombre seleccionado
-
+    imageUrl: imageOptions[nameOptions[selectedName]],
     imageAlt: 'User profile image',
     input: 'select',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     confirmButtonText: 'Select',
     preConfirm: (selectedName) => {
-      // Set the selected image URL based on the selected name
       selectedImage.value = imageOptions[nameOptions[selectedName]];
-      selectedImage.value = imageOptions[2];
+      selectedImage.value = imageOptions[1];
     },
   });
 
-  // mirar si se cambia el valor del path de la imagen
-  console.log("path de la imagen", selectedImage.value);
-
-  if (selectedName !== undefined) {
-    console.log('Selected Name:', selectedName);
-    console.log('Selected Image:', selectedImage.value);
-  }
 };
 
 
@@ -67,7 +58,6 @@ const getValueEmail = (event) => {
 };
 
 const postData = async () => {
-  console.log('Entering postData');
   const endpoint = 'players';
 
   const data = {
@@ -79,11 +69,11 @@ const postData = async () => {
 
   try {
     const api = new ApiClient();
-    const response = await api.post(endpoint, data);
-    console.log('Successfully created. Status code:', response.status);
-  } catch (error) {
-    console.error('Error during the request:', error);
+    await api.post(endpoint, data);
+  } catch {
+    // Aquí no haces nada, el bloque está vacío
   }
+
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -122,7 +112,6 @@ const isPasswordValid = () => password.value === confirmPassword.value;
         <router-link id="register-button" :to="isValidSignUp() ? '/player-info' : '/sign-up'" class="router-link" @click="postData()">
           Create account
         </router-link>
-
       </div>
 
       <p v-if="password !== confirmPassword || !isValidEmail()" class="error-message">
