@@ -37,10 +37,21 @@ const initialHP1 = ref(null);
 const hp2 = ref(null);
 const initialHP2 = ref(null);
 
-
 // Const to know the direction of the player
 const currentDirection = ref(null);
 
+// Get the equipped attacks from the current user.
+const equippedAttacks = ref([]);
+async function getEquippedAttacks() {
+  try {
+    const response = await api.get(`players/attacks`, token);
+    equippedAttacks.value = response.filter(attack => attack.equipped);
+    console.log(equippedAttacks)
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
 
 // *** METHODS ***
 onMounted(async () => {
@@ -59,6 +70,9 @@ onMounted(async () => {
     // Save the initial HP of the players
     initialHP1.value = hp1.value;
     initialHP2.value = hp2.value;
+
+    // Get the equipped attacks of the player.
+    getEquippedAttacks();
 
   } catch (error) {
     console.error('Error fetching game data:', error);
@@ -297,9 +311,7 @@ window.addEventListener('popstate', function () {
     <!-- The attacks and keys -->
     <div class="rows_together_container">
       <section id="attacks">
-        <h2>Attacflajlfasdljflsjlfjdlfjlsjdlkfjak 1</h2>
-        <h2>Attack 2</h2>
-        <h2>Attack 3</h2>
+        <h2 v-for="(attack, index) in equippedAttacks" v-bind:key="index">{{ attack.attack_ID }}</h2>
       </section>
 
       <div class="keys_container">
