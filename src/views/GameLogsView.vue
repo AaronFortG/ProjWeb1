@@ -54,7 +54,16 @@ function formatDate(dateString) {
     <section>
       <h1 class="title">Game Logs</h1>
 
-      <h2>Grid Size: {{ arenaInfo.size }} x {{ arenaInfo.size }} - HP Max: {{ arenaInfo.HP_max }}</h2>
+<!--      <h2>Arena name: "{{ arenaInfo.game_ID }}" -  Grid Size: {{ arenaInfo.size }} x {{ arenaInfo.size }} - HP Max: {{ arenaInfo.HP_max }}</h2>-->
+
+      <section class="arena-info">
+        <h2>Arena name: "{{ arenaInfo.game_ID }}"</h2>
+        <span class="separator">-</span>
+        <h2>Grid Size: {{ arenaInfo.size }} x {{ arenaInfo.size }}</h2>
+        <span class="separator">-</span>
+        <h2>HP Max: {{ arenaInfo.HP_max }}</h2>
+      </section>
+
       <p v-for="(log, index) in logsList" v-bind:key="index">[ {{ formatDate(log.date_time) }} ] - {{ log.description }}</p>
     </section>
   </div>
@@ -66,7 +75,7 @@ function formatDate(dateString) {
 }
 
 h1 {
-  margin: 3rem 0 2rem 0;
+  margin: 3rem 0 3rem 0;
 }
 
 p {
@@ -87,5 +96,32 @@ h2 {
 p {
   padding-bottom: 1rem;
   line-height: 1.5rem;
+}
+
+.arena-info {
+  display: flex;
+  flex-direction: column; /* Vertical display */
+}
+
+.separator {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .arena-info {
+    flex-direction: row; /* Horizontal display */
+  }
+
+  .arena-info h2 {
+    margin-right: 20px;
+  }
+
+  .separator {
+    margin: 0 2rem 1rem 1rem; /* Spacing for the separator */
+    color: white;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    display: inline;
+  }
 }
 </style>
