@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     navigateLogs() {
-      this.$router.push('/game-logs')
+      this.$router.push('/game-logs/007');  // TODO: falta fer-ho depenent del joc triat.
     },
     showPopUpMethod() {
       this.showPopUp = true
