@@ -42,6 +42,9 @@ const currentDirection = ref(null);
 
 // Get the equipped attacks from the current user.
 const equippedAttacks = ref([]);
+
+let selectedButtonIndex = null;
+
 async function getEquippedAttacks() {
   try {
     const response = await api.get(`players/attacks`, token);
@@ -181,6 +184,10 @@ const movePosition = async (movement) => {
   }
 }
 
+const startMoving = (direction) => {
+    moveDirection(direction);
+};
+
 document.addEventListener('keydown', function (event) {
   switch (event.keyCode) {
     case 37: // Arrow Left
@@ -233,6 +240,11 @@ const generateHeartIndices1 = () => {
 const generateHeartIndices2 = () => {
   const heartsCount = Math.min(5, Math.ceil((hp2.value / initialHP2.value) * 5));
   return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
+const selectButton = (index) => {
+  selectedButtonIndex = index;
+  // Agrega aquí la lógica adicional que desees al hacer clic en un botón.
 };
 
 onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
@@ -311,20 +323,26 @@ window.addEventListener('popstate', function () {
     <!-- The attacks and keys -->
     <div class="rows_together_container">
       <section id="attacks">
-        <h2 v-for="(attack, index) in equippedAttacks" v-bind:key="index">{{ attack.attack_ID }}</h2>
+        <button v-for="(attack, index) in equippedAttacks"
+                :key="index"
+                @click="selectButton(index)"
+                :class="{ 'selected-button': selectedButtonIndex === index }">
+          {{ attack.attack_ID }}
+
+        </button>
       </section>
 
       <div class="keys_container">
-        <button class="arrow-left" id="arrowLeftButton">
+        <button class="arrow-left" id="arrowLeftButton" @mousedown="startMoving('left')">
           <img src="../assets/images/game/arrow-left.png" alt="arrow-left" width="30" />
         </button>
-        <button class="arrow-up" id="arrowUpButton">
+        <button class="arrow-up" id="arrowUpButton" @mousedown="startMoving('up')">
           <img src="../assets/images/game/arrow-up.png" alt="arrow-up" width="30" />
         </button>
-        <button class="arrow-down" id="arrowDownButton">
+        <button class="arrow-down" id="arrowDownButton" @mousedown="startMoving('down')">
           <img src="../assets/images/game/arrow-down.png" alt="arrow-down" width="30" />
         </button>
-        <button class="arrow-right" id="arrowRightButton">
+        <button class="arrow-right" id="arrowRightButton" @mousedown="startMoving('right')">
           <img src="../assets/images/game/arrow-right.png" alt="arrow-right" width="30" />
         </button>
 
@@ -340,7 +358,7 @@ window.addEventListener('popstate', function () {
 
 <style scoped>
 p,
-h2 {
+button {
   color: white;
 }
 .rows_together_container {
@@ -400,7 +418,7 @@ h2 {
   justify-content: space-between;
 }
 
-#attacks h2 {
+#attacks button {
   max-width: 7rem;
   padding: 0.5rem;
   margin: 0.5rem 0;
@@ -458,7 +476,16 @@ h2 {
   width: 100%;
 }
 
+.selected-button {
+  border: 2px solid white;
+}
+
 @media (min-width: 980px) {
+  #attacks button {
+    width: 14rem;
+    height: 4rem;
+  }
+
   .game_container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columnas del mismo tamaño */
@@ -515,7 +542,7 @@ h2 {
   .rows_together_container #attacks {
     margin: auto auto 0 0;
   }
-  .rows_together_container #attacks h2 {
+  .rows_together_container #attacks button {
     max-width: 14rem;
   }
   .red_button {
