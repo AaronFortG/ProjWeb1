@@ -1,15 +1,16 @@
 <script setup>
-import { RouterLink } from 'vue-router'
 import InputNumberComponent from "@/components/InputNumberComponent.vue";
 import { ApiClient } from '@/assets/ApiClient'
 import { inject, ref } from 'vue'
 import InputComponent from '@/components/InputComponent.vue'
+import { useRouter } from 'vue-router';
 
 const api = new ApiClient();
 
 let game_ID = ref("");
 let size = ref(0);
 let hpMax = ref(0);
+const router = useRouter();
 
 // Show the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
@@ -42,8 +43,8 @@ const createArena = async () => {
       // Arena creada correctamente
       console.log('Arena created successfully');
 
-      // Cambia la URL y recarga la página
-      this.$router.push('/LoadingPageView');
+      // Cambia la URL
+      router.push(`/loading-page/${game_ID.value}`);
 
     } else {
       console.error('Error creating arena:', createResponse);

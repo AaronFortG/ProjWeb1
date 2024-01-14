@@ -1,42 +1,70 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
 import { inject } from 'vue';
+import { useRoute, useRouter } from 'vue-router'
 
 const api = new ApiClient();
 
-const gameData = ref(null);
+const gameData = ref(null);  // Datos de la partida
+const arenaID = ref(null);   // ID de la partida
+let intervalId;       // ID del intervalo
 
+// Hide the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
 updateShowVerticalMenu(false);
 
+// Const to get the ID of the arena
+const route = useRoute();
+const router = useRouter();
+
+// *** METHODS ***
 onMounted(async () => {
+  arenaID.value = route.params.arenaID;
+  console.log(arenaID.value);
   try {
-    const id = "holalkjhlkjl";
+    const id = arenaID.value;
     const response = await api.get(`/arenas/${id}`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
     gameData.value = response;
 
     console.log(gameData.value);
+    checkIfGameFinished();
 
   } catch (error) {
     console.error('Error fetching game data:', error);
-    // Puedes manejar el error de alguna manera aquí.
+    alert(error);
   }
 });
 
 const leaveGame = async() => {
   try {
-    const id = "holalkjhlkjl";
+    const id = arenaID.value;
     const response = await api.delete(`/arenas/${id}/play`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
     gameData.value = response;
 
     console.log(gameData.value);
-    this.$router.push('/game-over');
   } catch (error) {
     console.error('Error fetching game data:', error);
     alert(error);
   }
 }
+
+const checkIfGameFinished = async () => {
+  // Almacenar el ID del intervalo en la variable de referencia
+  intervalId = setInterval(async () => {
+    const id = arenaID.value;
+    const response = await api.get(`/arenas/${id}`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    gameData.value = response;
+
+    if (gameData.value.finished === true) {
+      clearInterval(intervalId); // Detener el intervalo antes de cambiar de página
+      console.log("GAME FINISHED");
+      router.push('/player-info');
+    }
+  }, 1000); // Actualizar cada 1000 milisegundos
+}
+
+onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
 
 </script>
 

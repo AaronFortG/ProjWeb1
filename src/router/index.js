@@ -80,12 +80,12 @@ const router = createRouter({
       component: () => import('../views/BagView.vue')
     },
     {
-      path: '/game',
+      path: '/game/:arenaID',
       name: 'game',
       component: () => import('../views/GameView.vue')
     },
     {
-      path: '/loading-page',
+      path: '/loading-page/:arenaID',
       name: 'loading-page',
       component: () => import('../views/LoadingPageView.vue')
     },

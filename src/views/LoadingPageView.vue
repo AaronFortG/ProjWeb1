@@ -1,45 +1,68 @@
 <script setup>
 import router from '@/router'
+import { ref, onMounted, inject } from 'vue'
+import { ApiClient } from '@/assets/ApiClient'
+import { useRoute } from 'vue-router'
 
-onMounted(() => {
-  // Espera 10 segons i llavors va a GameView.
-  // Quan treballem amb l'API haurem de fer que es vagi reiniciant el temps fins que algú s'uneixi a la partida.
-  setTimeout(() => {
-    router.push('/game')
-  }, 10000)
+// Hide the vertical menu.
+const updateShowVerticalMenu = inject('updateShowVerticalMenu');
+updateShowVerticalMenu(false);
+
+// *** CONSTANTS ***
+const api = new ApiClient();
+// API constants
+const gameData = ref(null);
+
+const arenaID = ref(null);
+
+// Progress bar
+const progressBarValue = ref(0)
+
+const route = useRoute();
+
+// *** METHODS ***
+onMounted(async () => {
+  arenaID.value = route.params.arenaID;
+  console.log(arenaID.value);
+
+  updateProgressBar()
+  try {
+    checkIfGameStarted();
+    console.log(gameData.value);
+
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
 })
 
-import { ref, onMounted } from 'vue'
+const checkIfGameStarted = async () => {
+  setInterval(async () => {
+    const id = arenaID.value;
+    const response = await api.get(`/arenas/${id}`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    gameData.value = response;
 
-const progressBarValue = ref(0)
+    if (gameData.value.start === true) {
+      router.push(`/game/${id}`);
+    }
+  }, 1000) // Actualizar cada 1000 milisegundos
+}
 
 const updateProgressBar = () => {
   setInterval(() => {
     if (progressBarValue.value < 100) {
       progressBarValue.value += 1
     } else {
-      clearInterval() // Detener el intervalo si se alcanza el 100%
+      progressBarValue.value = 0
     }
-  }, 100) // Actualizar cada 100 milisegundos (ajusta según tus necesidades)
+  }, 100) // Actualizar cada 100 milisegundos
 }
-
-onMounted(() => {
-  updateProgressBar()
-})
 
 // Deshabilitar el botón de retroceso
 history.pushState(null, null, document.URL)
 window.addEventListener('popstate', function () {
   history.pushState(null, null, document.URL)
 })
-</script>
-
-<script>
-export default {
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
-}
 </script>
 
 <template>
