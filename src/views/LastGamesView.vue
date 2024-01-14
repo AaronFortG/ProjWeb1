@@ -21,12 +21,11 @@ onMounted(async () => {
 
     const finishedGamesResponse = await api.get(`/players/${playerID.value}/games/finished`, "46679998-2095-4a74-a1e6-6ca67be66f43");
     finishedGames.value = finishedGamesResponse;
-    console.log(finishedGamesResponse);
+
 
     if (finishedGames.value && finishedGames.value.length > 0) {
-      console.log("netra");
       const lastTwoGames = finishedGames.value.slice(0, 5);
-      console.log('Últimos dos juegos:', lastTwoGames);
+
       games.value = [];
       for (const game of lastTwoGames) {
         games.value.push({
@@ -46,12 +45,10 @@ onMounted(async () => {
           }
         });
       }
-      console.log('games:', games.value);
-    } else {
-      console.log("else");
+
     }
-  } catch (error) {
-    console.error('Error fetching games:', error);
+  } catch  {
+    // Error cannot be shown in console.
   }
 });
 </script>

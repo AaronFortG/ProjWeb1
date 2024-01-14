@@ -14,13 +14,11 @@ onMounted(async () => {
     const playersEndpoint = '/players';
     const playersResponse = await api.get(playersEndpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
 
-    // Set the players array to the response data
     players.value = playersResponse;
 
-    // Sort players by coins in descending order
     players.value.sort((b, a) => a.coins - b.coins);
-  } catch (error) {
-    console.error('Error fetching players:', error);
+  } catch  {
+    // Error cannot be shown in console.
   }
 });
 </script>
