@@ -41,10 +41,14 @@ const initialHP2 = ref(null);
 // Const to know the direction of the player
 const currentDirection = ref(null);
 
+
 // *** METHODS ***
 onMounted(async () => {
   arenaID.value = route.params.arenaID;
   console.log(arenaID.value);
+  currentDirection.value = 'down';
+  console.log (currentDirection.value);
+
   try {
     const id = arenaID.value;
     const response = await api.get(`/arenas/${id}`, token);
@@ -248,11 +252,28 @@ window.addEventListener('popstate', function () {
         <div v-for="(cell, colIndex) in gameData.size" :key="colIndex">
           <!-- Verificar si la celda coincide con la posición del jugador -->
           <img
-            v-if="x_game_P1 === colIndex && y_game_P1 === rowIndex"
-            src="../assets/images/game/player1.png" :alt="`Player1`"
+            v-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'up'"
+            src="../assets/images/game/player1_up.png"
+            :alt="`Player1 up`"
           />
           <img
-            v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex"
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'down'"
+            src="../assets/images/game/player1_down.png"
+            :alt="`Player1 down`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'left'"
+            src="../assets/images/game/player1_left.png"
+            :alt="`Player1 left`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'right'"
+            src="../assets/images/game/player1_right.png"
+            :alt="`Player1 right`"
+          />
+
+          <img
+            v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex "
             src="../assets/images/game/player2.png" :alt="`Player2`"
           />
           <!-- Si no, muestra la imagen de suelo -->
