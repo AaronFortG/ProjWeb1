@@ -1,12 +1,12 @@
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { ApiClient } from '../assets/ApiClient'
 import { useRoute } from 'vue-router'
 
 const api = new ApiClient();
 
 // Get the user's credentials from the Singletone.
-const token = inject('token');
+const token = window.localStorage.getItem('token');
 const logsList = ref([]);
 const arenaID = ref('');
 const arenaInfo = ref('');

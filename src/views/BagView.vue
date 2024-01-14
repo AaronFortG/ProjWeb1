@@ -15,8 +15,8 @@ const api = new ApiClient();
 
 const showPopUp = ref(false);
 
-const token = inject('token');
-const playerID = inject('playerID');
+const token = window.localStorage.getItem('token');
+const playerID = window.localStorage.getItem('playerID');
 
 // Hide the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');

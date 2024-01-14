@@ -1,6 +1,9 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
+import { inject } from 'vue'
+
+const updateToken = inject('updateToken');
 </script>
 
 <template>
@@ -26,7 +29,7 @@ import {RouterLink} from "vue-router";
       <img src="../assets/images/menu/ranking.png" alt="">
     </router-link>
 
-    <router-link to="/" class="bloc-icon">
+    <router-link to="/" class="bloc-icon" v-on:click="updateToken('', '')">
       <img src="../assets/images/menu/turn-off.png" alt="">
     </router-link>
   </nav>

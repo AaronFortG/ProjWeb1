@@ -34,8 +34,11 @@ const updateToken = (newToken, newPlayerID) => {
   playerID.value = newPlayerID;
   localStorage.setItem('token', newToken);
   localStorage.setItem('playerID', newPlayerID);
-  console.log("Token updated!")
+  console.log("Token updated!");
   // Provide the updated values to the components
+
+  provide('token', playerToken.value);
+  provide('playerID', playerID.value);
 };
 
 provide('updateToken', updateToken);

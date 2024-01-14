@@ -20,6 +20,8 @@ const progressBarValue = ref(0)
 
 const route = useRoute();
 
+const token = window.localStorage.getItem('token');
+
 // *** METHODS ***
 onMounted(async () => {
   arenaID.value = route.params.arenaID;
@@ -39,7 +41,7 @@ onMounted(async () => {
 const checkIfGameStarted = async () => {
   setInterval(async () => {
     const id = arenaID.value;
-    const response = await api.get(`/arenas/${id}`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
 
     if (gameData.value.start === true) {

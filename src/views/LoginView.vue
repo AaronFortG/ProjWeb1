@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from 'vue';
+import { ref } from 'vue';
 import MySecondComponent from "@/components/InputComponent.vue";
 import { ApiClient } from "@/assets/ApiClient";
 import { useRouter } from 'vue-router';
@@ -7,8 +7,6 @@ import { useRouter } from 'vue-router';
 const email = ref('');
 const password = ref('');
 const router = useRouter();
-const players = ref([]);
-
 
 const getPlayer = (event) => {
   email.value = event;
@@ -40,8 +38,10 @@ const postData = async () => {
     // Update token to the App.vue (Singleton)
     updateToken(result.token, email.value);
     router.push(`/player-info`);
-  } catch {
+    //location.reload();
+  } catch(error) {
     // Error cannot be shown in console.
+    alert(error);
   }
 };
 

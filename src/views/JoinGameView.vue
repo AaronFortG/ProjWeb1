@@ -1,10 +1,12 @@
 <script setup>
-import { computed, inject, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { ApiClient } from '../assets/ApiClient'
 import ArenaComponent from '../components/ArenaComponent.vue'
+import { useRouter } from 'vue-router'
 
 const showPopUp = ref(false);
 const selectedArena = ref(null);
+const router = useRouter();
 
 // Show the popup to join an arena.
 const showJoinArenaPopUp = (arena_ID) => {
@@ -17,12 +19,15 @@ const hidePopUp = () => {
   showPopUp.value = false;
 };
 
+// Get the user's credentials from the Singleton.
+const token = window.localStorage.getItem('token');
+
 // Join the arena.
 const joinArena = (arena_ID) => {
 
   api.post(`arenas/${arena_ID}/play`, null, token)
     .then(() => {
-      // TODO: Reenviar l'usuari a /play-arena/:idArena
+      router.push(`/game/${arena_ID}`);
     })
     .catch((error) => {
       alert(error);
@@ -36,9 +41,6 @@ const handleNoClick = () => {
 };
 
 const api = new ApiClient();
-
-// Get the user's credentials from the Singletone.
-const token = inject('token');
 
 const gamesList = ref([]);
 onMounted(async () => {

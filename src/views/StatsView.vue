@@ -1,10 +1,10 @@
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router';
 import { ApiClient } from '@/assets/ApiClient';
 
-const token = inject('token');
-const playerID = inject('playerID');
+const token = window.localStorage.getItem('token');
+const playerID = window.localStorage.getItem('playerID');
 const gamesPlayed = ref(0);
 const gamesWon = ref(0);
 const winPercentage = ref(0);
@@ -14,12 +14,10 @@ const attacks = ref([]);
 const route = useRoute();
 
 onMounted(async () => {
-  console.log("Token: ", token, "Player IDDDD: ", playerID);
   try {
     // Accede al parámetro a través de route.params.playerID
     playerID.value = route.params.playerID;
 
-    console.log("Token: ", token, "Player IDDDD: ", playerID);
     const api = new ApiClient();
     const response = await api.get(`players/${playerID.value}/statistics`, token);
 

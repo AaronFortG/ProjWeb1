@@ -6,7 +6,7 @@ import { ApiClient } from '@/assets/ApiClient'
 
 let attack_ID = ref("");
 let positions = ref("");
-const token = inject('token');
+const token = window.localStorage.getItem('token');
 
 const api = new ApiClient();
 

@@ -1,5 +1,5 @@
 <script setup>
-import { inject, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ApiClient } from '../assets/ApiClient'
 import ArenaComponent from '../components/ArenaComponent.vue'
@@ -33,7 +33,7 @@ const handleNoClick = () => {
 }
 
 const api = new ApiClient();
-const token = inject('token');
+const token = window.localStorage.getItem('token');
 const gamesList = ref([]);
 const arenaIdFilter = ref('');
 const filteredGame = ref(null);

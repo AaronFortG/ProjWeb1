@@ -1,9 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { ref, onMounted, getCurrentInstance, inject } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
-
-const { proxy } = getCurrentInstance(); // Obtiene la instancia actual
 
 const items = ref([]);
 const player = ref([]);
@@ -13,7 +11,7 @@ const coins = ref(0);
 const api = new ApiClient();
 const showPopUp = ref(false);
 
-const token = inject('token');
+const token = window.localStorage.getItem('token');
 const playerID = inject('playerID');
 
 // Show the vertical menu.

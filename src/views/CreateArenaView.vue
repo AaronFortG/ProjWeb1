@@ -12,8 +12,7 @@ let size = ref(0);
 let hpMax = ref(0);
 const router = useRouter();
 
-const token = inject('token');
-const playerID = inject('playerID');
+const token = window.localStorage.getItem('token');
 
 // Show the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');

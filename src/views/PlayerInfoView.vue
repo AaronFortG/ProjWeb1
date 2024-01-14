@@ -17,8 +17,8 @@ const updateShowVerticalMenu = inject('updateShowVerticalMenu');
 updateShowVerticalMenu(true);
 
 // Get the user's credentials from the Singletone.
-const token = inject('token');
-const playerID = inject('playerID');
+const token = window.localStorage.getItem('token');
+const playerID = window.localStorage.getItem('playerID');
 console.log("Token: ", token, "Player ID:", playerID);
 
 // Show the popup to equip an attack.

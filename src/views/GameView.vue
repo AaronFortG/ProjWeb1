@@ -20,8 +20,8 @@ updateShowVerticalMenu(false);
 const route = useRoute();
 const router = useRouter();
 
-const token = inject('token');
-const playerID = inject('playerID');
+const token = window.localStorage.getItem('token');
+const playerID = window.localStorage.getItem('playerID');
 
 const playerID_2 = ref(null);
 

@@ -7,7 +7,7 @@ const games = ref([]);
 const route = useRoute();
 const playerID = ref('');
 const finishedGames = ref([]);
-const token = inject('token');
+const token = window.localStorage.getItem('token');
 
 // Hide the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
