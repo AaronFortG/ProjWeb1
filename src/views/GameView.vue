@@ -22,6 +22,7 @@ const router = useRouter();
 
 const token = inject('token');
 const playerID = inject('playerID');
+
 const playerID_2 = ref(null);
 
 const x_game_P1 = ref(null);
@@ -68,9 +69,10 @@ onMounted(async () => {
 
   try {
     const id = arenaID.value;
+    console.log(id);
     const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
-    console.log(gameData.value);
+    console.log('GAME:', gameData.value);
     checkIfGameFinished();
 
     // Save the initial HP of the players
@@ -108,8 +110,10 @@ const checkIfGameFinished = async () => {
       // Obtener los datos del jugador actualizado
       const playerResponse = await api.get('/players/arenas/current', token);
       playerData.value = playerResponse[0];
-
+      //console.log('PLAYER: ', playerID);
       for (let i = 0; i < playerData.value.players_games.length; i++) {
+        console.log('PLAYER: ', playerData.value.players_games[i].player_ID);
+
         if (playerData.value.players_games[i].player_ID === playerID) {
           // Get the position of the player
           x_game_P1.value = playerData.value.players_games[i].x_game;
@@ -119,6 +123,9 @@ const checkIfGameFinished = async () => {
           y_attack.value = parseInt(match[2]);
           // Get the HP of the player
           hp1.value = playerData.value.players_games[i].hp;
+
+          console.log('PLAYER: ', playerData.value.players_games[i].player_ID);
+
         } else {
           // Get the position of the player
           x_game_P2.value = playerData.value.players_games[i].x_game;
@@ -126,7 +133,6 @@ const checkIfGameFinished = async () => {
           playerID_2.value = playerData.value.players_games[i].player_ID;
           // Get the HP of the player
           hp2.value = playerData.value.players_games[i].hp;
-          break;
         }
       }
 

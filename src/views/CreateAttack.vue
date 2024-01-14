@@ -6,6 +6,7 @@ import { ApiClient } from '@/assets/ApiClient'
 
 let attack_ID = ref("");
 let positions = ref("");
+const token = inject('token');
 
 const api = new ApiClient();
 
@@ -30,7 +31,7 @@ const createAttack = async () => {
       img: "https://imgs.search.brave.com/636aDEVODM14zcFZ4tlGDJaRuZjRJXn48L6MXhK1QWI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/c2Vla3BuZy5jb20v/cG5nL2RldGFpbC8y/Ny0yNzM2NzBfcGl4/ZWwtZ3VuLXBpeGVs/LWFydC5wbmc"
     };
 
-    const createResponse = await api.post(createEndpoint, createData, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const createResponse = await api.post(createEndpoint, createData, token);
 
     if (createResponse) {
       // Ataque creado correctamente
