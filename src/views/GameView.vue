@@ -29,6 +29,9 @@ const x_game_P2 = ref(null);
 const y_game_P1 = ref(null);
 const y_game_P2 = ref(null);
 
+const x_attack = ref(null);
+const y_attack = ref(null);
+
 // ** Const to get the HP of the players **
 // Player 1
 const hp1 = ref(null);
@@ -43,7 +46,7 @@ const currentDirection = ref(null);
 // Get the equipped attacks from the current user.
 const equippedAttacks = ref([]);
 
-let selectedButtonIndex = null;
+let selectedButtonIndex = 0;
 
 async function getEquippedAttacks() {
   try {
@@ -111,6 +114,10 @@ const checkIfGameFinished = async () => {
           // Get the position of the player
           x_game_P1.value = playerData.value.players_games[i].x_game;
           y_game_P1.value = playerData.value.players_games[i].y_game;
+
+          const match = equippedAttacks.value[selectedButtonIndex].positions.match(/\((\d+),(\d+)\)/);
+          x_attack.value = parseInt(match[1]);
+          y_attack.value = parseInt(match[2]);
 
           // Get the HP of the player
           hp1.value = playerData.value.players_games[i].hp;
@@ -298,17 +305,28 @@ window.addEventListener('popstate', function () {
             :alt="`Player1 right`"
           />
 
+          <!-- Verificar si la celda coincide con la posición de ataque del jugador -->
           <img
-            v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex "
-            src="../assets/images/game/player2.png" :alt="`Player2`"
+            v-else-if="colIndex === (x_attack + x_game_P1) && rowIndex === (-y_attack + y_game_P1)"
+            src="../assets/images/game/floor_spikes_anim_f3.png"
+            :alt="`Player1 attack`"
+          />
+
+
+          <img
+            v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex"
+            src="../assets/images/game/player2.png"
+            :alt="`Player2`"
           />
           <!-- Si no, muestra la imagen de suelo -->
           <img
             v-else
-            src="../assets/images/game/floor_1.png" :alt="`Cell ${rowIndex}-${colIndex}`"
+            src="../assets/images/game/floor_1.png"
+            :alt="`Cell ${rowIndex}-${colIndex}`"
           />
         </div>
       </div>
+
     </div>
 
     <!-- Create: player's (2) name and his life -->
