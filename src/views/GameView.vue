@@ -28,6 +28,9 @@ const x_game_P2 = ref(null);
 const y_game_P1 = ref(null);
 const y_game_P2 = ref(null);
 
+const currentDirection = ref(null);
+
+
 // *** METHODS ***
 onMounted(async () => {
   arenaID.value = route.params.arenaID;
@@ -100,6 +103,28 @@ const setButtonState = (buttonId, isPressed) => {
   }
 }
 
+const moveDirection = async (movement) => {
+  try {
+    // Verifica si la dirección actual es diferente de la dirección solicitada
+    if (currentDirection.value === movement) {
+      const moveData = {
+        direction: movement
+      };
+
+      const response = await api.post(`/arenas/direction`, moveData, token);
+      console.log(response.value);
+
+      // Actualiza la dirección actual
+      currentDirection.value = movement;
+
+      movePosition(movement);
+    }
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
+
 const movePosition = async (movement) => {
   try {
     const moveData = {
@@ -119,19 +144,19 @@ document.addEventListener('keydown', function (event) {
   switch (event.keyCode) {
     case 37: // Arrow Left
       setButtonState('arrowLeftButton', true);
-      movePosition('left');
+      moveDirection('left');
       break
     case 38: // Arrow Up
       setButtonState('arrowUpButton', true);
-      movePosition('up');
+      moveDirection('up');
       break
     case 39: // Arrow Right
       setButtonState('arrowRightButton', true);
-      movePosition('right');
+      moveDirection('right');
       break
     case 40: // Arrow Down
       setButtonState('arrowDownButton', true);
-      movePosition('down');
+      moveDirection('down');
       break
     case 32: // Key Space
       setButtonState('spaceKeyButton', true);
