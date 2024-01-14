@@ -73,8 +73,9 @@ onMounted(async () => {
       </div>
     </div>
     <p class="last_games">
-      <router-link class="main-button" :to="'/last-games/'">Last Games</router-link>
+      <router-link class="main-button" :to="{ name: 'last-games', params: { playerID: playerID.value } }">Last Games</router-link>
     </p>
+
   </div>
 
   <div class="back-button">
