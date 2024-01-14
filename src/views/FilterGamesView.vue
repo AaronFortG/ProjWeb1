@@ -1,31 +1,35 @@
 <script setup>
-import { ref, onMounted, inject, watch } from 'vue'
+import { inject, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ApiClient } from '../assets/ApiClient'
 import ArenaComponent from '../components/ArenaComponent.vue'
+import 'jquery'; // Import jQuery
+import 'moment'; // Import Moment.js
+import 'daterangepicker/daterangepicker.css'; // Import Date Range Picker CSS
+import 'daterangepicker'; // Import Date Range Picker script
 
-const showPopUp = ref(false)
-const router = useRouter()
+const showPopUp = ref(false);
+const router = useRouter();
 
 const navigateLogs = () => {
-  router.push('/game-logs/007')  // TODO: adjust based on the chosen game.
+  router.push('/game-logs/007'); // TODO: adjust based on the chosen game.
 }
 
 const showPopUpMethod = () => {
-  showPopUp.value = true
+  showPopUp.value = true;
 }
 
 const hidePopUp = () => {
-  showPopUp.value = false
+  showPopUp.value = false;
 }
 
 const handleYesClick = () => {
   alert('Join arena')
-  hidePopUp()
+  hidePopUp();
 }
 
 const handleNoClick = () => {
-  hidePopUp()
+  hidePopUp();
 }
 
 const api = new ApiClient();
@@ -35,6 +39,7 @@ const arenaIdFilter = ref('');
 const filteredGame = ref(null);
 const filtering = ref(false);
 const selectedStatus = ref('Available');
+const dateRange = ref('11/10/2023 - 11/12/2023'); // Initial date range value
 
 onMounted(async () => {
   try {
@@ -51,8 +56,7 @@ watch(arenaIdFilter, async (newValue, oldValue) => {
   if (newValue !== oldValue && newValue !== null && newValue !== '') {
     filtering.value = true;
     await fetchArenaById(arenaIdFilter.value);
-  }
-  else {
+  } else {
     filtering.value = false;
     filteredGame.value = null;
   }
@@ -72,13 +76,20 @@ function filterGamesByStatus(allGames, status) {
   }
 }
 
+// Filter all the current games by the new date range selected.
+function filterGamesByDatesRange(allGames, firstDate, lastDate) {
+  return allGames.filter(game => {
+    const gameDate = game.creation_date;
+    return gameDate.isSameOrAfter(firstDate) && gameDate.isSameOrBefore(lastDate);
+  });
+}
+
 // Watch for changes in the selected status
 watch(selectedStatus, async (newValue, oldValue) => {
   if (newValue !== oldValue) {
     try {
       const response = await api.get('arenas', token);
-      const allGames = response;
-      gamesList.value = filterGamesByStatus(allGames, newValue);
+      gamesList.value = filterGamesByStatus(response, newValue);
     } catch (error) {
       console.error('Error fetching arenas:', error);
     }
@@ -109,6 +120,57 @@ function formatDate(inputDateString) {
   return formattedDate;
 }
 
+async function fetchArenaByDates(startDate, endDate) {
+  // A new date range has been selected:
+  console.log("A new date selection was made: " + startDate + ' to ' + endDate);
+  try {
+    const result = await api.get('arenas', token);
+    gamesList.value = filterGamesByDatesRange(result, startDate, endDate);
+    console.log(result);
+  } catch (error) {
+    filteredGame.value = null;
+  }
+}
+</script>
+
+
+<script>
+export default {
+  mounted() {
+    // Initialize the date range with our custom selections: format 'DD/MM/YYYY'
+    $('input[name="date-range"]').daterangepicker({
+      opens: 'center',
+      locale: {
+        format: 'DD/MM/YYYY',
+        separator: ' - ',
+        applyLabel: 'Apply',
+        cancelLabel: 'Cancel',
+        fromLabel: 'From',
+        toLabel: 'To',
+        customRangeLabel: 'Custom',
+        daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        monthNames: [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ],
+        firstDay: 1,
+      },
+    }, async (start, end) => {
+      // A new date range has been selected:
+      console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY'));
+    });
+  },
+};
 </script>
 
 <template>
@@ -135,7 +197,7 @@ function formatDate(inputDateString) {
 
     <div>
       <label for="date-range-input">Filter by date range</label>
-      <input type="text" name="date-range" id="date-range-input" value="11/10/2023 - 11/12/2023" />
+      <input type="text" name="date-range" id="date-range-input" v-model="dateRange" />
     </div>
   </form>
 
