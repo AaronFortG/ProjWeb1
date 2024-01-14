@@ -22,14 +22,12 @@ const playerID = inject('playerID');
 
 // Show the popup to equip an attack.
 const showPopUpEquipAttack = (attackID) => {
-  console.log("Selected attack: ", attackID);
   selectedAttack.value = attackID;
   showPopUpEquip.value = true;
 };
 
 // Show the popup to unequip and attack.
 const showPopUpUnequipAttack = (attackID) => {
-  console.log("Selected attack: ", attackID);
   selectedAttack.value = attackID;
   showPopUpUnequip.value = true;
 };

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, provide } from 'vue';
-import VerticalMenuComponent from "@/components/VerticalMenuComponent.vue";
+import { RouterView } from 'vue-router'
+import HorizontalMenuComponent from "@/components/HorizontalMenuComponent.vue";
 
 const playerToken = ref('');
 const playerID = ref('');
@@ -36,21 +37,24 @@ const updateToken = (newToken, newPlayerID) => {
 </script>
 
 <script>
-import HorizontalMenuComponent from "@/components/HorizontalMenuComponent.vue";
+import VerticalMenuComponent from './components/VerticalMenuComponent.vue'
 
 export default {
+  data() {
+    return {
+      showVerticalMenu: false
+    };
+  },
   components: {
-    HorizontalMenuComponent,
+    VerticalMenuComponent,
   },
 };
 </script>
 
 <template>
-  <div>
-    <VerticalMenuComponent v-if="showVerticalMenu" />
-    <RouterView :updateToken="updateToken" />
-    <HorizontalMenuComponent v-if="showVerticalMenu" />
-  </div>
+  <VerticalMenuComponent v-if="showVerticalMenu" />
+  <RouterView :updateToken="updateToken" />
+  <HorizontalMenuComponent v-if="showVerticalMenu" />
 </template>
 
 <style scoped></style>
