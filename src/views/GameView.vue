@@ -114,11 +114,10 @@ const moveDirection = async (movement) => {
       const response = await api.post(`/arenas/direction`, moveData, token);
       console.log(response.value);
 
-      // Actualiza la dirección actual
-      currentDirection.value = movement;
-
       movePosition(movement);
     }
+    // Actualiza la dirección actual
+    currentDirection.value = movement;
   } catch (error) {
     console.error('Error fetching game data:', error);
     alert(error);
