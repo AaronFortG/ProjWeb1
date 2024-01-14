@@ -129,10 +129,8 @@ async function fetchArenasByDates(startDate, endDate) {
     console.log(response);
     gamesList.value = response.filter(game => {
       const gameDate = formatDate(game.creation_date);
-      console.log(gameDate, startDate, endDate)
       return gameDate >= startDate && gameDate <= endDate;
     });
-    console.log("stopped filtering");
   } catch (error) {
     console.error('Error fetching arenas:', error);
   }
