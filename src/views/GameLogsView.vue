@@ -41,7 +41,7 @@ function formatDate(dateString) {
     hour12: false, // Use 24-hour format
   };
 
-  const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(dateObject);
+  const formattedDate = new Intl.DateTimeFormat('default', options).format(dateObject);
 
   return formattedDate;
 }

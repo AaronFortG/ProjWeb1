@@ -43,7 +43,6 @@ const token = inject('token');
 const gamesList = ref([]);
 onMounted(async () => {
   try {
-    // Replace 'your-endpoint' with the actual endpoint you want to call to get player information
     gamesList.value = await api.get('/arenas/', token);
   } catch (error) {
     console.error('Error fetching player information:', error);
