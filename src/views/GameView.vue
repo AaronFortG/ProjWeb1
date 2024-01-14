@@ -1,48 +1,128 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
 import { inject } from 'vue';
+import { useRoute, useRouter } from 'vue-router'
 
 const api = new ApiClient();
 
-const gameData = ref(null);
+const gameData = ref(null);  // Datos de la partida
+const arenaID = ref(null);   // ID de la partida
+const playerData = ref(null);  // Datos del jugador
 
+let intervalId;       // ID del intervalo
+
+// Hide the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
 updateShowVerticalMenu(false);
 
-onMounted(async () => {
-  try {
-    const id = "holalkjhlkjl";
-    const response = await api.get(`/arenas/${id}`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
-    gameData.value = response;
+// Const to get the ID of the arena
+const route = useRoute();
+const router = useRouter();
 
+const token = inject('token');
+const playerID = inject('playerID');
+const playerID_2 = ref(null);
+
+const x_game_P1 = ref(null);
+const x_game_P2 = ref(null);
+const y_game_P1 = ref(null);
+const y_game_P2 = ref(null);
+
+// ** Const to get the HP of the players **
+// Player 1
+const hp1 = ref(null);
+const initialHP1 = ref(null);
+// Player 2
+const hp2 = ref(null);
+const initialHP2 = ref(null);
+
+
+// Const to know the direction of the player
+const currentDirection = ref(null);
+
+
+// *** METHODS ***
+onMounted(async () => {
+  arenaID.value = route.params.arenaID;
+  console.log(arenaID.value);
+  currentDirection.value = 'down';
+  console.log (currentDirection.value);
+
+  try {
+    const id = arenaID.value;
+    const response = await api.get(`/arenas/${id}`, token);
+    gameData.value = response;
     console.log(gameData.value);
+    checkIfGameFinished();
+
+    // Save the initial HP of the players
+    initialHP1.value = hp1.value;
+    initialHP2.value = hp2.value;
 
   } catch (error) {
     console.error('Error fetching game data:', error);
-    // Puedes manejar el error de alguna manera aquí.
+    alert(error);
   }
 });
 
 const leaveGame = async() => {
   try {
-    const id = "holalkjhlkjl";
-    const response = await api.delete(`/arenas/${id}/play`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const id = arenaID.value;
+    const response = await api.delete(`/arenas/${id}/play`, token);
     gameData.value = response;
 
     console.log(gameData.value);
-    this.$router.push('/game-over');
+
+
   } catch (error) {
     console.error('Error fetching game data:', error);
     alert(error);
   }
 }
 
-</script>
+const checkIfGameFinished = async () => {
+  // Almacenar el ID del intervalo en la variable de referencia
+  intervalId = setInterval(async () => {
+    try {
+      // Obtener los datos del jugador actualizado
+      const playerResponse = await api.get('/players/arenas/current', token);
+      playerData.value = playerResponse[0];
 
-<script>
+      for (let i = 0; i < playerData.value.players_games.length; i++) {
+        if (playerData.value.players_games[i].player_ID === playerID) {
+          // Get the position of the player
+          x_game_P1.value = playerData.value.players_games[i].x_game;
+          y_game_P1.value = playerData.value.players_games[i].y_game;
 
-function setButtonState(buttonId, isPressed) {
+          // Get the HP of the player
+          hp1.value = playerData.value.players_games[i].hp;
+        } else {
+          // Get the position of the player
+          x_game_P2.value = playerData.value.players_games[i].x_game;
+          y_game_P2.value = playerData.value.players_games[i].y_game;
+          playerID_2.value = playerData.value.players_games[i].player_ID;
+
+          // Get the HP of the player
+          hp2.value = playerData.value.players_games[i].hp;
+          break;
+        }
+      }
+
+      // Verificar si el juego ha terminado
+      if (gameData.value.finished === true) {
+        clearInterval(intervalId);
+        console.log("JUEGO TERMINADO");
+        router.push('/player-info');
+      }
+    } catch (error) {
+      console.error('Error al obtener los datos del jugador:', error);
+      alert(error);
+    }
+  }, 1000); // Actualizar cada 1000 milisegundos
+}
+
+const setButtonState = (buttonId, isPressed) => {
   const button = document.getElementById(buttonId)
   if (isPressed) {
     button.style.backgroundColor = '#d0d0d0' // Change color when pressed
@@ -51,22 +131,62 @@ function setButtonState(buttonId, isPressed) {
   }
 }
 
+const moveDirection = async (movement) => {
+  try {
+    // Verifica si la dirección actual es diferente de la dirección solicitada
+    if (currentDirection.value === movement) {
+      const moveData = {
+        direction: movement
+      };
+
+      const response = await api.post(`/arenas/direction`, moveData, token);
+      console.log(response.value);
+
+      movePosition(movement);
+    }
+    // Actualiza la dirección actual
+    currentDirection.value = movement;
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
+
+const movePosition = async (movement) => {
+  try {
+    const moveData = {
+      movement: movement
+    };
+
+    const response = await api.post(`/arenas/move`, moveData, token);
+    console.log(response.value);
+
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
+
 document.addEventListener('keydown', function (event) {
   switch (event.keyCode) {
     case 37: // Arrow Left
-      setButtonState('arrowLeftButton', true)
+      setButtonState('arrowLeftButton', true);
+      moveDirection('left');
       break
     case 38: // Arrow Up
-      setButtonState('arrowUpButton', true)
+      setButtonState('arrowUpButton', true);
+      moveDirection('up');
       break
     case 39: // Arrow Right
-      setButtonState('arrowRightButton', true)
+      setButtonState('arrowRightButton', true);
+      moveDirection('right');
       break
     case 40: // Arrow Down
-      setButtonState('arrowDownButton', true)
+      setButtonState('arrowDownButton', true);
+      moveDirection('down');
       break
     case 32: // Key Space
-      setButtonState('spaceKeyButton', true)
+      setButtonState('spaceKeyButton', true);
       break
   }
 })
@@ -90,6 +210,24 @@ document.addEventListener('keyup', function (event) {
       break
   }
 })
+
+const generateHeartIndices1 = () => {
+  const heartsCount = Math.min(5, Math.ceil((hp1.value / initialHP1.value) * 5));
+  return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
+const generateHeartIndices2 = () => {
+  const heartsCount = Math.min(5, Math.ceil((hp2.value / initialHP2.value) * 5));
+  return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
+onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
+
+
+</script>
+
+<script>
+
 // Deshabilitar el botón de retroceso
 history.pushState(null, null, document.URL)
 window.addEventListener('popstate', function () {
@@ -101,32 +239,58 @@ window.addEventListener('popstate', function () {
   <div class="game_container">
     <!-- Create: player's (1) name and his life -->
     <div class="player-info">
-      <p>Player name</p>
+      <p>{{playerID}}</p>
       <div>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/half-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30" />
+        <!-- Lógica para mostrar corazones según el número de vidas -->
+        <img v-for="heartIndex in generateHeartIndices1()" :key="heartIndex" src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
       </div>
     </div>
 
     <!-- Create: the game board -->
-    <div class="board-game" v-if="gameData">
+    <div class="board-game" v-if="playerData">
       <div v-for="(row, rowIndex) in gameData.size" :key="rowIndex" class="row">
         <div v-for="(cell, colIndex) in gameData.size" :key="colIndex">
-          <img src="../assets/images/game/floor_1.png" :alt="`Cell ${rowIndex}-${colIndex}`" />
+          <!-- Verificar si la celda coincide con la posición del jugador -->
+          <img
+            v-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'up'"
+            src="../assets/images/game/player1_up.png"
+            :alt="`Player1 up`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'down'"
+            src="../assets/images/game/player1_down.png"
+            :alt="`Player1 down`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'left'"
+            src="../assets/images/game/player1_left.png"
+            :alt="`Player1 left`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'right'"
+            src="../assets/images/game/player1_right.png"
+            :alt="`Player1 right`"
+          />
+
+          <img
+            v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex "
+            src="../assets/images/game/player2.png" :alt="`Player2`"
+          />
+          <!-- Si no, muestra la imagen de suelo -->
+          <img
+            v-else
+            src="../assets/images/game/floor_1.png" :alt="`Cell ${rowIndex}-${colIndex}`"
+          />
         </div>
       </div>
     </div>
 
     <!-- Create: player's (2) name and his life -->
     <div class="player-info" id="players2">
-      <p>Player name</p>
+      <p>{{playerID_2}}</p>
       <div>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/half-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
+        <!-- Lógica para mostrar corazones según el número de vidas -->
+        <img v-for="heartIndex in generateHeartIndices2()" :key="heartIndex" src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
       </div>
     </div>
 
