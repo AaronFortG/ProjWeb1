@@ -74,13 +74,10 @@ article h2:last-child {
   padding-bottom: 0; /* Remove padding for the last child */
 }
 
-.arena-info {
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-section section article:hover {
+article:hover {
   outline: white 1px solid;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 @media (min-width: 1000px) {

@@ -3,29 +3,29 @@ import { inject, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ApiClient } from '../assets/ApiClient'
 import ArenaComponent from '../components/ArenaComponent.vue'
-import 'jquery'; // Import jQuery
-import 'moment'; // Import Moment.js
-import 'daterangepicker/daterangepicker.css'; // Import Date Range Picker CSS
-import 'daterangepicker'; // Import Date Range Picker script
 
-const showPopUp = ref(false);
+// Range date picker.
+import 'jquery';
+import 'moment';
+import 'daterangepicker/daterangepicker.css';
+import 'daterangepicker';
+
+const selectedArena = ref(null);
+const showPopUpJoin = ref(false);
+const showPopUpLogs = ref(false);
 const router = useRouter();
 
-const navigateLogs = () => {
-  router.push('/game-logs/007'); // TODO: adjust based on the chosen game.
+const showPopUpJoinArena = () => {
+  showPopUpJoin.value = true;
 }
 
-const showPopUpMethod = () => {
-  showPopUp.value = true;
+const showPopUpLogsArena = () => {
+  showPopUpLogs.value = true;
 }
 
 const hidePopUp = () => {
-  showPopUp.value = false;
-}
-
-const handleYesClick = () => {
-  alert('Join arena')
-  hidePopUp();
+  showPopUpLogs.value = false;
+  showPopUpJoin.value = false;
 }
 
 const handleNoClick = () => {
@@ -76,6 +76,25 @@ function filterGamesByStatus(allGames, status) {
   }
 }
 
+const joinArena = (arena_ID) => {
+  api.post(`arenas/${arena_ID}/play`, null, token)
+    .then(() => {
+      // TODO: Reenviar l'usuari a /play-arena/:idArena
+    })
+    .catch((error) => {
+      alert(error);
+    });
+
+  hidePopUp();
+};
+
+const checkLogs = (arena_ID) => {
+  router.push(`/game-logs/${arena_ID}`);
+
+  hidePopUp();
+}
+
+
 // Watch for changes in the selected status
 watch(selectedStatus, async (newValue, oldValue) => {
   if (newValue !== oldValue) {
@@ -93,7 +112,6 @@ async function fetchArenaById(arenaId) {
   try {
     const result = await api.get(`arenas/${arenaId}`, token);
     filteredGame.value = result;
-    console.log(result);
   } catch (error) {
     filteredGame.value = null;
   }
@@ -111,6 +129,21 @@ function formatDate(inputDateString) {
 
   return formattedDate;
 }
+
+// Join the arena.
+const arenaClicked = (arena) => {
+  selectedArena.value = arena;
+
+  // Join arena
+  if (!arena.start && !arena.finished) {
+    showPopUpJoinArena();
+  }
+
+  // Check arena logs.
+  if (arena.finished || arena.start) {
+    showPopUpLogsArena();
+  }
+};
 
 // Watch for changes in arenaIdFilter and fetch arenas when a new value is entered
 watch(dateRange, async (newValue, oldValue) => {
@@ -167,7 +200,6 @@ onMounted(() => {
       firstDay: 1,
     },
   }, (start, end) => {
-    console.log(start, end);
     dateRange.value = `${start.format('DD/MM/YYYY')} - ${end.format('DD/MM/YYYY')}`;
   });
 });
@@ -205,16 +237,22 @@ onMounted(() => {
   <p class="arena-join-description">Click a finished arena to view its logs.</p>
 
   <section v-if="filtering && filteredGame">
-    <ArenaComponent :name="filteredGame.game_ID" :size="filteredGame.size" :creation-date="formatDate(filteredGame.creation_date)" :started="filteredGame.start" :finished="filteredGame.finished" :hp="filteredGame.HP_max"></ArenaComponent>
+    <ArenaComponent :name="filteredGame.game_ID" :size="filteredGame.size" :creation-date="formatDate(filteredGame.creation_date)" :started="filteredGame.start" :finished="filteredGame.finished" :hp="filteredGame.HP_max" v-on:click="() => arenaClicked(filteredGame)"></ArenaComponent>
   </section>
 
   <section v-if="!filtering">
-    <ArenaComponent v-for="arena in gamesList" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-bind:started=arena.start v-bind:finished=arena.finished v-bind:hp=arena.HP_max></ArenaComponent>
+    <ArenaComponent v-for="arena in gamesList" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-bind:started=arena.start v-bind:finished=arena.finished v-bind:hp=arena.HP_max v-on:click="() => arenaClicked(arena)"></ArenaComponent>
   </section>
 
-  <div id="popUp" class="popUp" v-show="showPopUp">
-    <p class="popUp-question"><b>Are you sure you want to join the game?</b></p>
-    <p @click="handleYesClick">Join arena</p>
+  <div id="popUp" class="popUp" v-show="showPopUpJoin">
+    <p class="popUp-question"><b>Are you sure you want to join game "{{ selectedArena?.game_ID }}"?</b></p>
+    <p @click="joinArena(selectedArena.game_ID)">Join arena</p>
+    <p @click="handleNoClick">Cancel</p>
+  </div>
+
+  <div id="popUp-Logs" class="popUp" v-show="showPopUpLogs">
+    <p class="popUp-question"><b>Are you sure you want to check logs of game "{{ selectedArena?.game_ID }}"?</b></p>
+    <p @click="checkLogs(selectedArena.game_ID)">Check logs</p>
     <p @click="handleNoClick">Cancel</p>
   </div>
 </template>
