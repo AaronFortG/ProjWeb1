@@ -212,6 +212,7 @@ document.addEventListener('keydown', function (event) {
       break
     case 32: // Key Space
       setButtonState('spaceKeyButton', true);
+      attack();
       break
   }
 })
@@ -249,6 +250,18 @@ const generateHeartIndices2 = () => {
 const selectButton = (index) => {
   selectedButtonIndex = index;
   // Agrega aquí la lógica adicional que desees al hacer clic en un botón.
+};
+
+const attack = async () => {
+  try {
+    const attack_ID = equippedAttacks.value[selectedButtonIndex].attack_ID;
+    const response = await api.post(`/arenas/attack/${attack_ID}`, null, token);
+    console.log(response);
+
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
 };
 
 onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
@@ -362,7 +375,7 @@ window.addEventListener('popstate', function () {
         </button>
 
         <button class="space-key" id="spaceKeyButton">
-          <img src="../assets/images/game/space-key.png" alt="space-key" width="30" />
+          <img src="../assets/images/game/space-key.png" @mousedown="attack()" alt="space-key" width="30" />
         </button>
       </div>
     </div>
