@@ -1,5 +1,59 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { ref, onMounted } from 'vue';
+import { ApiClient } from '@/assets/ApiClient';
+import { useRoute } from 'vue-router';
+
+const games = ref([]);
+const route = useRoute();
+const playerID = ref('');
+const finishedGames = ref([]);
+
+const formatDate = (rawDate) => {
+  const date = new Date(rawDate);
+  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+};
+
+onMounted(async () => {
+  try {
+    const api = new ApiClient();
+    playerID.value = route.params.playerID;
+
+    const finishedGamesResponse = await api.get(`/players/${playerID.value}/games/finished`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    finishedGames.value = finishedGamesResponse;
+    console.log(finishedGamesResponse);
+
+    if (finishedGames.value && finishedGames.value.length > 0) {
+      console.log("netra");
+      const lastTwoGames = finishedGames.value.slice(0, 5);
+      console.log('Últimos dos juegos:', lastTwoGames);
+      games.value = [];
+      for (const game of lastTwoGames) {
+        games.value.push({
+          player1: {
+            player_ID: game.players_games[0].player_ID,
+            winner: game.players_games[0].winner,
+            xp_win: game.players_games[0].xp_win,
+            coins_win: game.players_games[0].coins_win,
+            date: formatDate(game.creation_date),
+          },
+          player2: {
+            player_ID: game.players_games[1].player_ID,
+            winner: game.players_games[1].winner,
+            xp_win: game.players_games[1].xp_win,
+            coins_win: game.players_games[1].coins_win,
+            date: formatDate(game.creation_date),
+          }
+        });
+      }
+      console.log('games:', games.value);
+    } else {
+      console.log("else");
+    }
+  } catch (error) {
+    console.error('Error fetching games:', error);
+  }
+});
 </script>
 
 <template>
@@ -8,74 +62,51 @@ import { RouterLink } from 'vue-router'
     <div v-for="(game, index) in games" :key="index" class="game-container">
       <hr class="separator" />
       <div class="info_player">
-        <p>Player1: {{ game.player1.name }}</p>
-        <p>Victory / Loss: {{ game.player1.result }}</p>
-        <p>Attacks: {{ game.player1.attacks }}</p>
+        <p class="gray-text">Player1:</p>
+        <p>{{ game.player1.player_ID }}</p>
+        <p class="gray-text"> Victory / Loss:</p>
+        <p>{{ game.player1.winner }}</p>
+        <p class="gray-text">Attacks:</p>
+        <p>{{ game.player1.xp_win }}</p>
+        <p class="gray-text">Date:</p>
+        <p> {{ game.player1.date }}</p>
       </div>
       <hr class="separator" />
 
       <div class="info_player">
-        <p>Player2: {{ game.player2.name }}</p>
-        <p>Victory / Loss: {{ game.player2.result }}</p>
-        <p>Attacks: {{ game.player2.attacks }}</p>
+        <p class="gray-text">Player2:</p>
+        <p>{{ game.player2.player_ID }}</p>
+        <p class="gray-text">Victory / Loss:</p>
+        <p>{{ game.player2.winner }}</p>
+        <p class="gray-text"> Attacks:</p>
+        <p>{{ game.player2.xp_win }}</p>
+        <p class="gray-text">Date:</p>
+        <p>{{ game.player2.date }}</p>
       </div>
       <hr class="separator" />
     </div>
-    <div class="separator"></div>
-    <router-link class="red_button register-button" to="/stats">Back</router-link>
+    <div class="back-button">
+      <router-link class="main-button red_button" to="/player-info">Back</router-link>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
-  data() {
-    return {
-      games: [
-        {
-          player1: { name: 'Player1', result: 'Victory', attacks: 'principal attack' },
-          player2: { name: 'Player2', result: 'Loss', attacks: 'principal attack' }
-        },
-        {
-          player1: { name: 'Player1', result: 'Victory', attacks: 'principal attack' },
-          player2: { name: 'Player2', result: 'Loss', attacks: 'principal attack' }
-        },
-        {
-          player1: { name: 'Player1', result: 'Victory', attacks: 'principal attack' },
-          player2: { name: 'Player2', result: 'Loss', attacks: 'principal attack' }
-        },
-        {
-          player1: { name: 'Player1', result: 'Victory', attacks: 'principal attack' },
-          player2: { name: 'Player2', result: 'Loss', attacks: 'principal attack' }
-        },
-        {
-          player1: { name: 'Player1', result: 'Victory', attacks: 'principal attack' },
-          player2: { name: 'Player2', result: 'Loss', attacks: 'principal attack' }
-        }
-        // el resto de juegos que vengan de la API
-      ]
-    }
-  },
-  methods: {
-    back() {
-      this.$router.back()
-    }
-  }
-}
-</script>
-
 <style scoped>
+.gray-text {
+  color: #e67e22;
+}
+
 .game-container {
   display: flex;
   justify-content: space-around;
   margin-bottom: 100px;
 }
 
-p {
-  margin: 10px 0;
-  color: black;
+.back-button {
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  order: -1;
 }
 
 .separator {
@@ -97,5 +128,10 @@ p {
   border-radius: 30px;
   color: #333333;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+
+  .main-button {
+    text-align: center;
+    padding: 10px;
+  }
 }
 </style>

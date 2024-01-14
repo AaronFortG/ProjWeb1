@@ -20,10 +20,11 @@ const router = createRouter({
       component: () => import('../views/GameOverView.vue')
     },
     {
-      path: '/stats',
+      path: '/stats/:playerID',
       name: 'stats',
       component: () => import('../views/StatsView.vue')
     },
+
     {
       path: '/create-arena',
       name: 'createArena',
@@ -51,7 +52,7 @@ const router = createRouter({
       component: () => import('../views/StoreView.vue')
     },
     {
-      path: '/last-games',
+      path: '/last-games/:playerID',
       name: 'last-games',
       component: () => import('../views/LastGamesView.vue')
     },

@@ -16,6 +16,7 @@ import MySecondComponent from "@/components/InputComponent.vue";
       </div>
 
 
+
       <div class="login_and_signUp_form-group">
         <label for="password">Password:</label>
         <MySecondComponent v-on:data="getPassword" placeHolder="password" type="password"/>
@@ -84,4 +85,3 @@ export default {
   },
 }
 </script>
-

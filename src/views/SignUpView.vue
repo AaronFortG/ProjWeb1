@@ -83,7 +83,7 @@ const openImageDialog = async () => {
   const { value: selectedName } = await Swal.fire({
     title: 'Select Your Profile Image',
     inputOptions: nameOptions,
-    imageUrl: imageOptions[0], // Imagen por defecto para el nombre seleccionado
+    imageUrl: imageOptions[2], // Imagen por defecto para el nombre seleccionado
 
     imageAlt: 'User profile image',
     input: 'select',
@@ -93,7 +93,7 @@ const openImageDialog = async () => {
     preConfirm: (selectedName) => {
       // Set the selected image URL based on the selected name
       selectedImage.value = imageOptions[nameOptions[selectedName]];
-      selectedImage.value = imageOptions[0];
+      selectedImage.value = imageOptions[2];
     },
   });
 
