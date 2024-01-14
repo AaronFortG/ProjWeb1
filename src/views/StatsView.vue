@@ -1,110 +1,87 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { ApiClient } from '@/assets/ApiClient';
+
+const playerID = ref('');
+const gamesPlayed = ref(0);
+const gamesWon = ref(0);
+const winPercentage = ref(0);
+const lossPercentage = ref(0);
+const attacks = ref([]);
+
+const route = useRoute();
+
+onMounted(async () => {
+  try {
+    // Accede al parámetro a través de route.params.playerID
+    playerID.value = route.params.playerID;
+    console.log('Parámetro recibido:', playerID.value);
+
+    const api = new ApiClient();
+    const response = await api.get(`players/${playerID.value}/statistics`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+
+    gamesWon.value = response.games_won;
+    gamesPlayed.value = response.games_played;
+
+    winPercentage.value = (gamesWon.value / gamesPlayed.value) * 100;
+    lossPercentage.value = (gamesPlayed.value - gamesWon.value) / gamesPlayed.value * 100;
+
+    // Obtener los ataques y asignarlos a la variable de referencia attacks
+    attacks.value = await api.get(`players/${playerID.value}/attacks`, "46679998-2095-4a74-a1e6-6ca67be66f43");
+
+  } catch (error) {
+    console.error('Error fetching players:', error);
+  }
+});
 </script>
-
-
 
 <template>
   <div class="container">
-    <div class="back-button">
-      <router-link class="red_button" to="/list-players">Back</router-link>
-    </div>
-
     <h1 class="title" style="margin-bottom: 2rem">Stats</h1>
 
-    <h2>Name Player</h2>
+    <h2 style="color: lightblue;">Name Player: {{ playerID }}</h2>
 
     <div class="content-container">
       <section class="column-1">
         <article>
           <p class="victories">Victories</p>
           <div class="progress-bar">
-            <div
-              :style="`transform: rotate(${victoriesPercentage}deg)`"
-              class="progress progress-victories"
-            ></div>
+            <div class="progress progress-victories" :style="{ width: `${winPercentage}%`, backgroundColor: '#28a745' }"></div>
           </div>
         </article>
 
         <article>
           <p class="losses">Losses</p>
           <div class="progress-bar">
-            <div
-              :style="`transform: rotate(${lossesPercentage}deg)`"
-              class="progress progress-losses"
-            ></div>
+            <div class="progress progress-losses" :style="{ width: `${lossPercentage}%`, backgroundColor: '#da4e39' }"></div>
           </div>
         </article>
 
-
-
         <article>
-          <p class="win-rate">Winrate 50%</p>
-          <p class="total-games">Total Games: 10 games</p>
+          <p class="win-rate" style="margin-bottom: 10px; color: #ffc107;">Winrate {{ winPercentage.toFixed(2) }}%</p>
+          <p class="total-games" style="margin-bottom: 10px; color: #007bff;">Total Games: {{ gamesPlayed }} games</p>
         </article>
       </section>
 
       <h2>Main Attacks</h2>
       <div class="column-2">
-        <p class="attack">Attack 1</p>
-        <p class="attack">Attack 2</p>
-        <p class="attack">Attack 3</p>
+        <p class="attack" v-for="(attack, index) in attacks.slice(0, 3)" :key="index" style="margin-bottom: 10px;">
+          <span style="color: white;">Attack ID: {{ attack.attack_ID }}</span>,
+          <span style="color: green;">Power: {{ attack.power }}</span>
+        </p>
       </div>
     </div>
+    <p class="last_games">
+      <router-link class="main-button" :to="'/last-games/'">Last Games</router-link>
+    </p>
+  </div>
 
-    <div class="last_games">
-      <router-link class="main-button" to="/last-games">Last Games</router-link>
-    </div>
+  <div class="back-button">
+    <router-link class="red_button" to="/list-players">Back</router-link>
   </div>
 </template>
-<script>
-import { ApiClient } from '@/assets/ApiClient'; // Adjust the path accordingly
 
-export default {
-  data() {
-    return {
-      gamesPlayed: '',
-      gamesWon: '',
-    };
-  },
-
-  methods: {
-    async getInfoPlayer() {
-      const endpoint = 'players/{id}/statistics';
-
-      const token = '';
-      const userName = '';
-      console.log(token);
-      console.log(userName);
-
-
-      try {
-        const api = new ApiClient();
-
-        const response = await api.get(endpoint);
-
-        let gamesPlayed = response.data[0].gamesPlayed;
-        let gamesWon = response.data[0].gamesWon;
-        let gamesLost = gamesPlayed - gamesWon;
-
-        let winRatio = (gamesWon / gamesPlayed) * 100;
-        let loseRatio = (gamesLost / gamesPlayed) * 100;
-
-        console.log('Win Ratio:', winRatio.toFixed(2) + '%');
-        console.log('Lose Ratio:', loseRatio.toFixed(2) + '%');
-
-        console.log('Successfully created. Status code:', response.status);
-      } catch (error) {
-        console.error('Error during the request:', error);
-      }
-    },
-
-
-
-
-  },
-};
-</script>
 <style scoped>
 .container {
   text-align: center;
@@ -123,9 +100,9 @@ p {
 
 .back-button {
   text-align: center;
-  margin-bottom: 40px;
+  padding-top: 20px;
+  margin-bottom: 20px;
   order: -1;
-  margin-left: auto;
 }
 
 .content-container {
@@ -160,6 +137,7 @@ p {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  margin-bottom: 45px;
   min-width: 17rem;
   margin-left: auto;
   margin-right: auto;
@@ -167,79 +145,25 @@ p {
 
 .progress-bar {
   position: relative;
-  width: 80px;
-  height: 80px; /* Reducido el tamaño de las redondas de porcentaje */
-  border-radius: 50%;
-  background-color: #f0f0f0;
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
   margin: 10px 0;
   overflow: hidden;
 }
 
 .progress {
   position: absolute;
-  width: 100%;
   height: 100%;
-  clip: rect(0, 100px, 100px, 50px);
-  border-radius: 100%;
-  background-color: #28a745;
-  transform-origin: bottom right;
+  border-radius: 10px;
 }
 
 .progress-victories {
-  transform: rotate(0deg);
   background-color: #28a745;
 }
 
 .progress-losses {
-  transform: rotate(360deg);
   background-color: #da4e39;
-}
-
-.victories {
-  color: #28a745;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.losses {
-  color: #da4e39;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.win-rate {
-  color: #ffc107;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.total-games {
-  color: #007bff;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.favorite {
-  color: darkviolet;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-@media (min-width: 768px) {
-  .back-button {
-    order: 2;
-  }
-  .column-1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .column-1 article:last-child {
-    margin-left: 10rem;
-    text-align: end;
-  }
-  .column-1 article:last-child p {
-    margin-top: 1rem;
-  }
 }
 </style>
