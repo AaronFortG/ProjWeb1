@@ -34,6 +34,7 @@ const gamesList = ref([]);
 const arenaIdFilter = ref('');
 const filteredGame = ref(null);
 const filtering = ref(false);
+const selectedStatus = ref('Available');
 
 onMounted(async () => {
   try {
@@ -52,6 +53,27 @@ watch(arenaIdFilter, async (newValue, oldValue) => {
   else {
     filtering.value = false;
     filteredGame.value = null;
+  }
+});
+
+// Watch for changes in the selected status
+watch(selectedStatus, async (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    try {
+      const response = await api.get('arenas', token);
+      const allGames = response; // Assuming the data property holds the array of games
+
+      // Filter games based on the selectedStatus
+      if (newValue === 'Available') {
+        gamesList.value = allGames.filter(game => !game.start);
+      } else if (newValue === 'Playing') {
+        gamesList.value = allGames.filter(game => game.start && !game.finished);
+      } else if (newValue === 'Finished') {
+        gamesList.value = allGames.filter(game => game.finished);
+      }
+    } catch (error) {
+      console.error('Error fetching arenas:', error);
+    }
   }
 });
 
@@ -91,7 +113,7 @@ function formatDate(inputDateString) {
   <form id="arena-filters">
     <div>
       <label for="arena-filter-selector">Filter by arena Status</label>
-      <select id="arena-filter-selector">
+      <select v-model="selectedStatus" id="arena-filter-selector">
         <option value="Available" selected>Available</option>
         <option value="Playing">Playing</option>
         <option value="Finished">Finished</option>
