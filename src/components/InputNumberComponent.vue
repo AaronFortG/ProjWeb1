@@ -42,6 +42,7 @@ export default {
       required
       :placeholder="this.placeHolder"
       @change="maxLengthCheck($event, min, max)"
+      @input="$emit('data', $event.target.value)"
   />
 
 </template>
