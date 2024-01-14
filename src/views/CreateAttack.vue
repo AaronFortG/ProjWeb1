@@ -53,7 +53,7 @@ const createAttack = async () => {
     <h1 class="title">Create an attack</h1>
 
     <div class="buttons_container">
-      <form class="form">
+      <form class="form_container">
         <div class="form-group">
           <label>Name</label>
           <input-component
@@ -90,19 +90,15 @@ const createAttack = async () => {
 
 <style scoped>
 .form-group {
-  display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
+
 }
 .form-group label {
   color: white;
   margin: 0.5rem;
-}
-.form-group input {
-  padding: 5px;
-  width: 25%;
 }
 
 .createAttack_container {
