@@ -15,11 +15,6 @@ const router = createRouter({
       component: () => import('../views/SignUpView.vue')
     },
     {
-      path: '/game-over',
-      name: 'gameOver',
-      component: () => import('../views/GameOverView.vue')
-    },
-    {
       path: '/stats/:playerID',
       name: 'stats',
       component: () => import('../views/StatsView.vue')
