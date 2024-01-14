@@ -73,13 +73,16 @@ const checkIfGameFinished = async () => {
       const playerResponse = await api.get('/players/arenas/current', token);
       playerData.value = playerResponse[0];
 
-      x_game_P1.value = playerData.value?.players_games[0]?.x_game;
-      x_game_P2.value = playerData.value?.players_games[1]?.x_game;
-      y_game_P1.value = playerData.value?.players_games[0]?.y_game;
-      y_game_P2.value = playerData.value?.players_games[1]?.y_game;
-
-      console.log("X: ", x_game_P1);
-      console.log("Y: ", y_game_P1);
+      for (let i = 0; i < playerData.value.players_games.length; i++) {
+        if (playerData.value.players_games[i].player_ID === playerID) {
+          x_game_P1.value = playerData.value.players_games[i].x_game;
+          y_game_P1.value = playerData.value.players_games[i].y_game;
+        } else {
+          x_game_P2.value = playerData.value.players_games[i].x_game;
+          y_game_P2.value = playerData.value.players_games[i].y_game;
+          break;
+        }
+      }
 
       // Verificar si el juego ha terminado
       if (gameData.value.finished === true) {
