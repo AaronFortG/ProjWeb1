@@ -109,24 +109,26 @@ const checkIfGameFinished = async () => {
       const playerResponse = await api.get('/players/arenas/current', token);
       playerData.value = playerResponse[0];
 
-      // Get the position of the player
-      x_game_P1.value = playerData.value.players_games[0].x_game;
-      y_game_P1.value = playerData.value.players_games[0].y_game;
-
-      const match = equippedAttacks.value[selectedButtonIndex].positions.match(/\((\d+),(\d+)\)/);
-      x_attack.value = parseInt(match[1]);
-      y_attack.value = parseInt(match[2]);
-
-      // Get the position of the player
-      x_game_P2.value = playerData.value.players_games[1].x_game;
-      y_game_P2.value = playerData.value.players_games[1].y_game;
-      playerID_2.value = playerData.value.players_games[1].player_ID;
-
-      // Get the HP of the player
-      hp2.value = playerData.value.players_games[1].hp;
-
-      // Get the HP of the player
-      hp1.value = playerData.value.players_games[0].hp;
+      for (let i = 0; i < playerData.value.players_games.length; i++) {
+        if (playerData.value.players_games[i].player_ID === playerID) {
+          // Get the position of the player
+          x_game_P1.value = playerData.value.players_games[i].x_game;
+          y_game_P1.value = playerData.value.players_games[i].y_game;
+          const match = equippedAttacks.value[selectedButtonIndex].positions.match(/\((\d+),(\d+)\)/);
+          x_attack.value = parseInt(match[1]);
+          y_attack.value = parseInt(match[2]);
+          // Get the HP of the player
+          hp1.value = playerData.value.players_games[i].hp;
+        } else {
+          // Get the position of the player
+          x_game_P2.value = playerData.value.players_games[i].x_game;
+          y_game_P2.value = playerData.value.players_games[i].y_game;
+          playerID_2.value = playerData.value.players_games[i].player_ID;
+          // Get the HP of the player
+          hp2.value = playerData.value.players_games[i].hp;
+          break;
+        }
+      }
 
       // Verificar si el juego ha terminado
       if (gameData.value.finished === true) {
