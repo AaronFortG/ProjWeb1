@@ -1,6 +1,61 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { ref } from 'vue';
 import MySecondComponent from "@/components/InputComponent.vue";
+import { ApiClient } from "@/assets/ApiClient";
+import { useRouter } from 'vue-router';
+
+const email = ref('');
+const password = ref('');
+const router = useRouter();
+const players = ref([]);
+
+const getPlayer = (event) => {
+  email.value = event;
+};
+
+const getPassword = (event) => {
+  password.value = event;
+};
+
+const postData = async () => {
+  console.log('Entering postData');
+  const endpoint = 'players';
+
+  try {
+    const api = new ApiClient();
+    const response = await api.get(endpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
+    players.value = response;
+    console.log('dsdsd', response);
+
+    // Realizar la comparación con el player_ID introducido
+    const myPlayerID = email.value;
+
+    let matchFound = false;
+
+    for (const player of players.value) {
+      if (player.player_ID === myPlayerID) {
+        console.log('El player_ID introducido coincide con uno de los jugadores obtenidos:', player);
+        matchFound = true;
+        break;
+      }
+    }
+
+    if (!matchFound) {
+      console.log('El player_ID introducido no coincide con ninguno de los jugadores obtenidos.');
+    } else {
+      router.push('/player-info');
+    }
+
+  } catch (error) {
+    console.error('Error during the request:', error);
+  }
+};
+
+const showVerticalMenu = ref(false);
+
+const mounted = () => {
+  showVerticalMenu.value = false;
+};
 </script>
 
 <template>
@@ -15,16 +70,13 @@ import MySecondComponent from "@/components/InputComponent.vue";
         <MySecondComponent v-on:data="getPlayer" placeHolder="example@gmail.com" type="text"/>
       </div>
 
-
-
       <div class="login_and_signUp_form-group">
         <label for="password">Password:</label>
         <MySecondComponent v-on:data="getPassword" placeHolder="password" type="password"/>
       </div>
 
       <div class="buttons_login_and_signUp">
-        <router-link id="login-button" type="submit" to="/player-info" class="router-link">Login</router-link>
-
+        <button @click="postData" id="login-button" class="router-link">Login</button>
         <router-link to="/sign-up" id="register-button" class="router-link">Sign Up</router-link>
       </div>
     </div>
@@ -34,54 +86,3 @@ import MySecondComponent from "@/components/InputComponent.vue";
     <p>Created by Marcos Ruiz-Flores, Aaron Fort and Gemma Yebra.</p>
   </footer>
 </template>
-
-<script>
-import {ApiClient} from "@/assets/ApiClient";
-
-export default {
-  data() {
-    return {
-      email: '',
-      password: ''
-    }
-  },
-  methods: {
-    getPlayer(event){
-      this.player = event;
-    },
-    getPassword(event){
-      this.password = event;
-    },
-
-    async postData() {
-      console.log('Entering postData');
-      const endpoint = 'players';
-
-      try {
-        const api = new ApiClient();
-        const response = await api.get(endpoint, null);
-
-        console.log('Successfully obtained player data. Status code:', response.status);
-
-        // Realizar la comparación con el player_ID introducido
-        const myPlayerID = this.player; // Reemplaza con tu variable
-        const matchingPlayers = response.data.filter(player => player.player_ID === myPlayerID);
-
-        if (matchingPlayers.length > 0) {
-          console.log('El player_ID introducido coincide con uno de los jugadores obtenidos:', matchingPlayers[0]);
-        } else {
-          console.log('El player_ID introducido no coincide con ninguno de los jugadores obtenidos.');
-        }
-
-      } catch (error) {
-        console.error('Error during the request:', error);
-      }
-    },
-
-    // ... Otros métodos ...
-  },
-  mounted() {
-    this.$root.$data.showVerticalMenu = false;
-  },
-}
-</script>
