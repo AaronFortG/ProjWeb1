@@ -41,7 +41,7 @@ function formatDate(dateString) {
     hour12: false, // Use 24-hour format
   };
 
-  const formattedDate = new Intl.DateTimeFormat('en-GB', options).format(dateObject);
+  const formattedDate = new Intl.DateTimeFormat('default', options).format(dateObject);
 
   return formattedDate;
 }
@@ -53,9 +53,6 @@ function formatDate(dateString) {
 
     <section>
       <h1 class="title">Game Logs</h1>
-
-<!--      <h2>Arena name: "{{ arenaInfo.game_ID }}" -  Grid Size: {{ arenaInfo.size }} x {{ arenaInfo.size }} - HP Max: {{ arenaInfo.HP_max }}</h2>-->
-
       <section class="arena-info">
         <h2>Arena name: "{{ arenaInfo.game_ID }}"</h2>
         <span class="separator">-</span>

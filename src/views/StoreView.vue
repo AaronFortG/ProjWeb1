@@ -13,6 +13,9 @@ const coins = ref(0);
 const api = new ApiClient();
 const showPopUp = ref(false);
 
+const token = inject('token');
+const playerID = inject('playerID');
+
 // Show the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
 updateShowVerticalMenu(true);
@@ -20,7 +23,7 @@ updateShowVerticalMenu(true);
 onMounted(async () => {
   try {
     const itemsEndpoint = '/shop/attacks';
-    const itemsResponse = await api.get(itemsEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const itemsResponse = await api.get(itemsEndpoint, token);
 
     console.log('Items Response:', itemsResponse);
 
@@ -70,11 +73,10 @@ const hidePopUp = () => {
   showPopUp.value = false;
 };
 
-const getUserCoins = async () => {
+const getUserCoins = async () => {$
   try {
-    let selectedPlayer = "laGemmaYebra";
-    const playerInfoEndpoint = `/players/${selectedPlayer}`;
-    const playerResponse = await api.get(playerInfoEndpoint, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const playerInfoEndpoint = `/players/${playerID}`;
+    const playerResponse = await api.get(playerInfoEndpoint, token);
 
     if (playerResponse) {
       player.value = playerResponse;
@@ -96,7 +98,7 @@ const buyAttack = async (attackId) => {
   try {
     // Lógica para realizar la compra del ataque
     const buyEndpoint = `/shop/attacks/${attackId}/buy`;
-    await api.post(buyEndpoint, "", "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    await api.post(buyEndpoint, "", token);
     alert('Attack bought successfully!');
     location.reload();
   } catch (error) {

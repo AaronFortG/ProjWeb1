@@ -22,24 +22,63 @@ const router = useRouter();
 
 const token = inject('token');
 const playerID = inject('playerID');
+const playerID_2 = ref(null);
 
 const x_game_P1 = ref(null);
 const x_game_P2 = ref(null);
 const y_game_P1 = ref(null);
 const y_game_P2 = ref(null);
 
+const x_attack = ref(null);
+const y_attack = ref(null);
+
+// ** Const to get the HP of the players **
+// Player 1
+const hp1 = ref(null);
+const initialHP1 = ref(null);
+// Player 2
+const hp2 = ref(null);
+const initialHP2 = ref(null);
+
+// Const to know the direction of the player
+const currentDirection = ref(null);
+
+// Get the equipped attacks from the current user.
+const equippedAttacks = ref([]);
+
+let selectedButtonIndex = 0;
+
+async function getEquippedAttacks() {
+  try {
+    const response = await api.get(`players/attacks`, token);
+    equippedAttacks.value = response.filter(attack => attack.equipped);
+    console.log(equippedAttacks)
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
+
 // *** METHODS ***
 onMounted(async () => {
   arenaID.value = route.params.arenaID;
   console.log(arenaID.value);
+  currentDirection.value = 'down';
+  console.log (currentDirection.value);
+
   try {
     const id = arenaID.value;
     const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
-
-
     console.log(gameData.value);
     checkIfGameFinished();
+
+    // Save the initial HP of the players
+    initialHP1.value = hp1.value;
+    initialHP2.value = hp2.value;
+
+    // Get the equipped attacks of the player.
+    getEquippedAttacks();
 
   } catch (error) {
     console.error('Error fetching game data:', error);
@@ -70,13 +109,29 @@ const checkIfGameFinished = async () => {
       const playerResponse = await api.get('/players/arenas/current', token);
       playerData.value = playerResponse[0];
 
-      x_game_P1.value = playerData.value?.players_games[0]?.x_game;
-      x_game_P2.value = playerData.value?.players_games[1]?.x_game;
-      y_game_P1.value = playerData.value?.players_games[0]?.y_game;
-      y_game_P2.value = playerData.value?.players_games[1]?.y_game;
+      for (let i = 0; i < playerData.value.players_games.length; i++) {
+        if (playerData.value.players_games[i].player_ID === playerID) {
+          // Get the position of the player
+          x_game_P1.value = playerData.value.players_games[i].x_game;
+          y_game_P1.value = playerData.value.players_games[i].y_game;
 
-      console.log("X: ", x_game_P1);
-      console.log("Y: ", y_game_P1);
+          const match = equippedAttacks.value[selectedButtonIndex].positions.match(/\((\d+),(\d+)\)/);
+          x_attack.value = parseInt(match[1]);
+          y_attack.value = parseInt(match[2]);
+
+          // Get the HP of the player
+          hp1.value = playerData.value.players_games[i].hp;
+        } else {
+          // Get the position of the player
+          x_game_P2.value = playerData.value.players_games[i].x_game;
+          y_game_P2.value = playerData.value.players_games[i].y_game;
+          playerID_2.value = playerData.value.players_games[i].player_ID;
+
+          // Get the HP of the player
+          hp2.value = playerData.value.players_games[i].hp;
+          break;
+        }
+      }
 
       // Verificar si el juego ha terminado
       if (gameData.value.finished === true) {
@@ -100,6 +155,27 @@ const setButtonState = (buttonId, isPressed) => {
   }
 }
 
+const moveDirection = async (movement) => {
+  try {
+    // Verifica si la dirección actual es diferente de la dirección solicitada
+    if (currentDirection.value === movement) {
+      const moveData = {
+        direction: movement
+      };
+
+      const response = await api.post(`/arenas/direction`, moveData, token);
+      console.log(response.value);
+
+      movePosition(movement);
+    }
+    // Actualiza la dirección actual
+    currentDirection.value = movement;
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
+
 const movePosition = async (movement) => {
   try {
     const moveData = {
@@ -115,23 +191,27 @@ const movePosition = async (movement) => {
   }
 }
 
+const startMoving = (direction) => {
+    moveDirection(direction);
+};
+
 document.addEventListener('keydown', function (event) {
   switch (event.keyCode) {
     case 37: // Arrow Left
       setButtonState('arrowLeftButton', true);
-      movePosition('left');
+      moveDirection('left');
       break
     case 38: // Arrow Up
       setButtonState('arrowUpButton', true);
-      movePosition('up');
+      moveDirection('up');
       break
     case 39: // Arrow Right
       setButtonState('arrowRightButton', true);
-      movePosition('right');
+      moveDirection('right');
       break
     case 40: // Arrow Down
       setButtonState('arrowDownButton', true);
-      movePosition('down');
+      moveDirection('down');
       break
     case 32: // Key Space
       setButtonState('spaceKeyButton', true);
@@ -159,7 +239,23 @@ document.addEventListener('keyup', function (event) {
   }
 })
 
+const generateHeartIndices1 = () => {
+  const heartsCount = Math.min(5, Math.ceil((hp1.value / initialHP1.value) * 5));
+  return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
+const generateHeartIndices2 = () => {
+  const heartsCount = Math.min(5, Math.ceil((hp2.value / initialHP2.value) * 5));
+  return Array.from({ length: heartsCount }, (_, index) => index);
+};
+
+const selectButton = (index) => {
+  selectedButtonIndex = index;
+  // Agrega aquí la lógica adicional que desees al hacer clic en un botón.
+};
+
 onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
+
 
 </script>
 
@@ -176,12 +272,10 @@ window.addEventListener('popstate', function () {
   <div class="game_container">
     <!-- Create: player's (1) name and his life -->
     <div class="player-info">
-      <p>Player name</p>
+      <p>{{playerID}}</p>
       <div>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/half-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30" />
+        <!-- Lógica para mostrar corazones según el número de vidas -->
+        <img v-for="heartIndex in generateHeartIndices1()" :key="heartIndex" src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
       </div>
     </div>
 
@@ -191,52 +285,82 @@ window.addEventListener('popstate', function () {
         <div v-for="(cell, colIndex) in gameData.size" :key="colIndex">
           <!-- Verificar si la celda coincide con la posición del jugador -->
           <img
-            v-if="x_game_P1 === colIndex && y_game_P1 === rowIndex"
-            src="../assets/images/game/player1.png" :alt="`Player1`"
+            v-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'up'"
+            src="../assets/images/game/player1_up.png"
+            :alt="`Player1 up`"
           />
           <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'down'"
+            src="../assets/images/game/player1_down.png"
+            :alt="`Player1 down`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'left'"
+            src="../assets/images/game/player1_left.png"
+            :alt="`Player1 left`"
+          />
+          <img
+            v-else-if="x_game_P1 === colIndex && y_game_P1 === rowIndex && currentDirection === 'right'"
+            src="../assets/images/game/player1_right.png"
+            :alt="`Player1 right`"
+          />
+
+          <!-- Verificar si la celda coincide con la posición de ataque del jugador -->
+          <img
+            v-else-if="colIndex === (x_attack + x_game_P1) && rowIndex === (-y_attack + y_game_P1)"
+            src="../assets/images/game/floor_spikes_anim_f3.png"
+            :alt="`Player1 attack`"
+          />
+
+
+          <img
             v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex"
-            src="../assets/images/game/player2.png" :alt="`Player2`"
+            src="../assets/images/game/player2.png"
+            :alt="`Player2`"
           />
           <!-- Si no, muestra la imagen de suelo -->
           <img
             v-else
-            src="../assets/images/game/floor_1.png" :alt="`Cell ${rowIndex}-${colIndex}`"
+            src="../assets/images/game/floor_1.png"
+            :alt="`Cell ${rowIndex}-${colIndex}`"
           />
         </div>
       </div>
+
     </div>
 
     <!-- Create: player's (2) name and his life -->
     <div class="player-info" id="players2">
-      <p>Player name</p>
+      <p>{{playerID_2}}</p>
       <div>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/half-heart.png" alt="heart" width="30" style="margin-right: 5px;"/>
-        <img src="../assets/images/game/empty-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
+        <!-- Lógica para mostrar corazones según el número de vidas -->
+        <img v-for="heartIndex in generateHeartIndices2()" :key="heartIndex" src="../assets/images/game/full-heart.png" alt="heart" width="30" style="margin-right: 5px;" />
       </div>
     </div>
 
     <!-- The attacks and keys -->
     <div class="rows_together_container">
       <section id="attacks">
-        <h2>Attacflajlfasdljflsjlfjdlfjlsjdlkfjak 1</h2>
-        <h2>Attack 2</h2>
-        <h2>Attack 3</h2>
+        <button v-for="(attack, index) in equippedAttacks"
+                :key="index"
+                @click="selectButton(index)"
+                :class="{ 'selected-button': selectedButtonIndex === index }">
+          {{ attack.attack_ID }}
+
+        </button>
       </section>
 
       <div class="keys_container">
-        <button class="arrow-left" id="arrowLeftButton">
+        <button class="arrow-left" id="arrowLeftButton" @mousedown="startMoving('left')">
           <img src="../assets/images/game/arrow-left.png" alt="arrow-left" width="30" />
         </button>
-        <button class="arrow-up" id="arrowUpButton">
+        <button class="arrow-up" id="arrowUpButton" @mousedown="startMoving('up')">
           <img src="../assets/images/game/arrow-up.png" alt="arrow-up" width="30" />
         </button>
-        <button class="arrow-down" id="arrowDownButton">
+        <button class="arrow-down" id="arrowDownButton" @mousedown="startMoving('down')">
           <img src="../assets/images/game/arrow-down.png" alt="arrow-down" width="30" />
         </button>
-        <button class="arrow-right" id="arrowRightButton">
+        <button class="arrow-right" id="arrowRightButton" @mousedown="startMoving('right')">
           <img src="../assets/images/game/arrow-right.png" alt="arrow-right" width="30" />
         </button>
 
@@ -252,7 +376,7 @@ window.addEventListener('popstate', function () {
 
 <style scoped>
 p,
-h2 {
+button {
   color: white;
 }
 .rows_together_container {
@@ -312,7 +436,7 @@ h2 {
   justify-content: space-between;
 }
 
-#attacks h2 {
+#attacks button {
   max-width: 7rem;
   padding: 0.5rem;
   margin: 0.5rem 0;
@@ -370,7 +494,16 @@ h2 {
   width: 100%;
 }
 
+.selected-button {
+  border: 2px solid white;
+}
+
 @media (min-width: 980px) {
+  #attacks button {
+    width: 14rem;
+    height: 4rem;
+  }
+
   .game_container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columnas del mismo tamaño */
@@ -427,7 +560,7 @@ h2 {
   .rows_together_container #attacks {
     margin: auto auto 0 0;
   }
-  .rows_together_container #attacks h2 {
+  .rows_together_container #attacks button {
     max-width: 14rem;
   }
   .red_button {

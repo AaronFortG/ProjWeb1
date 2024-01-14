@@ -12,6 +12,9 @@ let size = ref(0);
 let hpMax = ref(0);
 const router = useRouter();
 
+const token = inject('token');
+const playerID = inject('playerID');
+
 // Show the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
 updateShowVerticalMenu(true);
@@ -37,7 +40,7 @@ const createArena = async () => {
       HP_max: Number(hpMax.value)
     };
 
-    const createResponse = await api.post(createEndpoint, createData, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const createResponse = await api.post(createEndpoint, createData, token);
 
     if (createResponse) {
       // Arena creada correctamente
