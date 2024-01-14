@@ -2,49 +2,48 @@
 import { ref, onMounted } from 'vue';
 import { ApiClient } from '@/assets/ApiClient';
 
+// Define a reactive reference for players
 const players = ref([]);
+
+// Initialize the API client
 const api = new ApiClient();
 
+// Fetch players when the component is mounted
 onMounted(async () => {
   try {
     const playersEndpoint = '/players';
     const playersResponse = await api.get(playersEndpoint, "46679998-2095-4a74-a1e6-6ca67be66f43");
 
-    console.log('Players Response:', playersResponse);
+    // Set the players array to the response data
+    players.value = playersResponse;
 
-
-      players.value = playersResponse;
-
-
-      //const prueba = await api.get(`players/armand/statistics`, "46679998-2095-4a74-a1e6-6ca67be66f43");
-      //console.log("prueba de juegos ganados", prueba.games_won);
-      // Ordenamos de manera ascendente
-      players.value.sort((b, a) => a.coins - b.coins);
-
-      console.log('Players:', players.value);
-
+    // Sort players by coins in descending order
+    players.value.sort((b, a) => a.coins - b.coins);
   } catch (error) {
     console.error('Error fetching players:', error);
   }
 });
 </script>
 
-
 <template>
-  <div class="container" style="margin-bottom: 5rem">
-    <h1 class="title">Ranking</h1>
-    <ol id="ListPlayers">
-      <li class="player-item" v-for="(player, index) in players" :key="index">
-        <router-link :to="'/stats/' + player.player_ID">
+  <div class="container">
+    <h1 class="title white-text">Leaderboard</h1>
+    <div class="players-list">
+      <div class="player-item" v-for="(player, index) in players" :key="index">
+        <router-link :to="{ name: 'stats', params: { playerID: player.player_ID } }">
           <div class="player-info">
             <div class="player-rank">{{ index + 1 }}</div>
-            <div class="player-name">{{ player.player_ID }}</div>
-            <div class="player-name">Level: {{ player.coins }}</div>
+            <div class="player-details">
+              <div class="player-name">{{ player.player_ID }}</div>
+              <div class="player-level">Level {{ player.coins }}</div>
+            </div>
           </div>
         </router-link>
-        <div class="player-bar"></div>
-      </li>
-    </ol>
+      </div>
+    </div>
+    <div class="back-button">
+      <router-link class="red_button" to="/list-players">Back</router-link>
+    </div>
   </div>
 </template>
 
@@ -52,93 +51,81 @@ onMounted(async () => {
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: center;
   max-width: 100%;
-  margin: 0 20px; /* Establece un margen constante a ambos lados */
+  margin: 0 20px;
+}
+
+.title {
+  color: white;
+}
+
+.white-text {
+  color: white;
+}
+.players-list {
+  width: 100%;
+  max-width: 600px;
 }
 
 .player-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 30px auto;
   background-color: #ffffcc;
-  padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.player-item:hover {
+  transform: scale(1.05);
 }
 
 .player-info {
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
 .player-rank {
-  margin-right: 0;
+  font-size: 1.5em;
   font-weight: bold;
-  color: black;
+  color: #9d9d9d;
+  margin-right: 15px;
+}
+
+.player-details {
+  text-align: left;
 }
 
 .player-name {
-  text-align: center;
-  padding: 10px;
-  color: black;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2c3e50;
 }
 
-.recent-results {
-  display: flex;
-  justify-content: center;
-}
-
-.result-box {
-  width: 30px;
-  height: 30px;
-  margin: 0 5px;
-  border-radius: 4px;
-}
-
-#ListPlayers {
-  list-style-type: none;
-  padding: 10px;
+.player-level {
+  color: #e67e22;
 }
 
 .back-button {
-  text-align: center;
-  margin-top: 2rem; /* Ajusta el margen superior del botón */
-  margin-bottom: 40px;
-  order: -1;
-  margin-left: auto;
+  margin-top: 20px;
 }
 
-.victory {
-  background-color: #28a745;
+.red_button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-.defeat {
-  background-color: #dc3545;
-}
-
-@media (min-width: 768px) {
-  .player-item {
-    flex-direction: row;
-    max-width: 100%; /* Ajusta el ancho máximo al 100% para pantallas más grandes */
-  }
-
-  .player-info {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  .player-rank {
-    margin-bottom: 0;
-    margin-right: 20px; /* Ajusta el margen derecho en pantallas más grandes */
-    margin-left: 20px; /* Ajusta el margen izquierdo en pantallas más grandes */
-  }
-
-  .back-button {
-    order: 0;
-  }
+.red_button:hover {
+  background-color: #c0392b;
 }
 </style>
