@@ -39,7 +39,7 @@ const arenaIdFilter = ref('');
 const filteredGame = ref(null);
 const filtering = ref(false);
 const selectedStatus = ref('Available');
-const dateRange = ref('11/10/2023 - 11/12/2023'); // Initial date range value
+const dateRange = ref('05/01/2024 - 14/01/2024'); // Initial date range value
 
 onMounted(async () => {
   try {
@@ -74,14 +74,6 @@ function filterGamesByStatus(allGames, status) {
     default:
       return allGames;
   }
-}
-
-// Filter all the current games by the new date range selected.
-function filterGamesByDatesRange(allGames, firstDate, lastDate) {
-  return allGames.filter(game => {
-    const gameDate = game.creation_date;
-    return gameDate.isSameOrAfter(firstDate) && gameDate.isSameOrBefore(lastDate);
-  });
 }
 
 // Watch for changes in the selected status
@@ -120,57 +112,67 @@ function formatDate(inputDateString) {
   return formattedDate;
 }
 
-async function fetchArenaByDates(startDate, endDate) {
-  // A new date range has been selected:
-  console.log("A new date selection was made: " + startDate + ' to ' + endDate);
-  try {
-    const result = await api.get('arenas', token);
-    gamesList.value = filterGamesByDatesRange(result, startDate, endDate);
-    console.log(result);
-  } catch (error) {
+// Watch for changes in arenaIdFilter and fetch arenas when a new value is entered
+watch(dateRange, async (newValue, oldValue) => {
+  if (newValue !== oldValue && newValue !== null && newValue !== '') {
+    const [startDate, endDate] = newValue.split(' - ');
+    await fetchArenasByDates(startDate, endDate);
+  } else {
     filteredGame.value = null;
   }
-}
-</script>
+});
 
-
-<script>
-export default {
-  mounted() {
-    // Initialize the date range with our custom selections: format 'DD/MM/YYYY'
-    $('input[name="date-range"]').daterangepicker({
-      opens: 'center',
-      locale: {
-        format: 'DD/MM/YYYY',
-        separator: ' - ',
-        applyLabel: 'Apply',
-        cancelLabel: 'Cancel',
-        fromLabel: 'From',
-        toLabel: 'To',
-        customRangeLabel: 'Custom',
-        daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        monthNames: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ],
-        firstDay: 1,
-      },
-    }, async (start, end) => {
-      // A new date range has been selected:
-      console.log("A new date selection was made: " + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY'));
+async function fetchArenasByDates(startDate, endDate) {
+  console.log(startDate, endDate);
+  try {
+    const response = await api.get('arenas', token);
+    console.log(response);
+    gamesList.value = response.filter(game => {
+      const gameDate = formatDate(game.creation_date);
+      console.log(gameDate, startDate, endDate)
+      return gameDate >= startDate && gameDate <= endDate;
     });
-  },
-};
+    console.log("stopped filtering");
+  } catch (error) {
+    console.error('Error fetching arenas:', error);
+  }
+}
+
+// Lifecycle hook
+onMounted(() => {
+  // Initialize the date range with custom selections: format 'DD/MM/YYYY'
+  $('input[name="date-range"]').daterangepicker({
+    opens: 'center',
+    locale: {
+      format: 'DD/MM/YYYY',
+      separator: ' - ',
+      applyLabel: 'Apply',
+      cancelLabel: 'Cancel',
+      fromLabel: 'From',
+      toLabel: 'To',
+      customRangeLabel: 'Custom',
+      daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      monthNames: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+      firstDay: 1,
+    },
+  }, (start, end) => {
+    console.log(start, end);
+    dateRange.value = `${start.format('DD/MM/YYYY')} - ${end.format('DD/MM/YYYY')}`;
+  });
+});
 </script>
 
 <template>
@@ -197,7 +199,7 @@ export default {
 
     <div>
       <label for="date-range-input">Filter by date range</label>
-      <input type="text" name="date-range" id="date-range-input" v-model="dateRange" />
+      <input v-model="dateRange" type="text" name="date-range" id="date-range-input" />
     </div>
   </form>
 
