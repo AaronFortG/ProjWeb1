@@ -23,8 +23,10 @@ const router = useRouter();
 const token = inject('token');
 const playerID = inject('playerID');
 
-let x_game;
-let y_game;
+const x_game_P1 = ref(null);
+const x_game_P2 = ref(null);
+const y_game_P1 = ref(null);
+const y_game_P2 = ref(null);
 
 // *** METHODS ***
 onMounted(async () => {
@@ -35,15 +37,7 @@ onMounted(async () => {
     const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
 
-    // Obtener los datos del jugador actualizado
-    const playerResponse = await api.get('/players/arenas/current', token);
-    playerData.value = playerResponse[0];
 
-    x_game = playerData.value?.players_games[0]?.x_game;
-    y_game = playerData.value?.players_games[0]?.y_game;
-
-    console.log("X: ", x_game);
-    console.log("Y: ", y_game);
     console.log(gameData.value);
     checkIfGameFinished();
 
@@ -72,6 +66,18 @@ const checkIfGameFinished = async () => {
   // Almacenar el ID del intervalo en la variable de referencia
   intervalId = setInterval(async () => {
     try {
+      // Obtener los datos del jugador actualizado
+      const playerResponse = await api.get('/players/arenas/current', token);
+      playerData.value = playerResponse[0];
+
+      x_game_P1.value = playerData.value?.players_games[0]?.x_game;
+      x_game_P2.value = playerData.value?.players_games[1]?.x_game;
+      y_game_P1.value = playerData.value?.players_games[0]?.y_game;
+      y_game_P2.value = playerData.value?.players_games[1]?.y_game;
+
+      console.log("X: ", x_game_P1);
+      console.log("Y: ", y_game_P1);
+
       // Verificar si el juego ha terminado
       if (gameData.value.finished === true) {
         clearInterval(intervalId);
@@ -85,13 +91,7 @@ const checkIfGameFinished = async () => {
   }, 1000); // Actualizar cada 1000 milisegundos
 }
 
-onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
-
-</script>
-
-<script>
-
-function setButtonState(buttonId, isPressed) {
+const setButtonState = (buttonId, isPressed) => {
   const button = document.getElementById(buttonId)
   if (isPressed) {
     button.style.backgroundColor = '#d0d0d0' // Change color when pressed
@@ -100,22 +100,41 @@ function setButtonState(buttonId, isPressed) {
   }
 }
 
+const movePosition = async (movement) => {
+  try {
+    const moveData = {
+      movement: movement
+    };
+
+    const response = await api.post(`/arenas/move`, moveData, token);
+    console.log(response.value);
+
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
+}
+
 document.addEventListener('keydown', function (event) {
   switch (event.keyCode) {
     case 37: // Arrow Left
-      setButtonState('arrowLeftButton', true)
+      setButtonState('arrowLeftButton', true);
+      movePosition('left');
       break
     case 38: // Arrow Up
-      setButtonState('arrowUpButton', true)
+      setButtonState('arrowUpButton', true);
+      movePosition('up');
       break
     case 39: // Arrow Right
-      setButtonState('arrowRightButton', true)
+      setButtonState('arrowRightButton', true);
+      movePosition('right');
       break
     case 40: // Arrow Down
-      setButtonState('arrowDownButton', true)
+      setButtonState('arrowDownButton', true);
+      movePosition('down');
       break
     case 32: // Key Space
-      setButtonState('spaceKeyButton', true)
+      setButtonState('spaceKeyButton', true);
       break
   }
 })
@@ -139,6 +158,13 @@ document.addEventListener('keyup', function (event) {
       break
   }
 })
+
+onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
+
+</script>
+
+<script>
+
 // Deshabilitar el botón de retroceso
 history.pushState(null, null, document.URL)
 window.addEventListener('popstate', function () {
@@ -165,8 +191,12 @@ window.addEventListener('popstate', function () {
         <div v-for="(cell, colIndex) in gameData.size" :key="colIndex">
           <!-- Verificar si la celda coincide con la posición del jugador -->
           <img
-            v-if="x_game === colIndex && y_game === rowIndex"
-            src="../assets/images/coin.png" :alt="`Player`"
+            v-if="x_game_P1 === colIndex && y_game_P1 === rowIndex"
+            src="../assets/images/game/player1.png" :alt="`Player1`"
+          />
+          <img
+            v-else-if="x_game_P2 === colIndex && y_game_P2 === rowIndex"
+            src="../assets/images/game/player2.png" :alt="`Player2`"
           />
           <!-- Si no, muestra la imagen de suelo -->
           <img
