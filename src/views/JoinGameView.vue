@@ -82,7 +82,7 @@ function formatDate(inputDateString) {
     <p id="arena-join-description">Right click an arena to join it.</p>
 
     <section id="available-arenas">
-      <ArenaComponent v-for="arena in unfinishedArenas" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-bind:hp=arena.HP_max v-on:click="() => showJoinArenaPopUp(arena.game_ID)"></ArenaComponent>
+      <ArenaComponent v-for="arena in unfinishedArenas" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-bind:hp=arena.HP_max v-bind:started=arena.start v-bind:finished=arena.finished v-on:click="() => showJoinArenaPopUp(arena.game_ID)"></ArenaComponent>
     </section>
   </section>
 

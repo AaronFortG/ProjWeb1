@@ -1,15 +1,43 @@
 <script>
+import { ref, computed, toRefs } from 'vue'
+
 export default {
   props: {
     name: String,
     size: Number,
     creationDate: String,
-    hp: Number
+    hp: Number,
+    started: Boolean,
+    finished: Boolean,
   },
-  methods: {
+  setup(props) {
+    // Destructure the props to obtain their reactive references
+    const { started, finished } = toRefs(props);
+    const status = ref(null);
 
-  }
-}
+    // Compute the status based on started and finished props
+    const updateStatus = () => {
+      if (started.value === false) {
+        status.value = "Available";
+      }
+      else {
+        if (started.value === true && finished.value === false) {
+          status.value = "Playing";
+        }
+        else {
+          status.value = "Finished";
+        }
+      }
+    };
+
+    // Call the computeStatus function initially
+    updateStatus();
+
+    return {
+      status: computed(() => status.value),
+    };
+  },
+};
 </script>
 
 <template>
@@ -17,6 +45,7 @@ export default {
     <h2>Arena "{{ name }}"</h2>
     <p>Date: {{ creationDate }}</p>
     <p>Grid size: {{ size }}x{{ size }} - Max HP: {{ hp }}</p>
+    <p>Status: {{ status }}</p>
   </article>
 </template>
 

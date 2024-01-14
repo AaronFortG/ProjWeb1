@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { ApiClient } from '../assets/ApiClient'
 import ArenaComponent from '../components/ArenaComponent.vue'
@@ -31,6 +31,9 @@ const handleNoClick = () => {
 const api = new ApiClient();
 const token = inject('token');
 const gamesList = ref([]);
+const arenaIdFilter = ref('');
+const filteredGame = ref(null);
+const filtering = ref(false);
 
 onMounted(async () => {
   try {
@@ -39,6 +42,29 @@ onMounted(async () => {
     console.error('Error fetching player information:', error);
   }
 });
+
+// Watch for changes in arenaIdFilter and fetch arenas when a new value is entered
+watch(arenaIdFilter, async (newValue, oldValue) => {
+  if (newValue !== oldValue && newValue !== null && newValue !== '') {
+    filtering.value = true;
+    await fetchArenaById(arenaIdFilter.value);
+  }
+  else {
+    filtering.value = false;
+    filteredGame.value = null;
+  }
+});
+
+// Fetch the arena based on the provided arena ID and update filteredGame
+async function fetchArenaById(arenaId) {
+  try {
+    const result = await api.get(`arenas/${arenaId}`, token);
+    filteredGame.value = result;
+    console.log(result);
+  } catch (error) {
+    filteredGame.value = null;
+  }
+}
 
 // Get the date with format 'DD/MM/YYYY' given the response from the API.
 function formatDate(inputDateString) {
@@ -67,14 +93,14 @@ function formatDate(inputDateString) {
       <label for="arena-filter-selector">Filter by arena Status</label>
       <select id="arena-filter-selector">
         <option value="Available" selected>Available</option>
+        <option value="Playing">Playing</option>
         <option value="Finished">Finished</option>
-        <option value="Available and Finished">Available and Finished</option>
       </select>
     </div>
 
     <div>
       <label for="arena-search-input">Filter by arena ID</label>
-      <input id="arena-search-input" type="text" placeholder="Arena ID" />
+      <input v-model="arenaIdFilter" id="arena-search-input" type="text" placeholder="Arena ID" />
     </div>
 
     <div>
@@ -86,8 +112,12 @@ function formatDate(inputDateString) {
   <p class="arena-join-description">Click an available arena to join it.</p>
   <p class="arena-join-description">Click a finished arena to view its logs.</p>
 
-  <section>
-    <ArenaComponent v-for="arena in gamesList" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-bind:hp=arena.HP_max></ArenaComponent>
+  <section v-if="filtering && filteredGame">
+    <ArenaComponent :name="filteredGame.game_ID" :size="filteredGame.size" :creation-date="formatDate(filteredGame.creation_date)" :started="filteredGame.start" :finished="filteredGame.finished" :hp="filteredGame.HP_max"></ArenaComponent>
+  </section>
+
+  <section v-if="!filtering">
+    <ArenaComponent v-for="arena in gamesList" v-bind:key="arena.game_ID" v-bind:name=arena.game_ID v-bind:size=arena.size v-bind:creation-date=formatDate(arena.creation_date) v-bind:started=arena.start v-bind:finished=arena.finished v-bind:hp=arena.HP_max></ArenaComponent>
   </section>
 
   <div id="popUp" class="popUp" v-show="showPopUp">
