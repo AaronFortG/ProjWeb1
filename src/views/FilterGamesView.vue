@@ -38,7 +38,9 @@ const selectedStatus = ref('Available');
 
 onMounted(async () => {
   try {
-    gamesList.value = await api.get('arenas/', token);
+    const response = await api.get('arenas', token);
+    const allGames = response;
+    gamesList.value = filterGamesByStatus(allGames, selectedStatus.value);
   } catch (error) {
     console.error('Error fetching player information:', error);
   }
@@ -56,21 +58,27 @@ watch(arenaIdFilter, async (newValue, oldValue) => {
   }
 });
 
+// Filtering the games
+function filterGamesByStatus(allGames, status) {
+  switch (status) {
+    case 'Available':
+      return allGames.filter(game => !game.start && !game.finished);
+    case 'Playing':
+      return allGames.filter(game => game.start && !game.finished);
+    case 'Finished':
+      return allGames.filter(game => game.finished);
+    default:
+      return allGames;
+  }
+}
+
 // Watch for changes in the selected status
 watch(selectedStatus, async (newValue, oldValue) => {
   if (newValue !== oldValue) {
     try {
       const response = await api.get('arenas', token);
-      const allGames = response; // Assuming the data property holds the array of games
-
-      // Filter games based on the selectedStatus
-      if (newValue === 'Available') {
-        gamesList.value = allGames.filter(game => !game.start);
-      } else if (newValue === 'Playing') {
-        gamesList.value = allGames.filter(game => game.start && !game.finished);
-      } else if (newValue === 'Finished') {
-        gamesList.value = allGames.filter(game => game.finished);
-      }
+      const allGames = response;
+      gamesList.value = filterGamesByStatus(allGames, newValue);
     } catch (error) {
       console.error('Error fetching arenas:', error);
     }
