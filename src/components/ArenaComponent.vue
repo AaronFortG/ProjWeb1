@@ -3,7 +3,8 @@ export default {
   props: {
     name: String,
     size: Number,
-    creationDate: String
+    creationDate: String,
+    hp: Number
   },
   methods: {
 
@@ -15,7 +16,7 @@ export default {
   <article class="arena">
     <h2>Arena "{{ name }}"</h2>
     <p>Date: {{ creationDate }}</p>
-    <p>Grid size: {{ size }}x{{ size }}</p>
+    <p>Grid size: {{ size }}x{{ size }} - Max HP: {{ hp }}</p>
   </article>
 </template>
 

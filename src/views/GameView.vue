@@ -1,32 +1,91 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ApiClient } from '@/assets/ApiClient';
 import { inject } from 'vue';
+import { useRoute, useRouter } from 'vue-router'
 
 const api = new ApiClient();
 
-const gameData = ref(null);
+const gameData = ref(null);  // Datos de la partida
+const arenaID = ref(null);   // ID de la partida
+const playerData = ref(null);  // Datos del jugador
 
+let intervalId;       // ID del intervalo
+
+// Hide the vertical menu.
 const updateShowVerticalMenu = inject('updateShowVerticalMenu');
 updateShowVerticalMenu(false);
 
+// Const to get the ID of the arena
+const route = useRoute();
+const router = useRouter();
+
+const token = inject('token');
+const playerID = inject('playerID');
+
+let x_game;
+let y_game;
+
+// *** METHODS ***
 onMounted(async () => {
+  arenaID.value = route.params.arenaID;
+  console.log(arenaID.value);
   try {
-    const id = "holalkjhlkjl";
-    const response = await api.get(`/arenas/${id}`, "4c92d229-6871-4a46-ac2e-2ddb1dfdb3eb");
+    const id = arenaID.value;
+    const response = await api.get(`/arenas/${id}`, token);
     gameData.value = response;
 
+    // Obtener los datos del jugador actualizado
+    const playerResponse = await api.get('/players/arenas/current', token);
+    playerData.value = playerResponse[0];
+
+    x_game = playerData.value?.players_games[0]?.x_game;
+    y_game = playerData.value?.players_games[0]?.y_game;
+
+    console.log("X: ", x_game);
+    console.log("Y: ", y_game);
     console.log(gameData.value);
+    checkIfGameFinished();
 
   } catch (error) {
     console.error('Error fetching game data:', error);
-    // Puedes manejar el error de alguna manera aquí.
+    alert(error);
   }
 });
 
 const leaveGame = async() => {
+  try {
+    const id = arenaID.value;
+    const response = await api.delete(`/arenas/${id}/play`, token);
+    gameData.value = response;
 
+    console.log(gameData.value);
+
+
+  } catch (error) {
+    console.error('Error fetching game data:', error);
+    alert(error);
+  }
 }
+
+const checkIfGameFinished = async () => {
+  // Almacenar el ID del intervalo en la variable de referencia
+  intervalId = setInterval(async () => {
+    try {
+      // Verificar si el juego ha terminado
+      if (gameData.value.finished === true) {
+        clearInterval(intervalId);
+        console.log("JUEGO TERMINADO");
+        router.push('/player-info');
+      }
+    } catch (error) {
+      console.error('Error al obtener los datos del jugador:', error);
+      alert(error);
+    }
+  }, 1000); // Actualizar cada 1000 milisegundos
+}
+
+onUnmounted(() => clearInterval(intervalId)); // Detener el intervalo cuando se desmonte el componente
 
 </script>
 
@@ -101,10 +160,19 @@ window.addEventListener('popstate', function () {
     </div>
 
     <!-- Create: the game board -->
-    <div class="board-game" v-if="gameData">
+    <div class="board-game" v-if="playerData">
       <div v-for="(row, rowIndex) in gameData.size" :key="rowIndex" class="row">
         <div v-for="(cell, colIndex) in gameData.size" :key="colIndex">
-          <img src="../assets/images/game/floor_1.png" :alt="`Cell ${rowIndex}-${colIndex}`" />
+          <!-- Verificar si la celda coincide con la posición del jugador -->
+          <img
+            v-if="x_game === colIndex && y_game === rowIndex"
+            src="../assets/images/coin.png" :alt="`Player`"
+          />
+          <!-- Si no, muestra la imagen de suelo -->
+          <img
+            v-else
+            src="../assets/images/game/floor_1.png" :alt="`Cell ${rowIndex}-${colIndex}`"
+          />
         </div>
       </div>
     </div>
@@ -333,7 +401,7 @@ h2 {
     max-width: 14rem;
   }
   .red_button {
-    max-height: 1rem;
+    max-height: 4rem;
     grid-column: 2 / 2;
     grid-row: 1 / 1;
   }
